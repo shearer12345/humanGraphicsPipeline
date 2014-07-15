@@ -20,12 +20,32 @@ p{
 	font-size: 20px;
 }
 
-div.cont {
+div.fullcont {
 	width:90%;
+	margin:0px;
+	overflow: hidden;
+	border: 1px solid black;
+}
+
+div.leftcont {
+	width:35%;
+	float:left;
 	margin: 0px;
 	padding-top: 10px;
 	padding-right: 5%;
 	padding-left:5%;
+}
+
+div.rightcont {
+	width:45%;
+	margin: 0px;
+	padding-top: 10px;
+	padding-right: 5%;
+	padding-left:45%;
+}
+
+div.text{
+	padding-left: 20px;
 }
 </style>
 
@@ -117,8 +137,9 @@ function doBarycentric() {
 </script>
    </HEAD>
 <BODY>
-   <div class="cont">
-<h1>Half-space and Barycentric calculator</h1>
+<div class="fullcont">
+<h1>Half-space and Barycentric calculator with automated rasterizer</h1>
+<div class="leftcont">
 <form method="post" action="" name="inVals" id="inVals" class="inVals">
 ax: <input type="text" name="ax" id="ax" value="-0.5"> 
 ay: <input type="text" name="ay" id="ay" value="-0.5"><br><br>
@@ -128,13 +149,13 @@ cx: <input type="text" name="cx" id="cx" value="0.0">
 cy: <input type="text" name="cy" id="cy" value="0.5"><br><br>
 px: <input type="text" name="px" id="px" value="0.0"> 
 py: <input type="text" name="py" id="py" value="0.0"><br><br>
-<input type="radio" name="calcType" id="calcType" value="halfspace" checked="true">Half-space<br>
+<div class="text"><input type="radio" name="calcType" id="calcType" value="halfspace" checked="true">Half-space<br>
 <input type="radio" name="calcType" id="calcType" value="barycentric">Barycentric<br><br>
-<input type="button" name="calculate" value="Calculate" onclick="doSubmit(this.form)">
+<input type="button" name="calculate" value="Calculate" onclick="doSubmit(this.form)"></div>
 </form>
 <br><br>
-<textarea rows="30" cols = "40" id="outVals">
-</textarea>
+<div class="text"><textarea rows="30" cols = "40" id="outVals">
+</textarea></div>
 </div>
 </BODY>
 </HTML>
