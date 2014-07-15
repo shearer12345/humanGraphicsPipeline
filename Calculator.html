@@ -1,53 +1,11 @@
 <!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <HTML>
    <HEAD>
+	  <link rel="stylesheet" type="text/css" href="style.css">
       <TITLE>
          Human Graphics Pipeline - Half-space and Barrycentric calculator
       </TITLE>
-      <style>
-body{
-	background-color: #a89f7e;
-	}
-
-h1{
-	color: #000000;
-	text-align: center;
-	font-family: "Arial";
-}
-
-p{
-	font-family: "Arial";
-	font-size: 20px;
-}
-
-div.fullcont {
-	width:90%;
-	margin:0px;
-	overflow: hidden;
-	border: 1px solid black;
-}
-
-div.leftcont {
-	width:35%;
-	float:left;
-	margin: 0px;
-	padding-top: 10px;
-	padding-right: 5%;
-	padding-left:5%;
-}
-
-div.rightcont {
-	width:45%;
-	margin: 0px;
-	padding-top: 10px;
-	padding-right: 5%;
-	padding-left:45%;
-}
-
-div.text{
-	padding-left: 20px;
-}
-</style>
+      
 
 <script language="Javascript">
 
@@ -138,10 +96,12 @@ function doBarycentric() {
    </HEAD>
 <BODY>
 <div class="fullcont">
+
+
+<div class="centercont">
 <h1>Half-space and Barycentric calculator</h1>
-<div class="leftcont">
 <form method="post" action="" name="inVals" id="inVals" class="inVals">
-ax: <input type="text" name="ax" id="ax" value="-0.5"> 
+<test1>ax: <input type="text" name="ax" id="ax" value="-0.5"> 
 ay: <input type="text" name="ay" id="ay" value="-0.5"><br><br>
 bx: <input type="text" name="bx" id="bx" value="0.5"> 
 by: <input type="text" name="by" id="by" value="-0.5"><br><br>
@@ -149,13 +109,15 @@ cx: <input type="text" name="cx" id="cx" value="0.0">
 cy: <input type="text" name="cy" id="cy" value="0.5"><br><br>
 px: <input type="text" name="px" id="px" value="0.0"> 
 py: <input type="text" name="py" id="py" value="0.0"><br><br>
+
 <div class="text"><input type="radio" name="calcType" id="calcType" value="halfspace" checked="true">Half-space<br>
 <input type="radio" name="calcType" id="calcType" value="barycentric">Barycentric<br><br>
 <input type="button" name="calculate" value="Calculate" onclick="doSubmit(this.form)"></div>
 </form>
 <br><br>
-<div class="text"><textarea rows="30" cols = "40" id="outVals">
+<div class="text"><textarea rows="30" cols = "36" id="outVals">
 </textarea></div>
-</div>
+
+</div></div></test1>
 </BODY>
 </HTML>
