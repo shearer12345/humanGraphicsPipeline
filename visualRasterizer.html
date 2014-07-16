@@ -2,6 +2,46 @@
 <html>
 <head>
 </head>
-<body>
+<body onload="onLoad()">
+<script type="text/javascript">
+      var jsilConfig = {
+        printStackTrace: false,
+        webgl2d: false,
+        xna: 4,
+        gamepad: false,
+        readOnlyStorage: true,
+        localStorage: false,
+        
+        showProgressBar: true,
+        showStats: true,     
+
+        scriptRoot: "../humanGraphicsPipeline/Scripts/",
+        libraryRoot: "../humanGraphicsPipeline/Libraries/",
+        fileRoot: "../humanGraphicsPipeline/Scripts/",
+        contentRoot: "Content/",
+
+        manifests: [
+          "HumanGraphicsPipelineXna.exe",
+          "Content/HumanGraphicsPipelineXnaContent.contentproj"
+        ]
+      };
+    </script>
+
+<script src="../humanGraphicsPipeline/Libraries/JSIL.js" type="text/javascript"></script>
+
+<canvas id="canvas" width="800" height="480"></canvas>
+
+<script type="text/javascript">
+var assetsToLoad = [];
+
+function runMain()
+{
+  var asm = JSIL.GetAssembly("HumanGraphicsPipelineXna");
+	
+	var game = new asm.HumanGraphicsPipelineXna.Game1();
+	game.Run();
+	
+}
+</script>
 </body>
 </html>
