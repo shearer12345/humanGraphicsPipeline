@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+   <HEAD>
+	<link rel="stylesheet" type="text/css" href="style.css">
+      <TITLE>
+         Human Graphics Pipeline - Resources
+      </TITLE>
+   </HEAD>
+<BODY>
+	<div class="fullcont">
+		<div class="centercont">
+		
+			<div class="indexLinkCont">
+				<div class="indexLinkBG">
+				<t2><a href="#">Template</a></t2>
+				<t1></t1>
+				</div>
+			</div>
+			
+		</div>
+   	</div>
+</BODY>
+</HTML>
