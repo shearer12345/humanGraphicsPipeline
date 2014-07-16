@@ -1320,7 +1320,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
   };
 
   function Globals_Init () {
-    $thisType.Globals$pixelSize$value = 10;
+    $thisType.Globals$pixelSize$value = 20;
   };
 
   function Globals_set_graphics (value) {
@@ -1896,61 +1896,79 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
     return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Game1_MenuState)) ();
   };
   var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
+    return ($T01 = JSIL.Memoize($asm0D.System.Windows.Forms.Panel)) ();
   };
   var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+    return ($T02 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
   };
   var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
+    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
   };
   var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Content.ContentManager)) ();
+    return ($T04 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
   };
   var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
+    return ($T05 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Content.ContentManager)) ();
   };
   var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
+    return ($T06 = JSIL.Memoize($asm0D.System.Windows.Forms.Form)) ();
   };
   var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+    return ($T07 = JSIL.Memoize($asm0D.System.Windows.Forms.Control)) ();
   };
   var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+    return ($T08 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameWindow)) ();
   };
   var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteSortMode)) ();
+    return ($T09 = JSIL.Memoize($asm0D.System.Windows.Forms.DockStyle)) ();
   };
   var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.BlendState)) ();
+    return ($T0A = JSIL.Memoize($asm0D.System.Windows.Forms.Button)) ();
   };
   var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SamplerState)) ();
+    return ($T0B = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
   };
   var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.DepthStencilState)) ();
+    return ($T0C = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
   };
   var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.RasterizerState)) ();
+    return ($T0D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
   };
   var $T0E = function () {
-    return ($T0E = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
+    return ($T0E = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
   };
   var $T0F = function () {
-    return ($T0F = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button)) ();
+    return ($T0F = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteSortMode)) ();
   };
   var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+    return ($T10 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.BlendState)) ();
   };
   var $T11 = function () {
-    return ($T11 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
+    return ($T11 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SamplerState)) ();
   };
   var $T12 = function () {
-    return ($T12 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+    return ($T12 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.DepthStencilState)) ();
   };
   var $T13 = function () {
-    return ($T13 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
+    return ($T13 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.RasterizerState)) ();
+  };
+  var $T14 = function () {
+    return ($T14 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
+  };
+  var $T15 = function () {
+    return ($T15 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button)) ();
+  };
+  var $T16 = function () {
+    return ($T16 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+  };
+  var $T17 = function () {
+    return ($T17 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
+  };
+  var $T18 = function () {
+    return ($T18 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T19 = function () {
+    return ($T19 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
   };
   var $S00 = function () {
     return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
@@ -1958,11 +1976,15 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
 
   function Game1__ctor () {
     this.menuState = $T00().TriangleFilling;
-    $T01().prototype._ctor.call(this);
-    $T02().Globals$graphics$value = new ($T03())(this);
+    this.panel = new ($T01())();
+    $T02().prototype._ctor.call(this);
+    $T03().Globals$graphics$value = new ($T04())(this);
     this.get_Content().set_RootDirectory("Content");
     this.set_IsFixedTimeStep(true);
-    $T02().Init();
+    $T03().Init();
+    if (false) {
+      this.CreateForm();
+    }
   };
 
   function Game1_BackToTriangleMenu () {
@@ -1970,14 +1992,34 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
     this.menuState = $T00().TriangleFilling;
   };
 
+  function Game1_CreateForm () {
+    var form = $T06().$As($T07().FromHandle(this.get_Window().get_Handle()));
+    this.panel.set_Dock($T09().Right);
+    this.panel.set_Width(250);
+    $T07().prototype.add_Click.call((new ($T0A())()).__Initialize__({
+          Text: "Halfspace"}
+      ), function (sender, args) {
+        this.menuState = $asm00.HumanGraphicsPipelineXna.Game1_MenuState.None;
+        this.scene = new $asm00.HumanGraphicsPipelineXna.HalfSpace();
+        this.scene.add_BackToMenu($asm00.HumanGraphicsPipelineXna.Scene_ThisBackToMenu.New(this, $thisType.prototype.BackToTriangleMenu));
+      }.bind(this));
+    $T07().prototype.add_Click.call((new ($T0A())()).__Initialize__({
+          Text: "Halfspace2"}
+      ), function (sender, args) {
+        this.menuState = $asm00.HumanGraphicsPipelineXna.Game1_MenuState.None;
+        this.scene = new $asm00.HumanGraphicsPipelineXna.HalfSpace();
+        this.scene.add_BackToMenu($asm00.HumanGraphicsPipelineXna.Scene_ThisBackToMenu.New(this, $thisType.prototype.BackToTriangleMenu));
+      }.bind(this));
+  };
+
   function Game1_Draw (gameTime) {
-    this.get_GraphicsDevice().InternalClear($T07().get_SlateGray());
+    this.get_GraphicsDevice().InternalClear($T0D().get_SlateGray());
     this.spriteBatch.Begin(
-      $T09().Deferred, 
-      $T0A().AlphaBlend, 
-      $T0B().LinearClamp, 
-      $T0C().None, 
-      $T0D().CullNone
+      $T0F().Deferred, 
+      $T10().AlphaBlend, 
+      $T11().LinearClamp, 
+      $T12().None, 
+      $T13().CullNone
     );
     switch (this.menuState.valueOf()) {
       case 0: 
@@ -1993,7 +2035,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
       this.scene.Draw(this.spriteBatch);
     }
     this.spriteBatch.End();
-    $T01().prototype.Draw.call(this, gameTime);
+    $T02().prototype.Draw.call(this, gameTime);
   };
 
   function Game1_DrawMainMenu (spriteBatch) {
@@ -2007,21 +2049,21 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
 
   function Game1_Initialize () {
     this.set_IsMouseVisible(true);
-    $T01().prototype.Initialize.call(this);
+    $T02().prototype.Initialize.call(this);
   };
 
   function Game1_LoadContent () {
-    this.spriteBatch = new ($T08())(this.get_GraphicsDevice());
-    $T10().Fonts$font14$value = this.get_Content().Load$b1($T11())("Font14");
-    $T10().Fonts$smallFont$value = this.get_Content().Load$b1($T11())("SmallFont");
-    $T10().Fonts$arial14$value = this.get_Content().Load$b1($T11())("Arial14");
+    this.spriteBatch = new ($T0E())(this.get_GraphicsDevice());
+    $T16().Fonts$font14$value = this.get_Content().Load$b1($T17())("Font14");
+    $T16().Fonts$smallFont$value = this.get_Content().Load$b1($T17())("SmallFont");
+    $T16().Fonts$arial14$value = this.get_Content().Load$b1($T17())("Arial14");
     this.SetButtons();
   };
 
   function Game1_SetButtons () {
-    this.buttonTriangleFilling = new ($T0F())("Triangle filling", $T10().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(10, 10), $T07().get_Red().MemberwiseClone());
-    this.buttonHalfSpace = new ($T0F())("Half-space", $T10().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() / 2) | 0) - 200 | 0)), +(((($T02().get_viewportHeight() / 2) | 0) - 25 | 0))), $T07().get_Red().MemberwiseClone());
-    this.buttonBarycentric = new ($T0F())("Barycentric", $T10().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() / 2) | 0) + 50 | 0)), +(((($T02().get_viewportHeight() / 2) | 0) - 25 | 0))), $T07().get_Red().MemberwiseClone());
+    this.buttonTriangleFilling = new ($T15())("Triangle filling", $T16().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(10, 10), $T0D().get_Red().MemberwiseClone());
+    this.buttonHalfSpace = new ($T15())("Half-space", $T16().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T03().get_viewportWidth() / 2) | 0) - 200 | 0)), +(((($T03().get_viewportHeight() / 2) | 0) - 25 | 0))), $T0D().get_Red().MemberwiseClone());
+    this.buttonBarycentric = new ($T15())("Barycentric", $T16().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T03().get_viewportWidth() / 2) | 0) + 50 | 0)), +(((($T03().get_viewportHeight() / 2) | 0) - 25 | 0))), $T0D().get_Red().MemberwiseClone());
     this.buttonTriangleFilling.add_OnClick(function (b) {
         this.menuState = $asm00.HumanGraphicsPipelineXna.Game1_MenuState.TriangleFilling;
       }.bind(this));
@@ -2029,6 +2071,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
         this.menuState = $asm00.HumanGraphicsPipelineXna.Game1_MenuState.None;
         this.scene = new $asm00.HumanGraphicsPipelineXna.HalfSpace();
         this.scene.add_BackToMenu($asm00.HumanGraphicsPipelineXna.Scene_ThisBackToMenu.New(this, $thisType.prototype.BackToTriangleMenu));
+        this.CreateForm();
       }.bind(this));
     this.buttonBarycentric.add_OnClick(function (b) {
         this.menuState = $asm00.HumanGraphicsPipelineXna.Game1_MenuState.None;
@@ -2041,7 +2084,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
   };
 
   function Game1_Update (gameTime) {
-    $T13().Update(gameTime);
+    $T19().Update(gameTime);
     if (this.scene !== null) {
       this.scene.Update(gameTime);
     }
@@ -2056,7 +2099,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
         break;
 
     }
-    $T01().prototype.Update.call(this, gameTime);
+    $T02().prototype.Update.call(this, gameTime);
   };
 
   JSIL.MakeType({
@@ -2076,6 +2119,11 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
     $.Method({Static:false, Public:false}, "BackToTriangleMenu", 
       JSIL.MethodSignature.Void, 
       Game1_BackToTriangleMenu
+    );
+
+    $.Method({Static:false, Public:false}, "CreateForm", 
+      JSIL.MethodSignature.Void, 
+      Game1_CreateForm
     );
 
     $.Method({Static:false, Public:false, Virtual:true }, "Draw", 
@@ -2124,6 +2172,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
     $.Field({Static:false, Public:false}, "buttonTriangleFilling", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
     $.Field({Static:false, Public:false}, "scene", $asm00.TypeRef("HumanGraphicsPipelineXna.Scene")); 
     $.Field({Static:false, Public:false}, "menuState", $asm00.TypeRef("HumanGraphicsPipelineXna.Game1+MenuState")); 
+    $.Field({Static:false, Public:false, ReadOnly:true }, "panel", $asm0D.TypeRef("System.Windows.Forms.Panel")); 
     $.ImplementInterfaces(
     );
 
