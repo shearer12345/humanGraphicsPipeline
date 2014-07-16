@@ -57,7 +57,8 @@ div.rightcont {
 
 div.centercont{
 	width:90%;
-	margin: 0px;
+	margin: 5%;
+	margin-top:0px;
 	padding-top: 10px;
 	text-align:center;
 }
