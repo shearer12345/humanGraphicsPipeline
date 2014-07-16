@@ -87,3 +87,19 @@ div.indexLinkBG{
 div.text{
 	padding-left: 20px;
 }
+
+a:link {
+    color: #000000;
+}
+
+a:visited {
+    color: #000000;
+}
+
+a:hover {
+    color: #666666;
+}
+
+a:active {
+    color: #000000;
+}
