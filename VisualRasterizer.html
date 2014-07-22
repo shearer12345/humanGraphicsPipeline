@@ -3,9 +3,10 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Human Graphics Pipeline - Visual Rasterizer</title>
-	<script src="../humanGraphicsPipeline/Scripts/clearLog.js" type="text/javascript"></script>
+	
 </head>
 <body onload="onLoad()">
+<script src="../humanGraphicsPipeline/Scripts/jquery.js" type="text/javascript"></script>
 <div class="fullcont">
 <div class="centercont">
 <h1>Visual Rasterizer</h1>
@@ -66,6 +67,12 @@ or click the arrows to step through each pixel<br>
 </div>
 <br>
 <t1><a href="index.html">Home</a></t1>
+
+<script language="javascript" type="text/javascript">function clearLogDiv(){
+
+$("#log").empty();
+
+};</script>
 
 <h1>Output</h1>
 <t1><a href="#" onclick="clearLogDiv();">Clear Log</a></t1>

@@ -1,3 +1,5 @@
+
+
 function clearLogDiv(){
 
 var logDiv = document.getElementById("log").innerHTML;
