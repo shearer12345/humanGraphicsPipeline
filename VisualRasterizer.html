@@ -42,13 +42,16 @@ var assetsToLoad = [];
 
 function runMain()
 {
-  var asm = JSIL.GetAssembly("HumanGraphicsPipelineXna");
+	document.getElementById("log").innerHTML = "";
+  	var asm = JSIL.GetAssembly("HumanGraphicsPipelineXna");
 	
 	var game = new asm.HumanGraphicsPipelineXna.Game1();
 	game.Run();
 	
 }
 </script>
+
+<div id="log" style="font-family: Consolas, Courier New, monospace"></div>
 
 <div class="indexLinkCont">
 <div class="indexLinkBG">
