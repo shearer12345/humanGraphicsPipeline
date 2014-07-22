@@ -506,6 +506,8 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Scene+ThisBackToMenu", false, []);
     (this.boundingBox).Draw(spriteBatch);
     if (((this.listPixelCheck).get_Count() | 0) === 0) {
       $T07().Clear();
+      $T07().WriteLine("");
+      $T07().WriteLine("New Triangle");
       var count = 0;
 
       for (var i = 0; +i < +(((+this.maximum.X - +this.minimum.X) / +($T09().Globals$pixelSize$value))); i = ((i + 1) | 0)) {
