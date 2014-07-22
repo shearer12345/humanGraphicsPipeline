@@ -68,10 +68,14 @@ or click the arrows to step through each pixel<br>
 <br>
 <t1><a href="index.html">Home</a></t1>
 
-<script language="javascript" type="text/javascript">function clearLogDiv(){
+<script language="javascript" type="text/javascript">
+function clearLogDiv(){
 
-$("#log").empty();
-
+var node = document.getElementById('log');
+while (node.hasChildNodes()) {
+    node.removeChild(node.firstChild);
+}
+return false;
 };</script>
 
 <h1>Output</h1>
