@@ -16,27 +16,27 @@ var $asm0C = JSIL.GetAssembly("System.Numerics, Version=4.0.0.0, Culture=neutral
 var $asm0D = JSIL.GetAssembly("System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
 var $asm0E = JSIL.GetAssembly("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
 var $asm0F = JSIL.GetAssembly("JSIL.Meta, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-var $asm10 = JSIL.GetAssembly("Accessibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-var $asm11 = JSIL.GetAssembly("System.Data.SqlXml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+var $asm10 = JSIL.GetAssembly("System.Data.SqlXml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+var $asm11 = JSIL.GetAssembly("Accessibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
 var $asm12 = JSIL.GetAssembly("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
 
 if (typeof (contentManifest) !== "object") { contentManifest = {}; };
 contentManifest["HumanGraphicsPipelineXna.exe"] = [
     ["Script", "XNA.Colors.js", { "sizeBytes": 5651 }],
-    ["Script", "Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 110345 }],
     ["Script", "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 136304 }],
     ["Script", "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 30238 }],
-    ["Script", "Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 747563 }],
-    ["Script", "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 664465 }],
-    ["Script", "HumanGraphicsPipelineXna, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null.js", { "sizeBytes": 103549 }],
-    ["Script", "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 430559 }],
-    ["Script", "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 1301462 }],
-    ["Script", "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 2958909 }],
-    ["Script", "System.Deployment, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 941394 }],
     ["Script", "System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 87784 }],
+    ["Script", "Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 747563 }],
+    ["Script", "Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 110345 }],
+    ["Script", "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 1301462 }],
+    ["Script", "HumanGraphicsPipelineXna, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null.js", { "sizeBytes": 189513 }],
+    ["Script", "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js", { "sizeBytes": 430559 }],
+    ["Script", "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 2958909 }],
+    ["Script", "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 664465 }],
+    ["Script", "System.Deployment, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js", { "sizeBytes": 941394 }],
     ["Script", "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 4627947 }],
+    ["Script", "System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 9344989 }],
     ["Script", "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 6610715 }],
     ["Script", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 9652077 }],
-    ["Script", "System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js", { "sizeBytes": 9344989 }],
     ["ManifestResource", "Microsoft.Xna.Framework.RuntimeProfile", { "sizeBytes": 20, "assembly": "HumanGraphicsPipelineXna" }],
 ];
