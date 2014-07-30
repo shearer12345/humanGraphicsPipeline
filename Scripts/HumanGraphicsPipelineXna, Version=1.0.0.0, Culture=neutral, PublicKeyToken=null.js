@@ -929,6 +929,7 @@ JSIL.MakeEnum(
     var len = (Math.sqrt(((xD * xD) + (yD * yD))));
     var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
     var dot = (xD * xD2) + (yD * yD2);
+    var deg = +((dot / (len * len2)));
     var div = (yD2 * xD) - (xD2 * yD);
     var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
     var ub = +((((xD * yD3) - (yD * xD3)) / div));
@@ -959,8 +960,9 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_CorrectNormalisedTriangle (state) {
+    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
+    var pX = aX + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;
