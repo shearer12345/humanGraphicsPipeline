@@ -678,6 +678,12 @@ JSIL.MakeEnum(
   var $T16 = function () {
     return ($T16 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
   };
+  var $T17 = function () {
+    return ($T17 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
+  };
+  var $T18 = function () {
+    return ($T18 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2)))) ();
+  };
   var $S00 = function () {
     return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")])]), null))) ();
   };
@@ -698,6 +704,15 @@ JSIL.MakeEnum(
   };
   var $S06 = function () {
     return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Color")]), null))) ();
+  };
+  var $S07 = function () {
+    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])]), null))) ();
+  };
+  var $S08 = function () {
+    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
+  };
+  var $S09 = function () {
+    return ($S09 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
   };
 
   function TriangleRasterisingScene__ctor () {
@@ -850,6 +865,7 @@ JSIL.MakeEnum(
     list.Add($T16().get_CornflowerBlue());
     list.Add($T16().get_Plum());
     list.Add($T16().get_Olive());
+    (($S07().Construct()).__Initialize__([[$S08().Construct()]]).get_Item(0)).Add($S09().Construct(3));
   };
 
   JSIL.MakeType({
@@ -2027,40 +2043,40 @@ JSIL.MakeEnum(
 (function TriangleClippingSH$Members () {
   var $, $thisType;
   var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2)))) ();
+    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
   };
   var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
+    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
   };
   var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+    return ($T02 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
   };
   var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+    return ($T03 = JSIL.Memoize($asm06.System.Double)) ();
   };
   var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm06.System.Double)) ();
+    return ($T04 = JSIL.Memoize($asm06.System.Math)) ();
   };
   var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm06.System.Math)) ();
+    return ($T05 = JSIL.Memoize($asm06.System.Boolean)) ();
   };
   var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm06.System.Boolean)) ();
+    return ($T06 = JSIL.Memoize($asm06.System.Int32)) ();
   };
   var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm06.System.Int32)) ();
+    return ($T07 = JSIL.Memoize($asm06.System.Single)) ();
   };
   var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm06.System.Single)) ();
+    return ($T08 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Polygon))) ();
   };
   var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Polygon))) ();
+    return ($T09 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square))) ();
   };
   var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square))) ();
+    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean))) ();
   };
   var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean))) ();
+    return ($T0B = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2)))) ();
   };
   var $T0C = function () {
     return ($T0C = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
@@ -2117,22 +2133,22 @@ JSIL.MakeEnum(
     return ($T1D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.ButtonState)) ();
   };
   var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])]), null))) ();
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
   };
   var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
+    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
   };
   var $S02 = function () {
-    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Polygon")]), null))) ();
   };
   var $S03 = function () {
-    return ($S03 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Polygon")]), null))) ();
+    return ($S03 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")]), null))) ();
   };
   var $S04 = function () {
-    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")]), null))) ();
+    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")]), null))) ();
   };
   var $S05 = function () {
-    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")]), null))) ();
+    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])]), null))) ();
   };
   var $S06 = function () {
     return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
@@ -2160,15 +2176,14 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH__ctor () {
-    this.intersectionsLists = $S00().Construct();
-    $T01().prototype._ctor.call(this);
+    $T00().prototype._ctor.call(this);
   };
 
   function TriangleClippingSH_ActionOnTrianglePlaced (spriteBatch) {
   };
 
   function TriangleClippingSH_CheckLineIntersection (p1, p2, q1, q2, /* ref */ intersectionPoint) {
-    intersectionPoint.set($S01().Construct(-Infinity));
+    intersectionPoint.set($S00().Construct(-Infinity));
     var xD = +p2.X - +p1.X;
     var xD2 = +q2.X - +q1.X;
     var yD = +p2.Y - +p1.Y;
@@ -2178,11 +2193,10 @@ JSIL.MakeEnum(
     var len = (Math.sqrt(((xD * xD) + (yD * yD))));
     var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
     var dot = (xD * xD2) + (yD * yD2);
-    var deg = +((dot / (len * len2)));
     var div = (yD2 * xD) - (xD2 * yD);
     var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
     var ub = +((((xD * yD3) - (yD * xD3)) / div));
-    var pt = $S02().Construct(Math.fround(+p1.X + (ua * xD)), Math.fround(+p1.Y + (ua * yD)));
+    var pt = $S01().Construct(Math.fround(+p1.X + (ua * xD)), Math.fround(+p1.Y + (ua * yD)));
     xD = +pt.X - +p1.X;
     xD2 = +pt.X - +p2.X;
     yD = +pt.Y - +p1.Y;
@@ -2209,31 +2223,30 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_CorrectNormalisedTriangle (state) {
-    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = aX + bX;
+    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;
-    this.normalisedTrianglePoints[(((state | 0) - 1) | 0)] = $S02().Construct(pX, pY);
+    this.normalisedTrianglePoints[(((state | 0) - 1) | 0)] = $S01().Construct(pX, pY);
   };
 
   function TriangleClippingSH_DerivedInit () {
-    $T01().prototype.DerivedInit.call(this);
-    this.polyList = $S03().Construct();
-    this.squareList = $S04().Construct();
+    $T00().prototype.DerivedInit.call(this);
+    this.polyList = $S02().Construct();
+    this.squareList = $S03().Construct();
     this.polygonOutput = null;
-    this.isOutsideList = $S05().Construct();
-    this.intersectionsLists = $S00().Construct();
-    this.pointTopLeft = $S02().Construct(+((($T0C().get_viewportWidth() | 0) / 6 | 0)), +((($T0C().get_viewportHeight() | 0) / 6 | 0)));
-    this.pointTopRight = $S02().Construct(+(($T0C().get_viewportWidth() | 0) - ((($T0C().get_viewportWidth() | 0) / 6) | 0)), +((($T0C().get_viewportHeight() | 0) / 6 | 0)));
-    this.pointBottomLeft = $S02().Construct(+((($T0C().get_viewportWidth() | 0) / 6 | 0)), +(($T0C().get_viewportHeight() | 0) - ((($T0C().get_viewportHeight() | 0) / 6) | 0)));
-    this.pointBottomRight = $S02().Construct(+(($T0C().get_viewportWidth() | 0) - ((($T0C().get_viewportWidth() | 0) / 6) | 0)), +(($T0C().get_viewportHeight() | 0) - ((($T0C().get_viewportHeight() | 0) / 6) | 0)));
+    this.isOutsideList = $S04().Construct();
+    this.intersectionsLists = $S05().Construct();
+    this.pointTopLeft = $S01().Construct(+((($T0C().get_viewportWidth() | 0) / 6 | 0)), +((($T0C().get_viewportHeight() | 0) / 6 | 0)));
+    this.pointTopRight = $S01().Construct(+(($T0C().get_viewportWidth() | 0) - ((($T0C().get_viewportWidth() | 0) / 6) | 0)), +((($T0C().get_viewportHeight() | 0) / 6 | 0)));
+    this.pointBottomLeft = $S01().Construct(+((($T0C().get_viewportWidth() | 0) / 6 | 0)), +(($T0C().get_viewportHeight() | 0) - ((($T0C().get_viewportHeight() | 0) / 6) | 0)));
+    this.pointBottomRight = $S01().Construct(+(($T0C().get_viewportWidth() | 0) - ((($T0C().get_viewportWidth() | 0) / 6) | 0)), +(($T0C().get_viewportHeight() | 0) - ((($T0C().get_viewportHeight() | 0) / 6) | 0)));
     this.lineTop = new ($T0D())(this.pointTopLeft.MemberwiseClone(), this.pointTopRight.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
     this.lineLeft = new ($T0D())(this.pointTopLeft.MemberwiseClone(), this.pointBottomLeft.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
     this.lineBottom = new ($T0D())(this.pointBottomLeft.MemberwiseClone(), this.pointBottomRight.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
     this.lineRight = new ($T0D())(this.pointTopRight.MemberwiseClone(), this.pointBottomRight.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
-    this.l = ($S06().Construct()).__Initialize__([[$S02().Construct(-2.14748365E+09, this.pointTopLeft.Y)], [$S02().Construct(2.14748365E+09, this.pointTopRight.Y)], [$S02().Construct(this.pointBottomLeft.X, -2.14748365E+09)], [$S02().Construct(this.pointTopLeft.X, 2.14748365E+09)], [$S02().Construct(-2.14748365E+09, this.pointBottomLeft.Y)], [$S02().Construct(2.14748365E+09, this.pointBottomRight.Y)], [$S02().Construct(this.pointTopRight.X, -2.14748365E+09)], [$S02().Construct(this.pointBottomRight.X, 2.14748365E+09)]]);
+    this.l = ($S06().Construct()).__Initialize__([[$S01().Construct(-2.14748365E+09, this.pointTopLeft.Y)], [$S01().Construct(2.14748365E+09, this.pointTopRight.Y)], [$S01().Construct(this.pointBottomLeft.X, -2.14748365E+09)], [$S01().Construct(this.pointTopLeft.X, 2.14748365E+09)], [$S01().Construct(-2.14748365E+09, this.pointBottomLeft.Y)], [$S01().Construct(2.14748365E+09, this.pointBottomRight.Y)], [$S01().Construct(this.pointTopRight.X, -2.14748365E+09)], [$S01().Construct(this.pointBottomRight.X, 2.14748365E+09)]]);
   };
 
   function TriangleClippingSH_Draw (spriteBatch) {
@@ -2243,7 +2256,7 @@ JSIL.MakeEnum(
         ((this.polyList).get_Item(i)).Draw(spriteBatch);
       }
     }
-    $T01().prototype.Draw.call(this, spriteBatch);
+    $T00().prototype.Draw.call(this, spriteBatch);
     (this.lineTop).Draw(spriteBatch);
     (this.lineLeft).Draw(spriteBatch);
     (this.lineBottom).Draw(spriteBatch);
@@ -2260,13 +2273,13 @@ JSIL.MakeEnum(
   function TriangleClippingSH_FindCentroidOfTriangle$00 (pointsIn) {
     var centreX = +((((+pointsIn.get_Item(0).X + +pointsIn.get_Item(1).X) + +pointsIn.get_Item(2).X) / 3));
     var centreY = +((((+pointsIn.get_Item(0).Y + +pointsIn.get_Item(1).Y) + +pointsIn.get_Item(2).Y) / 3));
-    return $S02().Construct(centreX, centreY);
+    return $S01().Construct(centreX, centreY);
   };
 
   function TriangleClippingSH_FindCentroidOfTriangle$01 (pointsIn) {
     var centreX = +((((((((pointsIn.get_Item(0)).get_X() | 0) + ((pointsIn.get_Item(1)).get_X() | 0)) | 0) + ((pointsIn.get_Item(2)).get_X() | 0)) | 0) / 3 | 0));
     var centreY = +((((((((pointsIn.get_Item(0)).get_Y() | 0) + ((pointsIn.get_Item(1)).get_Y() | 0)) | 0) + ((pointsIn.get_Item(2)).get_Y() | 0)) | 0) / 3 | 0));
-    return $S02().Construct(centreX, centreY);
+    return $S01().Construct(centreX, centreY);
   };
 
   function TriangleClippingSH_FindPointInPolygon (points, p) {
@@ -2317,7 +2330,7 @@ JSIL.MakeEnum(
     var v = new JSIL.BoxedVariable(null);
 
     while (i < 8) {
-      v.set($T03().get_Zero().MemberwiseClone());
+      v.set($T02().get_Zero().MemberwiseClone());
 
       for (var j = 0; j < (((this.triangleCount | 0) - 1) | 0); j = ((j + 1) | 0)) {
         var b = this.CheckLineIntersection(
@@ -2345,31 +2358,31 @@ JSIL.MakeEnum(
       for (j = 0; j < (((this.intersectionsLists).get_Item(i)).get_Count() | 0); j = ((j + 1) | 0)) {
         var changed = false;
         var temp = ((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone();
-        ((this.intersectionsLists).get_Item(i)).set_Item(j, $T03().Clamp(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone(), this.pointTopLeft.MemberwiseClone(), this.pointBottomRight.MemberwiseClone()).MemberwiseClone());
-        if ($T03().op_Inequality(((this.intersectionsLists).get_Item(i)).get_Item(j), temp)) {
+        ((this.intersectionsLists).get_Item(i)).set_Item(j, $T02().Clamp(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone(), this.pointTopLeft.MemberwiseClone(), this.pointBottomRight.MemberwiseClone()).MemberwiseClone());
+        if ($T02().op_Inequality(((this.intersectionsLists).get_Item(i)).get_Item(j), temp)) {
           changed = true;
         }
         if (!(!changed || this.FindPointInPolygon(
-              $T16().ToList$b1($T03())($T17().$Cast(this.trianglePoints)), 
+              $T16().ToList$b1($T02())($T17().$Cast(this.trianglePoints)), 
               ((this.intersectionsLists).get_Item(i)).get_Item(j)
             ))) {
           ((this.intersectionsLists).get_Item(i)).RemoveAt(j);
           j = ((j - 1) | 0);
         }
       }
-      (this.intersectionsLists).set_Item(i, $T16().ToList$b1($T03())($S08().CallStatic($T16(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.intersectionsLists).get_Item(i))));
-      ((this.intersectionsLists).get_Item(i)).Remove($S01().Construct(-Infinity));
+      (this.intersectionsLists).set_Item(i, $T16().ToList$b1($T02())($S08().CallStatic($T16(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.intersectionsLists).get_Item(i))));
+      ((this.intersectionsLists).get_Item(i)).Remove($S00().Construct(-Infinity));
     }
     this.insideTriPoints = $S09().Construct();
     this.outsideTriPoints = $S09().Construct();
     var tempIntersectionsTo = $S06().Construct();
     var tempIntersectionsFrom = $S06().Construct();
-    this.squareList = $S04().Construct();
+    this.squareList = $S03().Construct();
 
     for (i = 0; i < (this.triangleCount | 0); i = ((i + 1) | 0)) {
 
       for (j = 0; j < (((this.intersectionsLists).get_Item(i)).get_Count() | 0); j = ((j + 1) | 0)) {
-        (this.squareList).Add(new ($T11())(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone(), $S02().Construct(4, 4), $T0E().get_Red().MemberwiseClone()));
+        (this.squareList).Add(new ($T11())(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone(), $S01().Construct(4, 4), $T0E().get_Red().MemberwiseClone()));
       }
     }
     var pointList = $S0A().Construct();
@@ -2389,8 +2402,8 @@ JSIL.MakeEnum(
           result2.set(0);
           check.set(((this.intersectionsLists).get_Item(i)).get_Item(((j - 1) | 0)).MemberwiseClone());
           check2.set(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone());
-          $T03().Distance(/* ref */ check, /* ref */ one, /* ref */ result);
-          $T03().Distance(/* ref */ check2, /* ref */ one, /* ref */ result2);
+          $T02().Distance(/* ref */ check, /* ref */ one, /* ref */ result);
+          $T02().Distance(/* ref */ check2, /* ref */ one, /* ref */ result2);
           if (+result.get() > +result2.get()) {
             temp = ((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone();
             ((this.intersectionsLists).get_Item(i)).set_Item(j, ((this.intersectionsLists).get_Item(i)).get_Item(((j - 1) | 0)).MemberwiseClone());
@@ -2429,11 +2442,11 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_PointtoVec2 (pointIn) {
-    return $S02().Construct(+(pointIn.get_X()), +(pointIn.get_Y()));
+    return $S01().Construct(+(pointIn.get_X()), +(pointIn.get_Y()));
   };
 
   function TriangleClippingSH_StateChanges (gameTime) {
-    $T01().prototype.StateChanges.call(this, gameTime);
+    $T00().prototype.StateChanges.call(this, gameTime);
     if (!((($T1C().Inputs$MouseState$value.get_LeftButton().valueOf() | 0) !== 0) || ($T1C().Inputs$MouseStatePrevious$value.get_LeftButton() !== $T1D().Pressed))) {
       if ((this.state | 0) <= (this.triangleCount | 0)) {
         this.CorrectNormalisedTriangle(this.state);
@@ -3461,6 +3474,7 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
     var len = (Math.sqrt(((xD * xD) + (yD * yD))));
     var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
     var dot = (xD * xD2) + (yD * yD2);
+    var deg = +((dot / (len * len2)));
     var div = (yD2 * xD) - (xD2 * yD);
     var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
     var ub = +((((xD * yD3) - (yD * xD3)) / div));
