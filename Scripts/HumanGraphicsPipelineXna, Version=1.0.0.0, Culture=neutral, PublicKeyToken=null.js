@@ -4,178 +4,6 @@ var $asm00 = JSIL.DeclareAssembly("HumanGraphicsPipelineXna, Version=1.0.0.0, Cu
 JSIL.SetEntryPoint($asm00, $asm00.TypeRef("HumanGraphicsPipelineXna.Program"), "Main", JSIL.MethodSignature.Action($jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.String")])));
 
 JSIL.DeclareNamespace("HumanGraphicsPipelineXna");
-/* class HumanGraphicsPipelineXna.Polygon */ 
-
-(function Polygon$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Point))) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm0B.System.Drawing.Point)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm0B.System.Drawing.Bitmap)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm0B.System.Drawing.Graphics)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm0B.System.Drawing.SolidBrush)) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm06.System.IO.MemoryStream)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm0B.System.Drawing.Image)) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm0B.System.Drawing.Imaging.ImageFormat)) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.IO.Stream)) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm06.System.Int64)) ();
-  };
-  var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm06.System.IO.SeekOrigin)) ();
-  };
-  var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Texture2D)) ();
-  };
-  var $T0E = function () {
-    return ($T0E = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T0F = function () {
-    return ($T0F = JSIL.Memoize($asm06.System.IDisposable)) ();
-  };
-  var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T11 = function () {
-    return ($T11 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T12 = function () {
-    return ($T12 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), null))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Point"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
-  };
-  var $S02 = function () {
-    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Bitmap"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
-  };
-  var $S03 = function () {
-    return ($S03 = JSIL.Memoize(new JSIL.MethodSignature(null, [$asm0B.TypeRef("System.Drawing.Brush"), $jsilcore.TypeRef("System.Array", [$asm0B.TypeRef("System.Drawing.Point")])]))) ();
-  };
-  var $S04 = function () {
-    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.SolidBrush"), [$asm0B.TypeRef("System.Drawing.Color")]))) ();
-  };
-  var $S05 = function () {
-    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.IO.MemoryStream"), null))) ();
-  };
-  var $S06 = function () {
-    return ($S06 = JSIL.Memoize(new JSIL.MethodSignature(null, [$asm06.TypeRef("System.IO.Stream"), $asm0B.TypeRef("System.Drawing.Imaging.ImageFormat")]))) ();
-  };
-  var $S07 = function () {
-    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $IM00 = function () {
-    return ($IM00 = JSIL.Memoize($asm06.System.IDisposable.Dispose)) ();
-  };
-
-  function Polygon__ctor (pointsIn, col) {
-    var $temp00;
-    this.points = $S00().Construct();
-
-    for (var i = 0; i < (pointsIn.get_Count() | 0); i = ((i + 1) | 0)) {
-      (this.points).Add(pointsIn.get_Item(i).MemberwiseClone());
-    }
-    var minX = 2147483647;
-    var minY = 2147483647;
-    var maxX = 0;
-    var maxY = 0;
-
-    for (var a$0 = this.points._items, i$0 = 0, l$0 = (this.points._size | 0); i$0 < l$0; ($temp00 = i$0, 
-        i$0 = ((i$0 + 1) | 0), 
-        $temp00)) {
-      var val = a$0[i$0].MemberwiseClone();
-      if ((val.get_X() | 0) < minX) {
-        minX = (val.get_X() | 0);
-      }
-      if ((val.get_X() | 0) > maxX) {
-        maxX = (val.get_X() | 0);
-      }
-      if ((val.get_Y() | 0) < minY) {
-        minY = (val.get_Y() | 0);
-      }
-      if ((val.get_Y() | 0) > maxY) {
-        maxY = (val.get_Y() | 0);
-      }
-    }
-
-    for (i = 0; i < ((this.points).get_Count() | 0); i = ((i + 1) | 0)) {
-      (this.points).set_Item(i, $S01().Construct((((((this.points).get_Item(i)).get_X() | 0) - minX) | 0), (((((this.points).get_Item(i)).get_Y() | 0) - minY) | 0)));
-    }
-    var b = $S02().Construct(((maxX - minX) | 0), ((maxY - minY) | 0));
-    var g = $T05().FromImage(b);
-    $S03().CallVirtual("FillPolygon", null, g, $S04().Construct(col), $T00().prototype.ToArray.call(this.points));
-    this.tex = null;
-    var s = $S05().Construct();
-    try {
-      $S06().CallVirtual("Save", null, b, s, $T09().get_Png());
-      s.Seek($T0B().Create(0, 0, 0), $T0C().Begin);
-      this.tex = $T0D().FromStream($T0E().get_graphicsDevice(), s);
-    } finally {
-      if (s !== null) {
-        $IM00().Call(s, null);
-      }
-    }
-    this.miniX = minX;
-    this.miniY = minY;
-  };
-
-  function Polygon_Draw (spriteBatch) {
-    spriteBatch.Draw(this.tex, $S07().Construct(+(this.miniX), +(this.miniY)), $T12().get_White());
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Polygon", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 2, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      new JSIL.MethodSignature(null, [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), $asm0B.TypeRef("System.Drawing.Color")]), 
-      Polygon__ctor
-    );
-
-    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Polygon_Draw
-    );
-
-    $.Field({Static:false, Public:false}, "points", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")])); 
-    $.Field({Static:false, Public:false}, "tex", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D")); 
-    $.Field({Static:false, Public:false}, "miniX", $.Int32); 
-    $.Field({Static:false, Public:false}, "miniY", $.Int32); 
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
 /* class HumanGraphicsPipelineXna.Scene */ 
 
 (function Scene$Members () {
@@ -777,6 +605,1451 @@ JSIL.MakeEnum(
   }, false
 );
 
+/* class HumanGraphicsPipelineXna.TriangleRasterisingScene */ 
+
+(function TriangleRasterisingScene$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean)))) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square)))) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Square)) ();
+  };
+  var $T07 = function () {
+    return ($T07 = JSIL.Memoize($asm06.System.Console)) ();
+  };
+  var $T08 = function () {
+    return ($T08 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+  var $T09 = function () {
+    return ($T09 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T0A = function () {
+    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean))) ();
+  };
+  var $T0B = function () {
+    return ($T0B = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square))) ();
+  };
+  var $T0C = function () {
+    return ($T0C = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T0D = function () {
+    return ($T0D = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
+  };
+  var $T0E = function () {
+    return ($T0E = JSIL.Memoize($asm06.System.String)) ();
+  };
+  var $T0F = function () {
+    return ($T0F = JSIL.Memoize(System.Array.Of($asm06.System.String))) ();
+  };
+  var $T10 = function () {
+    return ($T10 = JSIL.Memoize($asm06.System.Single)) ();
+  };
+  var $T11 = function () {
+    return ($T11 = JSIL.Memoize($asm06.System.Boolean)) ();
+  };
+  var $T12 = function () {
+    return ($T12 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+  };
+  var $T13 = function () {
+    return ($T13 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
+  };
+  var $T14 = function () {
+    return ($T14 = JSIL.Memoize($asm06.System.Math)) ();
+  };
+  var $T15 = function () {
+    return ($T15 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Color))) ();
+  };
+  var $T16 = function () {
+    return ($T16 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
+  };
+  var $T17 = function () {
+    return ($T17 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2)))) ();
+  };
+  var $T18 = function () {
+    return ($T18 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
+  };
+  var $T19 = function () {
+    return ($T19 = JSIL.Memoize($asm09.System.Linq.Enumerable)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")])]), null))) ();
+  };
+  var $S01 = function () {
+    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")])]), null))) ();
+  };
+  var $S02 = function () {
+    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])])]), null))) ();
+  };
+  var $S03 = function () {
+    return ($S03 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")]), null))) ();
+  };
+  var $S04 = function () {
+    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")]), null))) ();
+  };
+  var $S05 = function () {
+    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+  var $S06 = function () {
+    return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Color")]), null))) ();
+  };
+  var $S07 = function () {
+    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])]), null))) ();
+  };
+  var $S08 = function () {
+    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
+  };
+  var $S09 = function () {
+    return ($S09 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
+  };
+  var $S0A = function () {
+    return ($S0A = JSIL.Memoize(new JSIL.MethodSignature($asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"]), [$asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"])], ["TSource"]))) ();
+  };
+
+  function TriangleRasterisingScene__ctor () {
+    this.listPixelCheck = $S00().Construct();
+    this.listSquares = $S01().Construct();
+    this.listResults = $S02().Construct();
+    $T03().prototype._ctor.call(this);
+  };
+
+  function TriangleRasterisingScene_ActionOnTrianglePlaced (spriteBatch) {
+    var col = new ($T05())();
+    (this.boundingBox).Draw(spriteBatch);
+    if (((this.listPixelCheck).get_Count() | 0) === 0) {
+      $T07().Clear();
+      $T07().WriteLine("");
+      $T07().WriteLine("New Triangle");
+      var count = 0;
+
+      for (var i = 0; +i < +(((+this.maximum.X - +this.minimum.X) / +($T09().Globals$pixelSize$value))); i = ((i + 1) | 0)) {
+        (this.listPixelCheck).Add($S03().Construct());
+        (this.listSquares).Add($S04().Construct());
+
+        for (var j = 0; +j < +(((+this.maximum.Y - +this.minimum.Y) / +($T09().Globals$pixelSize$value))); j = ((j + 1) | 0)) {
+          ((this.listPixelCheck).get_Item(i)).Add(false);
+          this.check = $S05().Construct(((+this.minimum.X + +(i * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))), ((+this.minimum.Y + +(j * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))));
+          if (this.PerformFillingFunction(this.NormalisePoints(this.check).MemberwiseClone(), i, j)) {
+            ((this.listPixelCheck).get_Item(i)).set_Item(j, true);
+            $jsilxna.ColorFromPremultipliedInts(col, 0, 120, 120, 180);
+          } else {
+            ((this.listPixelCheck).get_Item(i)).set_Item(j, false);
+            $jsilxna.ColorFromPremultipliedInts(col, 255, 0, 0, 100);
+          }
+          ((this.listSquares).get_Item(i)).Add(new ($T06())($S05().Construct((+this.minimum.X + +(i * ($T09().Globals$pixelSize$value | 0))), (+this.minimum.Y + +(j * ($T09().Globals$pixelSize$value | 0)))), $S05().Construct(+($T09().Globals$pixelSize$value), +($T09().Globals$pixelSize$value)), col.MemberwiseClone()));
+          var pOut = this.NormalisePoints(((this.listSquares).get_Item(i)).get_Item(j).Square$position$value);
+          var xSpace = (
+            (+pOut.X < 0)
+               ? ""
+               : " ")
+          ;
+          var ySpace = (
+            (+pOut.Y < 0)
+               ? ""
+               : " ")
+          ;
+          $T07().WriteLine(JSIL.ConcatString.apply(null, JSIL.Array.New($T0E(), ["X:", xSpace, "{0}\t\tY:", ySpace, "{1}\t\t{2}"])), JSIL.NumberToFormattedString(pOut.X, null, "F"), JSIL.NumberToFormattedString(pOut.Y, null, "F"), ((this.listPixelCheck).get_Item(i)).get_Item(j));
+          count = ((count + 1) | 0);
+        }
+        count = 0;
+      }
+      this.animationCounterLimit = ((Math.imul((this.listPixelCheck).get_Count(), ((this.listPixelCheck).get_Item(0)).get_Count()) - 2) | 0);
+    }
+  };
+
+  function TriangleRasterisingScene_DerivedInit () {
+    $T03().prototype.DerivedInit.call(this);
+    this.listPixelCheck = $S00().Construct();
+    this.listSquares = $S01().Construct();
+    this.listResults = $S02().Construct();
+    this.minimum = $T0C().get_Zero().MemberwiseClone();
+    this.maximum = $T0C().get_Zero().MemberwiseClone();
+    this.check = $T0C().get_Zero().MemberwiseClone();
+    this.previousPixelInBox = $T0C().get_Zero().MemberwiseClone();
+    this.pixelInBox = $T0C().get_Zero().MemberwiseClone();
+  };
+
+  function TriangleRasterisingScene_DrawOnAnimate (spriteBatch) {
+    var $temp00;
+    $temp00 = new ($T0C())();
+    var breakNow = false;
+    var count = 0;
+
+  $loop0: 
+    for (var i = 0; i < (((this.listPixelCheck).get_Item(0)).get_Count() | 0); i = ((i + 1) | 0)) {
+
+    $loop1: 
+      for (var j = 0; j < ((this.listPixelCheck).get_Count() | 0); j = ((j + 1) | 0)) {
+        (((this.listSquares).get_Item(j)).get_Item(i)).Draw(spriteBatch);
+        if (count > (this.animationCounter | 0)) {
+          if ($T0C().op_Inequality(($temp00._ctor(+j, +i), 
+                $temp00), this.pixelInBox)) {
+            this.previousPixelInBox = $S05().Construct(this.pixelInBox.X, this.pixelInBox.Y);
+          }
+          var sq = new ($T06())($S05().Construct((((+this.minimum.X + (+this.pixelInBox.X * +($T09().Globals$pixelSize$value))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))) - 2), (((+this.minimum.Y + (+($T09().Globals$pixelSize$value) * +this.pixelInBox.Y)) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))) - 2)), $S05().Construct(4, 4), $T05().get_Green().MemberwiseClone());
+          sq.Draw(spriteBatch);
+          breakNow = true;
+          this.check = $S05().Construct(((+this.minimum.X + +(j * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))), ((+this.minimum.Y + +(i * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))));
+          this.pixelInBox.X = +j;
+          this.pixelInBox.Y = +i;
+          break $loop1;
+        }
+        count = ((count + 1) | 0);
+      }
+      if (breakNow) {
+        break $loop0;
+      }
+    }
+    var yPos = ($T09().get_viewportHeight() | 0);
+    if (((this.listPixelCheck).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))) {
+      $T12().WriteStrokedLine(
+        spriteBatch, 
+        $T12().Fonts$arial14$value, 
+        "Pixel is within triangle.", 
+        $S05().Construct(10, +(yPos - 20)), 
+        $T05().get_White(), 
+        $T05().get_Black()
+      );
+    } else {
+      $T12().WriteStrokedLine(
+        spriteBatch, 
+        $T12().Fonts$arial14$value, 
+        "Pixel not within triangle.", 
+        $S05().Construct(10, +(yPos - 20)), 
+        $T05().get_White(), 
+        $T05().get_Black()
+      );
+    }
+  };
+
+  function TriangleRasterisingScene_LastPointPlaced (gameTime) {
+    this.minimum = $S05().Construct(+($T14().Min(((this.trianglePoints[0].X) | 0), $T14().Min(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Min(((this.trianglePoints[0].Y) | 0), $T14().Min(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
+    this.maximum = $S05().Construct(+($T14().Max(((this.trianglePoints[0].X) | 0), $T14().Max(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Max(((this.trianglePoints[0].Y) | 0), $T14().Max(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
+    this.minimum = $S05().Construct((+this.minimum.X - (+this.minimum.X % +($T09().Globals$pixelSize$value))), (+this.minimum.Y - (+this.minimum.Y % +($T09().Globals$pixelSize$value))));
+    this.maximum = $S05().Construct(((+this.maximum.X - (+this.maximum.X % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)), ((+this.maximum.Y - (+this.maximum.Y % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)));
+    this.boundingBox = new ($T06())($S05().Construct(this.minimum.X, this.minimum.Y), $S05().Construct((+this.maximum.X - +this.minimum.X), (+this.maximum.Y - +this.minimum.Y)), $jsilxna.ColorFromPremultipliedInts(null, 255, 0, 0, 120));
+    var list = $S06().Construct();
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
+    var vecArr = $S07().Construct();
+    vecArr.Add($S08().Construct());
+    (vecArr.get_Item(0)).Add($S09().Construct(3));
+    (vecArr.get_Item(0)).Add($S09().Construct(3));
+    (vecArr.get_Item(0)).Add($S09().Construct(3));
+    (vecArr.get_Item(0)).Add($S09().Construct(3));
+    vecArr.set_Item(0, $T19().ToList$b1($T0C())($S0A().CallStatic($T19(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], vecArr.get_Item(0))));
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleScene"), 
+      Name: "HumanGraphicsPipelineXna.TriangleRasterisingScene", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:false}, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      TriangleRasterisingScene__ctor
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "ActionOnTrianglePlaced", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      TriangleRasterisingScene_ActionOnTrianglePlaced
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "DerivedInit", 
+      JSIL.MethodSignature.Void, 
+      TriangleRasterisingScene_DerivedInit
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "DrawOnAnimate", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      TriangleRasterisingScene_DrawOnAnimate
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "LastPointPlaced", 
+      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
+      TriangleRasterisingScene_LastPointPlaced
+    );
+
+    $.Field({Static:false, Public:false}, "listPixelCheck", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$.Boolean])])); 
+    $.Field({Static:false, Public:false}, "listSquares", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")])])); 
+    $.Field({Static:false, Public:false}, "listResults", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$.Single])])])); 
+    $.Field({Static:false, Public:false}, "minimum", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "maximum", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "check", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "previousPixelInBox", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "pixelInBox", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "boundingBox", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.HalfSpace */ 
+
+(function HalfSpace$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleRasterisingScene)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T07 = function () {
+    return ($T07 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T08 = function () {
+    return ($T08 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
+  };
+  var $T09 = function () {
+    return ($T09 = JSIL.Memoize($asm06.System.String)) ();
+  };
+  var $T0A = function () {
+    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single)))) ();
+  };
+  var $T0B = function () {
+    return ($T0B = JSIL.Memoize($asm06.System.Single)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+  var $S01 = function () {
+    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])]), null))) ();
+  };
+
+  function HalfSpace__ctor () {
+    $T00().prototype._ctor.call(this);
+    this.drawGrid = true;
+  };
+
+  function HalfSpace_DerivedInit () {
+    $T00().prototype.DerivedInit.call(this);
+    this.v0 = 0;
+    this.v1 = 1;
+    this.v2 = 0;
+  };
+
+  function HalfSpace_Draw (spriteBatch) {
+    $T02().prototype.Draw.call(this, spriteBatch);
+  };
+
+  function HalfSpace_DrawText (spriteBatch) {
+    var yPos = ($T04().get_viewportHeight() | 0);
+    $T05().WriteStrokedLine(
+      spriteBatch, 
+      $T05().Fonts$arial14$value, 
+      "Place points clockwise for backface culling.", 
+      $S00().Construct(+(($T04().get_viewportWidth() | 0) - 320), 20), 
+      $T07().get_White(), 
+      $T07().get_Black()
+    );
+    if (((this.listResults).get_Count() | 0) > 0) {
+      $T05().WriteStrokedLine(
+        spriteBatch, 
+        $T05().Fonts$arial14$value, 
+        JSIL.ConcatString("Orient CA: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[2]), 
+        $S00().Construct(10, +((yPos = ((yPos - 40) | 0), 
+              yPos))), 
+        $T07().get_White(), 
+        $T07().get_Black()
+      );
+      $T05().WriteStrokedLine(
+        spriteBatch, 
+        $T05().Fonts$arial14$value, 
+        JSIL.ConcatString("Orient BC: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[1]), 
+        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
+              yPos))), 
+        $T07().get_White(), 
+        $T07().get_Black()
+      );
+      $T05().WriteStrokedLine(
+        spriteBatch, 
+        $T05().Fonts$arial14$value, 
+        JSIL.ConcatString("Orient AB: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[0]), 
+        $S00().Construct(10, +(yPos - 20)), 
+        $T07().get_White(), 
+        $T07().get_Black()
+      );
+    }
+  };
+
+  function HalfSpace_orient2d (a, b, p) {
+    return (((+b.X - +a.X) * (+p.Y - +a.Y)) - ((+b.Y - +a.Y) * (+p.X - +a.X)));
+  };
+
+  function HalfSpace_PerformFillingFunction (p, i, j) {
+    if ((i | 0) === ((this.listResults).get_Count() | 0)) {
+      (this.listResults).Add($S01().Construct());
+    }
+    this.v0 = +this.orient2d(this.normalisedTrianglePoints[0], this.normalisedTrianglePoints[1], p);
+    this.v1 = +this.orient2d(this.normalisedTrianglePoints[1], this.normalisedTrianglePoints[2], p);
+    this.v2 = +this.orient2d(this.normalisedTrianglePoints[2], this.normalisedTrianglePoints[0], p);
+    ((this.listResults).get_Item(i)).Add(JSIL.Array.New($T0B(), 3));
+    ((this.listResults).get_Item(i)).get_Item(j)[0] = +this.v0;
+    ((this.listResults).get_Item(i)).get_Item(j)[1] = +this.v1;
+    ((this.listResults).get_Item(i)).get_Item(j)[2] = +this.v2;
+    return !((+this.v0 < 0) || 
+      (+this.v1 < 0) || (+this.v2 < 0));
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleRasterisingScene"), 
+      Name: "HumanGraphicsPipelineXna.HalfSpace", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      HalfSpace__ctor
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "DerivedInit", 
+      JSIL.MethodSignature.Void, 
+      HalfSpace_DerivedInit
+    );
+
+    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      HalfSpace_Draw
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "DrawText", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      HalfSpace_DrawText
+    );
+
+    $.Method({Static:false, Public:false}, "orient2d", 
+      new JSIL.MethodSignature($.Single, [
+          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
+          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")
+        ]), 
+      HalfSpace_orient2d
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "PerformFillingFunction", 
+      new JSIL.MethodSignature($.Boolean, [
+          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $.Int32, 
+          $.Int32
+        ]), 
+      HalfSpace_PerformFillingFunction
+    );
+
+    $.Field({Static:false, Public:false}, "v0", $.Single); 
+    $.Field({Static:false, Public:false}, "v1", $.Single); 
+    $.Field({Static:false, Public:false}, "v2", $.Single); 
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.Game1 */ 
+
+(function Game1$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Game1_MenuState)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Content.ContentManager)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.HalfSpace)) ();
+  };
+  var $T07 = function () {
+    return ($T07 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
+  };
+  var $T08 = function () {
+    return ($T08 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene_ThisBackToMenu)) ();
+  };
+  var $T09 = function () {
+    return ($T09 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Barycentric)) ();
+  };
+  var $T0A = function () {
+    return ($T0A = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleClippingSH)) ();
+  };
+  var $T0B = function () {
+    return ($T0B = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
+  };
+  var $T0C = function () {
+    return ($T0C = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
+  };
+  var $T0D = function () {
+    return ($T0D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T0E = function () {
+    return ($T0E = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T0F = function () {
+    return ($T0F = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteSortMode)) ();
+  };
+  var $T10 = function () {
+    return ($T10 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.BlendState)) ();
+  };
+  var $T11 = function () {
+    return ($T11 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SamplerState)) ();
+  };
+  var $T12 = function () {
+    return ($T12 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.DepthStencilState)) ();
+  };
+  var $T13 = function () {
+    return ($T13 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.RasterizerState)) ();
+  };
+  var $T14 = function () {
+    return ($T14 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+  };
+  var $T15 = function () {
+    return ($T15 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
+  };
+  var $T16 = function () {
+    return ($T16 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T17 = function () {
+    return ($T17 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button_ThisOnClick)) ();
+  };
+  var $T18 = function () {
+    return ($T18 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+
+  function Game1__ctor () {
+    this.menuState = $T00().Main;
+    $T01().prototype._ctor.call(this);
+    $T02().Globals$graphics$value = new ($T03())(this);
+    (this.get_Content()).set_RootDirectory("Content");
+    this.set_IsFixedTimeStep(true);
+    $T02().Init();
+  };
+
+  function Game1_$lSetButtons$gb__0 (b) {
+    this.menuState = $T00().TriangleFilling;
+  };
+
+  function Game1_$lSetButtons$gb__1 (b) {
+    this.menuState = $T00().None;
+    this.scene = new ($T06())();
+    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
+  };
+
+  function Game1_$lSetButtons$gb__2 (b) {
+    this.menuState = $T00().None;
+    this.scene = new ($T09())();
+    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
+  };
+
+  function Game1_$lSetButtons$gb__3 (b) {
+    this.menuState = $T00().None;
+    this.scene = new ($T0A())();
+    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
+  };
+
+  function Game1_BackToMainMenu () {
+    this.scene = null;
+    this.menuState = $T00().Main;
+  };
+
+  function Game1_BackToTriangleMenu () {
+    this.scene = null;
+    this.menuState = $T00().TriangleFilling;
+  };
+
+  function Game1_CreateForm () {
+  };
+
+  function Game1_Draw (gameTime) {
+    this.get_GraphicsDevice().InternalClear($T0D().get_SlateGray());
+    (this.spriteBatch).Begin(
+      $T0F().Deferred, 
+      $T10().AlphaBlend, 
+      $T11().LinearClamp, 
+      $T12().None, 
+      $T13().CullNone
+    );
+    switch ((this.menuState).valueOf()) {
+      case 0: 
+        this.DrawMainMenu(this.spriteBatch);
+        break;
+
+      case 1: 
+        this.DrawTriangleFillingMenu(this.spriteBatch);
+        break;
+
+    }
+    if (this.scene !== null) {
+      (this.scene).Draw(this.spriteBatch);
+    }
+    (this.spriteBatch).End();
+    $T01().prototype.Draw.call(this, gameTime);
+  };
+
+  function Game1_DrawMainMenu (spriteBatch) {
+    (this.buttonTriangleFilling).Draw(spriteBatch);
+    (this.buttonClipping).Draw(spriteBatch);
+  };
+
+  function Game1_DrawTriangleFillingMenu (spriteBatch) {
+    (this.buttonHalfSpace).Draw(spriteBatch);
+    (this.buttonBarycentric).Draw(spriteBatch);
+  };
+
+  function Game1_Initialize () {
+    this.set_IsMouseVisible(true);
+    $T01().prototype.Initialize.call(this);
+  };
+
+  function Game1_LoadContent () {
+    this.spriteBatch = new ($T0E())(this.get_GraphicsDevice());
+    $T14().Fonts$font14$value = (this.get_Content()).Load$b1($T15())("Font14");
+    $T14().Fonts$smallFont$value = (this.get_Content()).Load$b1($T15())("SmallFont");
+    $T14().Fonts$arial14$value = (this.get_Content()).Load$b1($T15())("Arial14");
+    this.SetButtons();
+  };
+
+  function Game1_SetButtons () {
+    this.buttonTriangleFilling = new ($T05())("Triangle\n filling", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) - 200), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
+    this.buttonClipping = new ($T05())("Clipping", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) + 50), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
+    this.buttonHalfSpace = new ($T05())("Half-space", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) - 200), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
+    this.buttonBarycentric = new ($T05())("Barycentric", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) + 50), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
+    (this.buttonTriangleFilling).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__0));
+    (this.buttonHalfSpace).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__1));
+    (this.buttonBarycentric).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__2));
+    (this.buttonClipping).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__3));
+  };
+
+  function Game1_UnloadContent () {
+  };
+
+  function Game1_Update (gameTime) {
+    $T18().Update(gameTime);
+    if (this.scene !== null) {
+      (this.scene).Update(gameTime);
+    }
+    switch ((this.menuState).valueOf()) {
+      case 0: 
+        (this.buttonTriangleFilling).Update(gameTime);
+        (this.buttonClipping).Update(gameTime);
+        break;
+
+      case 1: 
+        (this.buttonHalfSpace).Update(gameTime);
+        (this.buttonBarycentric).Update(gameTime);
+        break;
+
+    }
+    $T01().prototype.Update.call(this, gameTime);
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm02.TypeRef("Microsoft.Xna.Framework.Game"), 
+      Name: "HumanGraphicsPipelineXna.Game1", 
+      IsPublic: true, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      Game1__ctor
+    );
+
+    $.Method({Static:false, Public:false}, "$lSetButtons$gb__0", 
+      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
+      Game1_$lSetButtons$gb__0
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:false}, "$lSetButtons$gb__1", 
+      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
+      Game1_$lSetButtons$gb__1
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:false}, "$lSetButtons$gb__2", 
+      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
+      Game1_$lSetButtons$gb__2
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:false}, "$lSetButtons$gb__3", 
+      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
+      Game1_$lSetButtons$gb__3
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:false}, "BackToMainMenu", 
+      JSIL.MethodSignature.Void, 
+      Game1_BackToMainMenu
+    );
+
+    $.Method({Static:false, Public:false}, "BackToTriangleMenu", 
+      JSIL.MethodSignature.Void, 
+      Game1_BackToTriangleMenu
+    );
+
+    $.Method({Static:false, Public:false}, "CreateForm", 
+      JSIL.MethodSignature.Void, 
+      Game1_CreateForm
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "Draw", 
+      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
+      Game1_Draw
+    );
+
+    $.Method({Static:false, Public:false}, "DrawMainMenu", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      Game1_DrawMainMenu
+    );
+
+    $.Method({Static:false, Public:false}, "DrawTriangleFillingMenu", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      Game1_DrawTriangleFillingMenu
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "Initialize", 
+      JSIL.MethodSignature.Void, 
+      Game1_Initialize
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "LoadContent", 
+      JSIL.MethodSignature.Void, 
+      Game1_LoadContent
+    );
+
+    $.Method({Static:false, Public:true }, "SetButtons", 
+      JSIL.MethodSignature.Void, 
+      Game1_SetButtons
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "UnloadContent", 
+      JSIL.MethodSignature.Void, 
+      Game1_UnloadContent
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "Update", 
+      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
+      Game1_Update
+    );
+
+    $.Field({Static:false, Public:false}, "spriteBatch", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")); 
+    $.Field({Static:false, Public:false}, "buttonHalfSpace", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
+    $.Field({Static:false, Public:false}, "buttonBarycentric", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
+    $.Field({Static:false, Public:false}, "buttonTriangleFilling", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
+    $.Field({Static:false, Public:false}, "buttonClipping", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
+    $.Field({Static:false, Public:false}, "scene", $asm00.TypeRef("HumanGraphicsPipelineXna.Scene")); 
+    $.Field({Static:false, Public:false}, "menuState", $asm00.TypeRef("HumanGraphicsPipelineXna.Game1+MenuState")); 
+    $.ImplementInterfaces(
+    );
+
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* enum HumanGraphicsPipelineXna.Game1+MenuState */ 
+
+JSIL.MakeEnum(
+  "HumanGraphicsPipelineXna.Game1+MenuState", false, {
+    Main: 0, 
+    TriangleFilling: 1, 
+    Clipping: 2, 
+    None: 3
+  }, false
+);
+
+/* class HumanGraphicsPipelineXna.Barycentric */ 
+
+(function Barycentric$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleRasterisingScene)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
+  };
+  var $T07 = function () {
+    return ($T07 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
+  };
+  var $T08 = function () {
+    return ($T08 = JSIL.Memoize($asm06.System.String)) ();
+  };
+  var $T09 = function () {
+    return ($T09 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single)))) ();
+  };
+  var $T0A = function () {
+    return ($T0A = JSIL.Memoize($asm06.System.Single)) ();
+  };
+  var $T0B = function () {
+    return ($T0B = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T0C = function () {
+    return ($T0C = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T0D = function () {
+    return ($T0D = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Helper)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+  var $S01 = function () {
+    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])]), null))) ();
+  };
+
+  function Barycentric__ctor () {
+    $T00().prototype._ctor.call(this);
+    this.drawGrid = true;
+  };
+
+  function Barycentric_Draw (spriteBatch) {
+    $T02().prototype.Draw.call(this, spriteBatch);
+    this.DrawText(spriteBatch);
+  };
+
+  function Barycentric_DrawText (spriteBatch) {
+    var yPos = ($T05().get_viewportHeight() | 0);
+    yPos = ((yPos - 20) | 0);
+    if (((this.listResults).get_Count() | 0) > 0) {
+      $T07().WriteStrokedLine(
+        spriteBatch, 
+        $T07().Fonts$arial14$value, 
+        JSIL.ConcatString("S+T: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[2]), 
+        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
+              yPos))), 
+        $T0C().get_White(), 
+        $T0C().get_Black()
+      );
+      $T07().WriteStrokedLine(
+        spriteBatch, 
+        $T07().Fonts$arial14$value, 
+        JSIL.ConcatString("T: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[1]), 
+        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
+              yPos))), 
+        $T0C().get_White(), 
+        $T0C().get_Black()
+      );
+      $T07().WriteStrokedLine(
+        spriteBatch, 
+        $T07().Fonts$arial14$value, 
+        JSIL.ConcatString("S: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[0]), 
+        $S00().Construct(10, +(yPos - 20)), 
+        $T0C().get_White(), 
+        $T0C().get_Black()
+      );
+    }
+  };
+
+  function Barycentric_PerformFillingFunction (p, i, j) {
+    if ((i | 0) === ((this.listResults).get_Count() | 0)) {
+      (this.listResults).Add($S01().Construct());
+    }
+    var vs = $S00().Construct((+this.normalisedTrianglePoints[1].X - +this.normalisedTrianglePoints[0].X), (+this.normalisedTrianglePoints[1].Y - +this.normalisedTrianglePoints[0].Y));
+    var vs2 = $S00().Construct((+this.normalisedTrianglePoints[2].X - +this.normalisedTrianglePoints[0].X), (+this.normalisedTrianglePoints[2].Y - +this.normalisedTrianglePoints[0].Y));
+    var q = $S00().Construct((+p.X - +this.normalisedTrianglePoints[0].X), (+p.Y - +this.normalisedTrianglePoints[0].Y));
+    var s = +((+$T0D().CrossProduct(q, vs2) / +$T0D().CrossProduct(vs, vs2)));
+    var t = +((+$T0D().CrossProduct(vs, q) / +$T0D().CrossProduct(vs, vs2)));
+    ((this.listResults).get_Item(i)).Add(JSIL.Array.New($T0A(), 3));
+    ((this.listResults).get_Item(i)).get_Item(j)[0] = s;
+    ((this.listResults).get_Item(i)).get_Item(j)[1] = t;
+    ((this.listResults).get_Item(i)).get_Item(j)[2] = s + t;
+    return !((s < 0) || 
+      (t < 0) || ((s + t) > 1));
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleRasterisingScene"), 
+      Name: "HumanGraphicsPipelineXna.Barycentric", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      Barycentric__ctor
+    );
+
+    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      Barycentric_Draw
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "DrawText", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      Barycentric_DrawText
+    );
+
+    $.Method({Static:false, Public:false, Virtual:true }, "PerformFillingFunction", 
+      new JSIL.MethodSignature($.Boolean, [
+          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $.Int32, 
+          $.Int32
+        ]), 
+      Barycentric_PerformFillingFunction
+    );
+
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.Polygon */ 
+
+(function Polygon$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Point))) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm0B.System.Drawing.Point)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm0B.System.Drawing.Bitmap)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm0B.System.Drawing.Graphics)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm0B.System.Drawing.SolidBrush)) ();
+  };
+  var $T07 = function () {
+    return ($T07 = JSIL.Memoize($asm06.System.IO.MemoryStream)) ();
+  };
+  var $T08 = function () {
+    return ($T08 = JSIL.Memoize($asm0B.System.Drawing.Image)) ();
+  };
+  var $T09 = function () {
+    return ($T09 = JSIL.Memoize($asm0B.System.Drawing.Imaging.ImageFormat)) ();
+  };
+  var $T0A = function () {
+    return ($T0A = JSIL.Memoize($asm06.System.IO.Stream)) ();
+  };
+  var $T0B = function () {
+    return ($T0B = JSIL.Memoize($asm06.System.Int64)) ();
+  };
+  var $T0C = function () {
+    return ($T0C = JSIL.Memoize($asm06.System.IO.SeekOrigin)) ();
+  };
+  var $T0D = function () {
+    return ($T0D = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Texture2D)) ();
+  };
+  var $T0E = function () {
+    return ($T0E = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T0F = function () {
+    return ($T0F = JSIL.Memoize($asm06.System.IDisposable)) ();
+  };
+  var $T10 = function () {
+    return ($T10 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T11 = function () {
+    return ($T11 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T12 = function () {
+    return ($T12 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), null))) ();
+  };
+  var $S01 = function () {
+    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Point"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
+  };
+  var $S02 = function () {
+    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Bitmap"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
+  };
+  var $S03 = function () {
+    return ($S03 = JSIL.Memoize(new JSIL.MethodSignature(null, [$asm0B.TypeRef("System.Drawing.Brush"), $jsilcore.TypeRef("System.Array", [$asm0B.TypeRef("System.Drawing.Point")])]))) ();
+  };
+  var $S04 = function () {
+    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.SolidBrush"), [$asm0B.TypeRef("System.Drawing.Color")]))) ();
+  };
+  var $S05 = function () {
+    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.IO.MemoryStream"), null))) ();
+  };
+  var $S06 = function () {
+    return ($S06 = JSIL.Memoize(new JSIL.MethodSignature(null, [$asm06.TypeRef("System.IO.Stream"), $asm0B.TypeRef("System.Drawing.Imaging.ImageFormat")]))) ();
+  };
+  var $S07 = function () {
+    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+  var $IM00 = function () {
+    return ($IM00 = JSIL.Memoize($asm06.System.IDisposable.Dispose)) ();
+  };
+
+  function Polygon__ctor (pointsIn, col) {
+    var $temp00;
+    this.points = $S00().Construct();
+
+    for (var i = 0; i < (pointsIn.get_Count() | 0); i = ((i + 1) | 0)) {
+      (this.points).Add(pointsIn.get_Item(i).MemberwiseClone());
+    }
+    var minX = 2147483647;
+    var minY = 2147483647;
+    var maxX = 0;
+    var maxY = 0;
+
+    for (var a$0 = this.points._items, i$0 = 0, l$0 = (this.points._size | 0); i$0 < l$0; ($temp00 = i$0, 
+        i$0 = ((i$0 + 1) | 0), 
+        $temp00)) {
+      var val = a$0[i$0].MemberwiseClone();
+      if ((val.get_X() | 0) < minX) {
+        minX = (val.get_X() | 0);
+      }
+      if ((val.get_X() | 0) > maxX) {
+        maxX = (val.get_X() | 0);
+      }
+      if ((val.get_Y() | 0) < minY) {
+        minY = (val.get_Y() | 0);
+      }
+      if ((val.get_Y() | 0) > maxY) {
+        maxY = (val.get_Y() | 0);
+      }
+    }
+
+    for (i = 0; i < ((this.points).get_Count() | 0); i = ((i + 1) | 0)) {
+      (this.points).set_Item(i, $S01().Construct((((((this.points).get_Item(i)).get_X() | 0) - minX) | 0), (((((this.points).get_Item(i)).get_Y() | 0) - minY) | 0)));
+    }
+    var b = $S02().Construct(((maxX - minX) | 0), ((maxY - minY) | 0));
+    var g = $T05().FromImage(b);
+    $S03().CallVirtual("FillPolygon", null, g, $S04().Construct(col), $T00().prototype.ToArray.call(this.points));
+    this.tex = null;
+    var s = $S05().Construct();
+    try {
+      $S06().CallVirtual("Save", null, b, s, $T09().get_Png());
+      s.Seek($T0B().Create(0, 0, 0), $T0C().Begin);
+      this.tex = $T0D().FromStream($T0E().get_graphicsDevice(), s);
+    } finally {
+      if (s !== null) {
+        $IM00().Call(s, null);
+      }
+    }
+    this.miniX = minX;
+    this.miniY = minY;
+  };
+
+  function Polygon_Draw (spriteBatch) {
+    spriteBatch.Draw(this.tex, $S07().Construct(+(this.miniX), +(this.miniY)), $T12().get_White());
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Polygon", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 2, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      new JSIL.MethodSignature(null, [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), $asm0B.TypeRef("System.Drawing.Color")]), 
+      Polygon__ctor
+    );
+
+    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
+      Polygon_Draw
+    );
+
+    $.Field({Static:false, Public:false}, "points", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")])); 
+    $.Field({Static:false, Public:false}, "tex", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D")); 
+    $.Field({Static:false, Public:false}, "miniX", $.Int32); 
+    $.Field({Static:false, Public:false}, "miniY", $.Int32); 
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.Globals */ 
+
+(function Globals$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Viewport)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+
+  function Globals__ctor () {
+  };
+
+  function Globals_get_graphics () {
+    return $thisType.Globals$graphics$value;
+  };
+
+  function Globals_get_graphicsDevice () {
+    return $thisType.Globals$graphics$value.get_GraphicsDevice();
+  };
+
+  function Globals_get_pixelSize () {
+    return $thisType.Globals$pixelSize$value;
+  };
+
+  function Globals_get_viewport () {
+    return $S00().Construct(+($thisType.Globals$graphics$value.get_GraphicsDevice().get_Viewport().get_Width()), +($thisType.Globals$graphics$value.get_GraphicsDevice().get_Viewport().get_Height()));
+  };
+
+  function Globals_get_viewportHeight () {
+    return (($thisType.get_viewport().Y) | 0);
+  };
+
+  function Globals_get_viewportWidth () {
+    return (($thisType.get_viewport().X) | 0);
+  };
+
+  function Globals_Init () {
+    $thisType.Globals$pixelSize$value = 20;
+  };
+
+  function Globals_set_graphics (value) {
+    $thisType.Globals$graphics$value = value;
+  };
+
+  function Globals_set_pixelSize (value) {
+    $thisType.Globals$pixelSize$value = (value | 0);
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Globals", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      Globals__ctor
+    );
+
+    $.Method({Static:true , Public:true }, "get_graphics", 
+      JSIL.MethodSignature.Return($asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager")), 
+      Globals_get_graphics
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "get_graphicsDevice", 
+      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice")), 
+      Globals_get_graphicsDevice
+    );
+
+    $.Method({Static:true , Public:true }, "get_pixelSize", 
+      JSIL.MethodSignature.Return($.Int32), 
+      Globals_get_pixelSize
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "get_viewport", 
+      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
+      Globals_get_viewport
+    );
+
+    $.Method({Static:true , Public:true }, "get_viewportHeight", 
+      JSIL.MethodSignature.Return($.Int32), 
+      Globals_get_viewportHeight
+    );
+
+    $.Method({Static:true , Public:true }, "get_viewportWidth", 
+      JSIL.MethodSignature.Return($.Int32), 
+      Globals_get_viewportWidth
+    );
+
+    $.Method({Static:true , Public:true }, "Init", 
+      JSIL.MethodSignature.Void, 
+      Globals_Init
+    );
+
+    $.Method({Static:true , Public:true }, "set_graphics", 
+      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager")), 
+      Globals_set_graphics
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:false}, "set_pixelSize", 
+      JSIL.MethodSignature.Action($.Int32), 
+      Globals_set_pixelSize
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Field({Static:true , Public:false}, "Globals$graphics$value", $asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Field({Static:true , Public:false}, "Globals$pixelSize$value", $.Int32)
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Property({Static:true , Public:true }, "graphics", $asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager"));
+
+    $.Property({Static:true , Public:true }, "graphicsDevice", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice"));
+
+    $.Property({Static:true , Public:true }, "viewport", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"));
+
+    $.Property({Static:true , Public:true }, "viewportWidth", $.Int32);
+
+    $.Property({Static:true , Public:true }, "viewportHeight", $.Int32);
+
+    $.Property({Static:true , Public:true }, "pixelSize", $.Int32);
+
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.Fonts */ 
+
+(function Fonts$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm06.System.String)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm06.System.Int32)) ();
+  };
+
+  function Fonts__ctor () {
+  };
+
+  function Fonts_get_arial14 () {
+    return $thisType.Fonts$arial14$value;
+  };
+
+  function Fonts_get_font14 () {
+    return $thisType.Fonts$font14$value;
+  };
+
+  function Fonts_get_smallFont () {
+    return $thisType.Fonts$smallFont$value;
+  };
+
+  function Fonts_Init () {
+  };
+
+  function Fonts_set_arial14 (value) {
+    $thisType.Fonts$arial14$value = value;
+  };
+
+  function Fonts_set_font14 (value) {
+    $thisType.Fonts$font14$value = value;
+  };
+
+  function Fonts_set_smallFont (value) {
+    $thisType.Fonts$smallFont$value = value;
+  };
+
+  function Fonts_WriteStrokedLine (spriteBatch, font, text, position, textColour, strokeColour) {
+    var $temp00;
+    $temp00 = new ($T03())();
+
+    for (var i = -1; i <= 1; i = ((i + 1) | 0)) {
+
+      for (var j = -1; j <= 1; j = ((j + 1) | 0)) {
+        if ((i !== 0) || (j !== 0)) {
+          spriteBatch.DrawString(font, text, ($temp00._ctor(+position.X + +i, +position.Y + +j), 
+              $temp00), strokeColour);
+        }
+      }
+    }
+    spriteBatch.DrawString(font, text, position, textColour);
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Fonts", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 0, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      JSIL.MethodSignature.Void, 
+      Fonts__ctor
+    );
+
+    $.Method({Static:true , Public:true }, "get_arial14", 
+      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_get_arial14
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "get_font14", 
+      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_get_font14
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "get_smallFont", 
+      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_get_smallFont
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:true }, "Init", 
+      JSIL.MethodSignature.Void, 
+      Fonts_Init
+    );
+
+    $.Method({Static:true , Public:true }, "set_arial14", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_set_arial14
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "set_font14", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_set_font14
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "set_smallFont", 
+      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
+      Fonts_set_smallFont
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "WriteStrokedLine", 
+      new JSIL.MethodSignature(null, [
+          $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch"), $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"), 
+          $.String, $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
+          $asm01.TypeRef("Microsoft.Xna.Framework.Color"), $asm01.TypeRef("Microsoft.Xna.Framework.Color")
+        ]), 
+      Fonts_WriteStrokedLine
+    );
+
+    $.Field({Static:true , Public:false}, "Fonts$smallFont$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Field({Static:true , Public:false}, "Fonts$font14$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Field({Static:true , Public:false}, "Fonts$arial14$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Property({Static:true , Public:true }, "smallFont", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
+
+    $.Property({Static:true , Public:true }, "font14", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
+
+    $.Property({Static:true , Public:true }, "arial14", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
+
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
 /* class HumanGraphicsPipelineXna.TriangleClippingSH */ 
 
 (function TriangleClippingSH$Members () {
@@ -1176,17 +2449,44 @@ JSIL.MakeEnum(
       }
     }
     pointList = this.EliminateDuplicates$b1($T14())(pointList);
-    var dCol = ($S0B().Construct()).__Initialize__([[$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()], [$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()], [$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()]]);
+    var list = $S0B().Construct();
+    list.Add($T0E().get_Red().MemberwiseClone());
+    list.Add($T0E().get_Yellow().MemberwiseClone());
+    list.Add($T0E().get_Green().MemberwiseClone());
+    list.Add($T0E().get_Blue().MemberwiseClone());
+    list.Add($T0E().get_White().MemberwiseClone());
+    list.Add($T0E().get_Gray().MemberwiseClone());
+    list.Add($T0E().get_CornflowerBlue().MemberwiseClone());
+    list.Add($T0E().get_Plum().MemberwiseClone());
+    list.Add($T0E().get_Olive().MemberwiseClone());
+    list.Add($T0E().get_Red().MemberwiseClone());
+    list.Add($T0E().get_Yellow().MemberwiseClone());
+    list.Add($T0E().get_Green().MemberwiseClone());
+    list.Add($T0E().get_Blue().MemberwiseClone());
+    list.Add($T0E().get_White().MemberwiseClone());
+    list.Add($T0E().get_Gray().MemberwiseClone());
+    list.Add($T0E().get_CornflowerBlue().MemberwiseClone());
+    list.Add($T0E().get_Plum().MemberwiseClone());
+    list.Add($T0E().get_Olive().MemberwiseClone());
+    list.Add($T0E().get_Red().MemberwiseClone());
+    list.Add($T0E().get_Yellow().MemberwiseClone());
+    list.Add($T0E().get_Green().MemberwiseClone());
+    list.Add($T0E().get_Blue().MemberwiseClone());
+    list.Add($T0E().get_White().MemberwiseClone());
+    list.Add($T0E().get_Gray().MemberwiseClone());
+    list.Add($T0E().get_CornflowerBlue().MemberwiseClone());
+    list.Add($T0E().get_Plum().MemberwiseClone());
+    list.Add($T0E().get_Olive().MemberwiseClone());
     if ((pointList.get_Count() | 0) > 0) {
 
       for (i = 0; i < (((pointList.get_Count() | 0) - 2) | 0); i = ((i + 1) | 0)) {
-        var list = $S0A().Construct();
-        list.Add(pointList.get_Item(0).MemberwiseClone());
-        list.Add(pointList.get_Item(((i + 1) | 0)).MemberwiseClone());
-        list.Add(pointList.get_Item(((i + 2) | 0)).MemberwiseClone());
-        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
-        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
-        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
+        var list2 = $S0A().Construct();
+        list2.Add(pointList.get_Item(0).MemberwiseClone());
+        list2.Add(pointList.get_Item(((i + 1) | 0)).MemberwiseClone());
+        list2.Add(pointList.get_Item(((i + 2) | 0)).MemberwiseClone());
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 2));
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 2));
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 2));
       }
     }
   };
@@ -1394,445 +2694,50 @@ JSIL.MakeEnum(
 
 })();
 
-/* class HumanGraphicsPipelineXna.TriangleRasterisingScene */ 
+/* class HumanGraphicsPipelineXna.Inputs */ 
 
-(function TriangleRasterisingScene$Members () {
+(function Inputs$Members () {
   var $, $thisType;
   var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean)))) ();
+    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.MouseState)) ();
   };
   var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square)))) ();
+    return ($T01 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
   };
   var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Square)) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm06.System.Console)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Boolean))) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Square))) ();
-  };
-  var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
-  };
-  var $T0E = function () {
-    return ($T0E = JSIL.Memoize($asm06.System.String)) ();
-  };
-  var $T0F = function () {
-    return ($T0F = JSIL.Memoize(System.Array.Of($asm06.System.String))) ();
-  };
-  var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm06.System.Single)) ();
-  };
-  var $T11 = function () {
-    return ($T11 = JSIL.Memoize($asm06.System.Boolean)) ();
-  };
-  var $T12 = function () {
-    return ($T12 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
-  };
-  var $T13 = function () {
-    return ($T13 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
-  };
-  var $T14 = function () {
-    return ($T14 = JSIL.Memoize($asm06.System.Math)) ();
-  };
-  var $T15 = function () {
-    return ($T15 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Color))) ();
-  };
-  var $T16 = function () {
-    return ($T16 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
-  };
-  var $T17 = function () {
-    return ($T17 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2)))) ();
-  };
-  var $T18 = function () {
-    return ($T18 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
-  };
-  var $T19 = function () {
-    return ($T19 = JSIL.Memoize($asm09.System.Linq.Enumerable)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")])]), null))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")])]), null))) ();
-  };
-  var $S02 = function () {
-    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])])]), null))) ();
-  };
-  var $S03 = function () {
-    return ($S03 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")]), null))) ();
-  };
-  var $S04 = function () {
-    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")]), null))) ();
-  };
-  var $S05 = function () {
-    return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S06 = function () {
-    return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Color")]), null))) ();
-  };
-  var $S07 = function () {
-    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])]), null))) ();
-  };
-  var $S08 = function () {
-    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
-  };
-  var $S09 = function () {
-    return ($S09 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S0A = function () {
-    return ($S0A = JSIL.Memoize(new JSIL.MethodSignature($asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"]), [$asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"])], ["TSource"]))) ();
+    return ($T02 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.Mouse)) ();
   };
 
-  function TriangleRasterisingScene__ctor () {
-    this.listPixelCheck = $S00().Construct();
-    this.listSquares = $S01().Construct();
-    this.listResults = $S02().Construct();
-    $T03().prototype._ctor.call(this);
+  function Inputs__ctor () {
   };
 
-  function TriangleRasterisingScene_ActionOnTrianglePlaced (spriteBatch) {
-    var col = new ($T05())();
-    (this.boundingBox).Draw(spriteBatch);
-    if (((this.listPixelCheck).get_Count() | 0) === 0) {
-      $T07().Clear();
-      $T07().WriteLine("");
-      $T07().WriteLine("New Triangle");
-      var count = 0;
-
-      for (var i = 0; +i < +(((+this.maximum.X - +this.minimum.X) / +($T09().Globals$pixelSize$value))); i = ((i + 1) | 0)) {
-        (this.listPixelCheck).Add($S03().Construct());
-        (this.listSquares).Add($S04().Construct());
-
-        for (var j = 0; +j < +(((+this.maximum.Y - +this.minimum.Y) / +($T09().Globals$pixelSize$value))); j = ((j + 1) | 0)) {
-          ((this.listPixelCheck).get_Item(i)).Add(false);
-          this.check = $S05().Construct(((+this.minimum.X + +(i * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))), ((+this.minimum.Y + +(j * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))));
-          if (this.PerformFillingFunction(this.NormalisePoints(this.check).MemberwiseClone(), i, j)) {
-            ((this.listPixelCheck).get_Item(i)).set_Item(j, true);
-            $jsilxna.ColorFromPremultipliedInts(col, 0, 120, 120, 180);
-          } else {
-            ((this.listPixelCheck).get_Item(i)).set_Item(j, false);
-            $jsilxna.ColorFromPremultipliedInts(col, 255, 0, 0, 100);
-          }
-          ((this.listSquares).get_Item(i)).Add(new ($T06())($S05().Construct((+this.minimum.X + +(i * ($T09().Globals$pixelSize$value | 0))), (+this.minimum.Y + +(j * ($T09().Globals$pixelSize$value | 0)))), $S05().Construct(+($T09().Globals$pixelSize$value), +($T09().Globals$pixelSize$value)), col.MemberwiseClone()));
-          var pOut = this.NormalisePoints(((this.listSquares).get_Item(i)).get_Item(j).Square$position$value);
-          var xSpace = (
-            (+pOut.X < 0)
-               ? ""
-               : " ")
-          ;
-          var ySpace = (
-            (+pOut.Y < 0)
-               ? ""
-               : " ")
-          ;
-          $T07().WriteLine(JSIL.ConcatString.apply(null, JSIL.Array.New($T0E(), ["X:", xSpace, "{0}\t\tY:", ySpace, "{1}\t\t{2}"])), JSIL.NumberToFormattedString(pOut.X, null, "F"), JSIL.NumberToFormattedString(pOut.Y, null, "F"), ((this.listPixelCheck).get_Item(i)).get_Item(j));
-          count = ((count + 1) | 0);
-        }
-        count = 0;
-      }
-      this.animationCounterLimit = ((Math.imul((this.listPixelCheck).get_Count(), ((this.listPixelCheck).get_Item(0)).get_Count()) - 2) | 0);
-    }
+  function Inputs_get_MouseState () {
+    return $thisType.Inputs$MouseState$value;
   };
 
-  function TriangleRasterisingScene_DerivedInit () {
-    $T03().prototype.DerivedInit.call(this);
-    this.listPixelCheck = $S00().Construct();
-    this.listSquares = $S01().Construct();
-    this.listResults = $S02().Construct();
-    this.minimum = $T0C().get_Zero().MemberwiseClone();
-    this.maximum = $T0C().get_Zero().MemberwiseClone();
-    this.check = $T0C().get_Zero().MemberwiseClone();
-    this.previousPixelInBox = $T0C().get_Zero().MemberwiseClone();
-    this.pixelInBox = $T0C().get_Zero().MemberwiseClone();
+  function Inputs_get_MouseStatePrevious () {
+    return $thisType.Inputs$MouseStatePrevious$value;
   };
 
-  function TriangleRasterisingScene_DrawOnAnimate (spriteBatch) {
-    var $temp00;
-    $temp00 = new ($T0C())();
-    var breakNow = false;
-    var count = 0;
-
-  $loop0: 
-    for (var i = 0; i < (((this.listPixelCheck).get_Item(0)).get_Count() | 0); i = ((i + 1) | 0)) {
-
-    $loop1: 
-      for (var j = 0; j < ((this.listPixelCheck).get_Count() | 0); j = ((j + 1) | 0)) {
-        (((this.listSquares).get_Item(j)).get_Item(i)).Draw(spriteBatch);
-        if (count > (this.animationCounter | 0)) {
-          if ($T0C().op_Inequality(($temp00._ctor(+j, +i), 
-                $temp00), this.pixelInBox)) {
-            this.previousPixelInBox = $S05().Construct(this.pixelInBox.X, this.pixelInBox.Y);
-          }
-          var sq = new ($T06())($S05().Construct((((+this.minimum.X + (+this.pixelInBox.X * +($T09().Globals$pixelSize$value))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))) - 2), (((+this.minimum.Y + (+($T09().Globals$pixelSize$value) * +this.pixelInBox.Y)) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))) - 2)), $S05().Construct(4, 4), $T05().get_Green().MemberwiseClone());
-          sq.Draw(spriteBatch);
-          breakNow = true;
-          this.check = $S05().Construct(((+this.minimum.X + +(j * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))), ((+this.minimum.Y + +(i * ($T09().Globals$pixelSize$value | 0))) + +((($T09().Globals$pixelSize$value | 0) / 2 | 0))));
-          this.pixelInBox.X = +j;
-          this.pixelInBox.Y = +i;
-          break $loop1;
-        }
-        count = ((count + 1) | 0);
-      }
-      if (breakNow) {
-        break $loop0;
-      }
-    }
-    var yPos = ($T09().get_viewportHeight() | 0);
-    if (((this.listPixelCheck).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))) {
-      $T12().WriteStrokedLine(
-        spriteBatch, 
-        $T12().Fonts$arial14$value, 
-        "Pixel is within triangle.", 
-        $S05().Construct(10, +(yPos - 20)), 
-        $T05().get_White(), 
-        $T05().get_Black()
-      );
-    } else {
-      $T12().WriteStrokedLine(
-        spriteBatch, 
-        $T12().Fonts$arial14$value, 
-        "Pixel not within triangle.", 
-        $S05().Construct(10, +(yPos - 20)), 
-        $T05().get_White(), 
-        $T05().get_Black()
-      );
-    }
+  function Inputs_Init () {
   };
 
-  function TriangleRasterisingScene_LastPointPlaced (gameTime) {
-    this.minimum = $S05().Construct(+($T14().Min(((this.trianglePoints[0].X) | 0), $T14().Min(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Min(((this.trianglePoints[0].Y) | 0), $T14().Min(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
-    this.maximum = $S05().Construct(+($T14().Max(((this.trianglePoints[0].X) | 0), $T14().Max(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Max(((this.trianglePoints[0].Y) | 0), $T14().Max(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
-    this.minimum = $S05().Construct((+this.minimum.X - (+this.minimum.X % +($T09().Globals$pixelSize$value))), (+this.minimum.Y - (+this.minimum.Y % +($T09().Globals$pixelSize$value))));
-    this.maximum = $S05().Construct(((+this.maximum.X - (+this.maximum.X % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)), ((+this.maximum.Y - (+this.maximum.Y % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)));
-    this.boundingBox = new ($T06())($S05().Construct(this.minimum.X, this.minimum.Y), $S05().Construct((+this.maximum.X - +this.minimum.X), (+this.maximum.Y - +this.minimum.Y)), $jsilxna.ColorFromPremultipliedInts(null, 255, 0, 0, 120));
-    var list = $S06().Construct();
-    list.Add($T16().get_Red());
-    list.Add($T16().get_Yellow());
-    list.Add($T16().get_Green());
-    list.Add($T16().get_Blue());
-    list.Add($T16().get_White());
-    list.Add($T16().get_Gray());
-    list.Add($T16().get_CornflowerBlue());
-    list.Add($T16().get_Plum());
-    list.Add($T16().get_Olive());
-    list.Add($T16().get_Red());
-    list.Add($T16().get_Yellow());
-    list.Add($T16().get_Green());
-    list.Add($T16().get_Blue());
-    list.Add($T16().get_White());
-    list.Add($T16().get_Gray());
-    list.Add($T16().get_CornflowerBlue());
-    list.Add($T16().get_Plum());
-    list.Add($T16().get_Olive());
-    list.Add($T16().get_Red());
-    list.Add($T16().get_Yellow());
-    list.Add($T16().get_Green());
-    list.Add($T16().get_Blue());
-    list.Add($T16().get_White());
-    list.Add($T16().get_Gray());
-    list.Add($T16().get_CornflowerBlue());
-    list.Add($T16().get_Plum());
-    list.Add($T16().get_Olive());
-    var vecArr = $S07().Construct();
-    vecArr.Add($S08().Construct());
-    (vecArr.get_Item(0)).Add($S09().Construct(3));
-    (vecArr.get_Item(0)).Add($S09().Construct(3));
-    (vecArr.get_Item(0)).Add($S09().Construct(3));
-    (vecArr.get_Item(0)).Add($S09().Construct(3));
-    vecArr.set_Item(0, $T19().ToList$b1($T0C())($S0A().CallStatic($T19(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], vecArr.get_Item(0))));
+  function Inputs_set_MouseState (value) {
+    $thisType.Inputs$MouseState$value = value;
+  };
+
+  function Inputs_set_MouseStatePrevious (value) {
+    $thisType.Inputs$MouseStatePrevious$value = value;
+  };
+
+  function Inputs_Update (gameTime) {
+    ($thisType.Inputs$MouseState$value = $thisType.Inputs$MouseStatePrevious$value.MemberwiseClone());
+    ($thisType.Inputs$MouseStatePrevious$value = $T02().GetState().MemberwiseClone());
   };
 
   JSIL.MakeType({
-      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleScene"), 
-      Name: "HumanGraphicsPipelineXna.TriangleRasterisingScene", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:false}, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      TriangleRasterisingScene__ctor
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "ActionOnTrianglePlaced", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      TriangleRasterisingScene_ActionOnTrianglePlaced
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DerivedInit", 
-      JSIL.MethodSignature.Void, 
-      TriangleRasterisingScene_DerivedInit
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DrawOnAnimate", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      TriangleRasterisingScene_DrawOnAnimate
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "LastPointPlaced", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      TriangleRasterisingScene_LastPointPlaced
-    );
-
-    $.Field({Static:false, Public:false}, "listPixelCheck", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$.Boolean])])); 
-    $.Field({Static:false, Public:false}, "listSquares", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")])])); 
-    $.Field({Static:false, Public:false}, "listResults", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$.Single])])])); 
-    $.Field({Static:false, Public:false}, "minimum", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "maximum", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "check", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "previousPixelInBox", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "pixelInBox", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "boundingBox", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.Barycentric */ 
-
-(function Barycentric$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleRasterisingScene)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm06.System.String)) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single)))) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.Single)) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Helper)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])]), null))) ();
-  };
-
-  function Barycentric__ctor () {
-    $T00().prototype._ctor.call(this);
-    this.drawGrid = true;
-  };
-
-  function Barycentric_Draw (spriteBatch) {
-    $T02().prototype.Draw.call(this, spriteBatch);
-    this.DrawText(spriteBatch);
-  };
-
-  function Barycentric_DrawText (spriteBatch) {
-    var yPos = ($T05().get_viewportHeight() | 0);
-    yPos = ((yPos - 20) | 0);
-    if (((this.listResults).get_Count() | 0) > 0) {
-      $T07().WriteStrokedLine(
-        spriteBatch, 
-        $T07().Fonts$arial14$value, 
-        JSIL.ConcatString("S+T: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[2]), 
-        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
-              yPos))), 
-        $T0C().get_White(), 
-        $T0C().get_Black()
-      );
-      $T07().WriteStrokedLine(
-        spriteBatch, 
-        $T07().Fonts$arial14$value, 
-        JSIL.ConcatString("T: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[1]), 
-        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
-              yPos))), 
-        $T0C().get_White(), 
-        $T0C().get_Black()
-      );
-      $T07().WriteStrokedLine(
-        spriteBatch, 
-        $T07().Fonts$arial14$value, 
-        JSIL.ConcatString("S: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[0]), 
-        $S00().Construct(10, +(yPos - 20)), 
-        $T0C().get_White(), 
-        $T0C().get_Black()
-      );
-    }
-  };
-
-  function Barycentric_PerformFillingFunction (p, i, j) {
-    if ((i | 0) === ((this.listResults).get_Count() | 0)) {
-      (this.listResults).Add($S01().Construct());
-    }
-    var vs = $S00().Construct((+this.normalisedTrianglePoints[1].X - +this.normalisedTrianglePoints[0].X), (+this.normalisedTrianglePoints[1].Y - +this.normalisedTrianglePoints[0].Y));
-    var vs2 = $S00().Construct((+this.normalisedTrianglePoints[2].X - +this.normalisedTrianglePoints[0].X), (+this.normalisedTrianglePoints[2].Y - +this.normalisedTrianglePoints[0].Y));
-    var q = $S00().Construct((+p.X - +this.normalisedTrianglePoints[0].X), (+p.Y - +this.normalisedTrianglePoints[0].Y));
-    var s = +((+$T0D().CrossProduct(q, vs2) / +$T0D().CrossProduct(vs, vs2)));
-    var t = +((+$T0D().CrossProduct(vs, q) / +$T0D().CrossProduct(vs, vs2)));
-    ((this.listResults).get_Item(i)).Add(JSIL.Array.New($T0A(), 3));
-    ((this.listResults).get_Item(i)).get_Item(j)[0] = s;
-    ((this.listResults).get_Item(i)).get_Item(j)[1] = t;
-    ((this.listResults).get_Item(i)).get_Item(j)[2] = s + t;
-    return !((s < 0) || 
-      (t < 0) || ((s + t) > 1));
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleRasterisingScene"), 
-      Name: "HumanGraphicsPipelineXna.Barycentric", 
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Inputs", 
       IsPublic: false, 
       IsReferenceType: true, 
       MaximumConstructorArguments: 0, 
@@ -1841,26 +2746,164 @@ JSIL.MakeEnum(
 
     $.Method({Static:false, Public:true }, ".ctor", 
       JSIL.MethodSignature.Void, 
-      Barycentric__ctor
+      Inputs__ctor
+    );
+
+    $.Method({Static:true , Public:true }, "get_MouseState", 
+      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
+      Inputs_get_MouseState
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "get_MouseStatePrevious", 
+      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
+      Inputs_get_MouseStatePrevious
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:false, Public:true }, "Init", 
+      JSIL.MethodSignature.Void, 
+      Inputs_Init
+    );
+
+    $.Method({Static:true , Public:false}, "set_MouseState", 
+      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
+      Inputs_set_MouseState
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:false}, "set_MouseStatePrevious", 
+      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
+      Inputs_set_MouseStatePrevious
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Method({Static:true , Public:true }, "Update", 
+      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
+      Inputs_Update
+    );
+
+    $.Field({Static:true , Public:false}, "Inputs$MouseState$value", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Field({Static:true , Public:false}, "Inputs$MouseStatePrevious$value", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    function Inputs__cctor () {
+      $thisType.Inputs$MouseState$value = new $asm01.Microsoft.Xna.Framework.Input.MouseState();
+      $thisType.Inputs$MouseStatePrevious$value = new $asm01.Microsoft.Xna.Framework.Input.MouseState();
+    };
+
+
+    $.Method({Static:true , Public:false}, ".cctor", 
+      JSIL.MethodSignature.Void, 
+      Inputs__cctor
+    );
+
+    $.Property({Static:true , Public:true }, "MouseState", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"));
+
+    $.Property({Static:true , Public:true }, "MouseStatePrevious", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"));
+
+    return function (newThisType) { $thisType = newThisType; }; 
+  });
+
+})();
+
+/* class HumanGraphicsPipelineXna.Square */ 
+
+(function Square$Members () {
+  var $, $thisType;
+  var $T00 = function () {
+    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+  };
+  var $T01 = function () {
+    return ($T01 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
+  };
+  var $T02 = function () {
+    return ($T02 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Texture2D)) ();
+  };
+  var $T03 = function () {
+    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
+  };
+  var $T04 = function () {
+    return ($T04 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SurfaceFormat)) ();
+  };
+  var $T05 = function () {
+    return ($T05 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+  };
+  var $T06 = function () {
+    return ($T06 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Rectangle)) ();
+  };
+  var $S00 = function () {
+    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D"), [
+        $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice"), $asm06.TypeRef("System.Int32"), 
+        $asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Boolean"), 
+        $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SurfaceFormat")
+      ]))) ();
+  };
+  var $S01 = function () {
+    return ($S01 = JSIL.Memoize(new JSIL.MethodSignature(null, [$jsilcore.TypeRef("System.Array", ["!!0"])], ["T"]))) ();
+  };
+
+  function Square__ctor (pos, sizeIn, col) {
+    this.pixels = JSIL.Array.New($T01(), [$T01().get_Black()]);
+    this.pixels[0] = col;
+    (this.Square$position$value = pos);
+    this.size = sizeIn;
+    this.tex = $S00().Construct($T03().get_graphicsDevice(), 1, 1, true, $T04().Color);
+    $S01().CallVirtual("SetData$b1", [$asm01.Microsoft.Xna.Framework.Color], this.tex, this.pixels);
+  };
+
+  function Square_Draw (spriteBatch) {
+    spriteBatch.DrawRect(this.tex, new ($T06())(((this.Square$position$value.X) | 0), ((this.Square$position$value.Y) | 0), ((this.size.X) | 0), ((this.size.Y) | 0)), this.pixels[0]);
+  };
+
+  function Square_get_position () {
+    return this.Square$position$value;
+  };
+
+  function Square_set_position (value) {
+    this.Square$position$value = value;
+  };
+
+  JSIL.MakeType({
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Square", 
+      IsPublic: false, 
+      IsReferenceType: true, 
+      MaximumConstructorArguments: 3, 
+    }, function ($interfaceBuilder) {
+    $ = $interfaceBuilder;
+
+    $.Method({Static:false, Public:true }, ".ctor", 
+      new JSIL.MethodSignature(null, [
+          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
+          $asm01.TypeRef("Microsoft.Xna.Framework.Color")
+        ]), 
+      Square__ctor
     );
 
     $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
       JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Barycentric_Draw
+      Square_Draw
     );
 
-    $.Method({Static:false, Public:false, Virtual:true }, "DrawText", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Barycentric_DrawText
-    );
+    $.Method({Static:false, Public:true }, "get_position", 
+      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
+      Square_get_position
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
 
-    $.Method({Static:false, Public:false, Virtual:true }, "PerformFillingFunction", 
-      new JSIL.MethodSignature($.Boolean, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $.Int32, 
-          $.Int32
-        ]), 
-      Barycentric_PerformFillingFunction
-    );
+    $.Method({Static:false, Public:false}, "set_position", 
+      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
+      Square_set_position
+    )
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
+
+    $.Field({Static:false, Public:false}, "tex", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D")); 
+    $.Field({Static:false, Public:false}, "pixels", $jsilcore.TypeRef("System.Array", [$asm01.TypeRef("Microsoft.Xna.Framework.Color")])); 
+    $.Field({Static:false, Public:false}, "size", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
+    $.Field({Static:false, Public:false}, "Square$position$value", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"))
+      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
+    $.Property({Static:false, Public:true }, "position", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"));
 
     return function (newThisType) { $thisType = newThisType; }; 
   });
@@ -2151,623 +3194,44 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnClick", false, []);
 
 JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
 
-/* class HumanGraphicsPipelineXna.Fonts */ 
+/* class HumanGraphicsPipelineXna.Program */ 
 
-(function Fonts$Members () {
+(function Program$Members () {
   var $, $thisType;
   var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
+    return ($T00 = JSIL.Memoize(System.Array.Of($asm06.System.String))) ();
   };
   var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
+    return ($T01 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Game1)) ();
   };
   var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm06.System.String)) ();
+    return ($T02 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
   };
   var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
+    return ($T03 = JSIL.Memoize($asm06.System.IDisposable)) ();
   };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm06.System.Int32)) ();
+  var $IM00 = function () {
+    return ($IM00 = JSIL.Memoize($asm06.System.IDisposable.Dispose)) ();
   };
 
-  function Fonts__ctor () {
-  };
-
-  function Fonts_get_arial14 () {
-    return $thisType.Fonts$arial14$value;
-  };
-
-  function Fonts_get_font14 () {
-    return $thisType.Fonts$font14$value;
-  };
-
-  function Fonts_get_smallFont () {
-    return $thisType.Fonts$smallFont$value;
-  };
-
-  function Fonts_Init () {
-  };
-
-  function Fonts_set_arial14 (value) {
-    $thisType.Fonts$arial14$value = value;
-  };
-
-  function Fonts_set_font14 (value) {
-    $thisType.Fonts$font14$value = value;
-  };
-
-  function Fonts_set_smallFont (value) {
-    $thisType.Fonts$smallFont$value = value;
-  };
-
-  function Fonts_WriteStrokedLine (spriteBatch, font, text, position, textColour, strokeColour) {
-    var $temp00;
-    $temp00 = new ($T03())();
-
-    for (var i = -1; i <= 1; i = ((i + 1) | 0)) {
-
-      for (var j = -1; j <= 1; j = ((j + 1) | 0)) {
-        if ((i !== 0) || (j !== 0)) {
-          spriteBatch.DrawString(font, text, ($temp00._ctor(+position.X + +i, +position.Y + +j), 
-              $temp00), strokeColour);
-        }
+  function Program_Main (args) {
+    var game = new ($T01())();
+    try {
+      game.Run();
+    } finally {
+      if (game !== null) {
+        $IM00().Call(game, null);
       }
     }
-    spriteBatch.DrawString(font, text, position, textColour);
   };
 
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Fonts", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
+  JSIL.MakeStaticClass("HumanGraphicsPipelineXna.Program", false, [], function ($interfaceBuilder) {
     $ = $interfaceBuilder;
 
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      Fonts__ctor
+    $.Method({Static:true , Public:false}, "Main", 
+      JSIL.MethodSignature.Action($jsilcore.TypeRef("System.Array", [$.String])), 
+      Program_Main
     );
-
-    $.Method({Static:true , Public:true }, "get_arial14", 
-      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_get_arial14
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "get_font14", 
-      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_get_font14
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "get_smallFont", 
-      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_get_smallFont
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:true }, "Init", 
-      JSIL.MethodSignature.Void, 
-      Fonts_Init
-    );
-
-    $.Method({Static:true , Public:true }, "set_arial14", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_set_arial14
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "set_font14", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_set_font14
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "set_smallFont", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont")), 
-      Fonts_set_smallFont
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "WriteStrokedLine", 
-      new JSIL.MethodSignature(null, [
-          $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch"), $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"), 
-          $.String, $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm01.TypeRef("Microsoft.Xna.Framework.Color"), $asm01.TypeRef("Microsoft.Xna.Framework.Color")
-        ]), 
-      Fonts_WriteStrokedLine
-    );
-
-    $.Field({Static:true , Public:false}, "Fonts$smallFont$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Field({Static:true , Public:false}, "Fonts$font14$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Field({Static:true , Public:false}, "Fonts$arial14$value", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Property({Static:true , Public:true }, "smallFont", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
-
-    $.Property({Static:true , Public:true }, "font14", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
-
-    $.Property({Static:true , Public:true }, "arial14", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteFont"));
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.Globals */ 
-
-(function Globals$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Viewport)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-
-  function Globals__ctor () {
-  };
-
-  function Globals_get_graphics () {
-    return $thisType.Globals$graphics$value;
-  };
-
-  function Globals_get_graphicsDevice () {
-    return $thisType.Globals$graphics$value.get_GraphicsDevice();
-  };
-
-  function Globals_get_pixelSize () {
-    return $thisType.Globals$pixelSize$value;
-  };
-
-  function Globals_get_viewport () {
-    return $S00().Construct(+($thisType.Globals$graphics$value.get_GraphicsDevice().get_Viewport().get_Width()), +($thisType.Globals$graphics$value.get_GraphicsDevice().get_Viewport().get_Height()));
-  };
-
-  function Globals_get_viewportHeight () {
-    return (($thisType.get_viewport().Y) | 0);
-  };
-
-  function Globals_get_viewportWidth () {
-    return (($thisType.get_viewport().X) | 0);
-  };
-
-  function Globals_Init () {
-    $thisType.Globals$pixelSize$value = 20;
-  };
-
-  function Globals_set_graphics (value) {
-    $thisType.Globals$graphics$value = value;
-  };
-
-  function Globals_set_pixelSize (value) {
-    $thisType.Globals$pixelSize$value = (value | 0);
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Globals", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      Globals__ctor
-    );
-
-    $.Method({Static:true , Public:true }, "get_graphics", 
-      JSIL.MethodSignature.Return($asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager")), 
-      Globals_get_graphics
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "get_graphicsDevice", 
-      JSIL.MethodSignature.Return($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice")), 
-      Globals_get_graphicsDevice
-    );
-
-    $.Method({Static:true , Public:true }, "get_pixelSize", 
-      JSIL.MethodSignature.Return($.Int32), 
-      Globals_get_pixelSize
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "get_viewport", 
-      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
-      Globals_get_viewport
-    );
-
-    $.Method({Static:true , Public:true }, "get_viewportHeight", 
-      JSIL.MethodSignature.Return($.Int32), 
-      Globals_get_viewportHeight
-    );
-
-    $.Method({Static:true , Public:true }, "get_viewportWidth", 
-      JSIL.MethodSignature.Return($.Int32), 
-      Globals_get_viewportWidth
-    );
-
-    $.Method({Static:true , Public:true }, "Init", 
-      JSIL.MethodSignature.Void, 
-      Globals_Init
-    );
-
-    $.Method({Static:true , Public:true }, "set_graphics", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager")), 
-      Globals_set_graphics
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:false}, "set_pixelSize", 
-      JSIL.MethodSignature.Action($.Int32), 
-      Globals_set_pixelSize
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Field({Static:true , Public:false}, "Globals$graphics$value", $asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Field({Static:true , Public:false}, "Globals$pixelSize$value", $.Int32)
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Property({Static:true , Public:true }, "graphics", $asm02.TypeRef("Microsoft.Xna.Framework.GraphicsDeviceManager"));
-
-    $.Property({Static:true , Public:true }, "graphicsDevice", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice"));
-
-    $.Property({Static:true , Public:true }, "viewport", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"));
-
-    $.Property({Static:true , Public:true }, "viewportWidth", $.Int32);
-
-    $.Property({Static:true , Public:true }, "viewportHeight", $.Int32);
-
-    $.Property({Static:true , Public:true }, "pixelSize", $.Int32);
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.HalfSpace */ 
-
-(function HalfSpace$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleRasterisingScene)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single))))) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm06.System.String)) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of(System.Array.Of($asm06.System.Single)))) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm06.System.Single)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$jsilcore.TypeRef("System.Array", [$asm06.TypeRef("System.Single")])]), null))) ();
-  };
-
-  function HalfSpace__ctor () {
-    $T00().prototype._ctor.call(this);
-    this.drawGrid = true;
-  };
-
-  function HalfSpace_DerivedInit () {
-    $T00().prototype.DerivedInit.call(this);
-    this.v0 = 0;
-    this.v1 = 1;
-    this.v2 = 0;
-  };
-
-  function HalfSpace_Draw (spriteBatch) {
-    $T02().prototype.Draw.call(this, spriteBatch);
-  };
-
-  function HalfSpace_DrawText (spriteBatch) {
-    var yPos = ($T04().get_viewportHeight() | 0);
-    $T05().WriteStrokedLine(
-      spriteBatch, 
-      $T05().Fonts$arial14$value, 
-      "Place points clockwise for backface culling.", 
-      $S00().Construct(+(($T04().get_viewportWidth() | 0) - 320), 20), 
-      $T07().get_White(), 
-      $T07().get_Black()
-    );
-    if (((this.listResults).get_Count() | 0) > 0) {
-      $T05().WriteStrokedLine(
-        spriteBatch, 
-        $T05().Fonts$arial14$value, 
-        JSIL.ConcatString("Orient CA: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[2]), 
-        $S00().Construct(10, +((yPos = ((yPos - 40) | 0), 
-              yPos))), 
-        $T07().get_White(), 
-        $T07().get_Black()
-      );
-      $T05().WriteStrokedLine(
-        spriteBatch, 
-        $T05().Fonts$arial14$value, 
-        JSIL.ConcatString("Orient BC: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[1]), 
-        $S00().Construct(10, +((yPos = ((yPos - 20) | 0), 
-              yPos))), 
-        $T07().get_White(), 
-        $T07().get_Black()
-      );
-      $T05().WriteStrokedLine(
-        spriteBatch, 
-        $T05().Fonts$arial14$value, 
-        JSIL.ConcatString("Orient AB: ", ((this.listResults).get_Item(((this.pixelInBox.X) | 0))).get_Item(((this.pixelInBox.Y) | 0))[0]), 
-        $S00().Construct(10, +(yPos - 20)), 
-        $T07().get_White(), 
-        $T07().get_Black()
-      );
-    }
-  };
-
-  function HalfSpace_orient2d (a, b, p) {
-    return (((+b.X - +a.X) * (+p.Y - +a.Y)) - ((+b.Y - +a.Y) * (+p.X - +a.X)));
-  };
-
-  function HalfSpace_PerformFillingFunction (p, i, j) {
-    if ((i | 0) === ((this.listResults).get_Count() | 0)) {
-      (this.listResults).Add($S01().Construct());
-    }
-    this.v0 = +this.orient2d(this.normalisedTrianglePoints[0], this.normalisedTrianglePoints[1], p);
-    this.v1 = +this.orient2d(this.normalisedTrianglePoints[1], this.normalisedTrianglePoints[2], p);
-    this.v2 = +this.orient2d(this.normalisedTrianglePoints[2], this.normalisedTrianglePoints[0], p);
-    ((this.listResults).get_Item(i)).Add(JSIL.Array.New($T0B(), 3));
-    ((this.listResults).get_Item(i)).get_Item(j)[0] = +this.v0;
-    ((this.listResults).get_Item(i)).get_Item(j)[1] = +this.v1;
-    ((this.listResults).get_Item(i)).get_Item(j)[2] = +this.v2;
-    return !((+this.v0 < 0) || 
-      (+this.v1 < 0) || (+this.v2 < 0));
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleRasterisingScene"), 
-      Name: "HumanGraphicsPipelineXna.HalfSpace", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      HalfSpace__ctor
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DerivedInit", 
-      JSIL.MethodSignature.Void, 
-      HalfSpace_DerivedInit
-    );
-
-    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      HalfSpace_Draw
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DrawText", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      HalfSpace_DrawText
-    );
-
-    $.Method({Static:false, Public:false}, "orient2d", 
-      new JSIL.MethodSignature($.Single, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")
-        ]), 
-      HalfSpace_orient2d
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "PerformFillingFunction", 
-      new JSIL.MethodSignature($.Boolean, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $.Int32, 
-          $.Int32
-        ]), 
-      HalfSpace_PerformFillingFunction
-    );
-
-    $.Field({Static:false, Public:false}, "v0", $.Single); 
-    $.Field({Static:false, Public:false}, "v1", $.Single); 
-    $.Field({Static:false, Public:false}, "v2", $.Single); 
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.Helper */ 
-
-(function Helper$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-
-  function Helper__ctor () {
-  };
-
-  function Helper_CrossProduct (a, b) {
-    return ((+a.X * +b.Y) - (+a.Y * +b.X));
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Helper", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      Helper__ctor
-    );
-
-    $.Method({Static:true , Public:true }, "CrossProduct", 
-      new JSIL.MethodSignature($.Single, [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), 
-      Helper_CrossProduct
-    );
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.Inputs */ 
-
-(function Inputs$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.MouseState)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.Mouse)) ();
-  };
-
-  function Inputs__ctor () {
-  };
-
-  function Inputs_get_MouseState () {
-    return $thisType.Inputs$MouseState$value;
-  };
-
-  function Inputs_get_MouseStatePrevious () {
-    return $thisType.Inputs$MouseStatePrevious$value;
-  };
-
-  function Inputs_Init () {
-  };
-
-  function Inputs_set_MouseState (value) {
-    $thisType.Inputs$MouseState$value = value;
-  };
-
-  function Inputs_set_MouseStatePrevious (value) {
-    $thisType.Inputs$MouseStatePrevious$value = value;
-  };
-
-  function Inputs_Update (gameTime) {
-    ($thisType.Inputs$MouseState$value = $thisType.Inputs$MouseStatePrevious$value.MemberwiseClone());
-    ($thisType.Inputs$MouseStatePrevious$value = $T02().GetState().MemberwiseClone());
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Inputs", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      Inputs__ctor
-    );
-
-    $.Method({Static:true , Public:true }, "get_MouseState", 
-      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
-      Inputs_get_MouseState
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "get_MouseStatePrevious", 
-      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
-      Inputs_get_MouseStatePrevious
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:true }, "Init", 
-      JSIL.MethodSignature.Void, 
-      Inputs_Init
-    );
-
-    $.Method({Static:true , Public:false}, "set_MouseState", 
-      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
-      Inputs_set_MouseState
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:false}, "set_MouseStatePrevious", 
-      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState")), 
-      Inputs_set_MouseStatePrevious
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:true , Public:true }, "Update", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      Inputs_Update
-    );
-
-    $.Field({Static:true , Public:false}, "Inputs$MouseState$value", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Field({Static:true , Public:false}, "Inputs$MouseStatePrevious$value", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    function Inputs__cctor () {
-      $thisType.Inputs$MouseState$value = new $asm01.Microsoft.Xna.Framework.Input.MouseState();
-      $thisType.Inputs$MouseStatePrevious$value = new $asm01.Microsoft.Xna.Framework.Input.MouseState();
-    };
-
-
-    $.Method({Static:true , Public:false}, ".cctor", 
-      JSIL.MethodSignature.Void, 
-      Inputs__cctor
-    );
-
-    $.Property({Static:true , Public:true }, "MouseState", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"));
-
-    $.Property({Static:true , Public:true }, "MouseStatePrevious", $asm01.TypeRef("Microsoft.Xna.Framework.Input.MouseState"));
 
     return function (newThisType) { $thisType = newThisType; }; 
   });
@@ -2882,264 +3346,25 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
 
 })();
 
-/* class HumanGraphicsPipelineXna.Program */ 
+/* class HumanGraphicsPipelineXna.Helper */ 
 
-(function Program$Members () {
+(function Helper$Members () {
   var $, $thisType;
   var $T00 = function () {
-    return ($T00 = JSIL.Memoize(System.Array.Of($asm06.System.String))) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Game1)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm06.System.IDisposable)) ();
-  };
-  var $IM00 = function () {
-    return ($IM00 = JSIL.Memoize($asm06.System.IDisposable.Dispose)) ();
+    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
   };
 
-  function Program_Main (args) {
-    var game = new ($T01())();
-    try {
-      game.Run();
-    } finally {
-      if (game !== null) {
-        $IM00().Call(game, null);
-      }
-    }
+  function Helper__ctor () {
   };
 
-  JSIL.MakeStaticClass("HumanGraphicsPipelineXna.Program", false, [], function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:true , Public:false}, "Main", 
-      JSIL.MethodSignature.Action($jsilcore.TypeRef("System.Array", [$.String])), 
-      Program_Main
-    );
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* class HumanGraphicsPipelineXna.Game1 */ 
-
-(function Game1$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Game1_MenuState)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.Game)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GraphicsDeviceManager)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Content.ContentManager)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.HalfSpace)) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Scene_ThisBackToMenu)) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Barycentric)) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleClippingSH)) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
-  };
-  var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.GraphicsDevice)) ();
-  };
-  var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T0E = function () {
-    return ($T0E = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T0F = function () {
-    return ($T0F = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteSortMode)) ();
-  };
-  var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.BlendState)) ();
-  };
-  var $T11 = function () {
-    return ($T11 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SamplerState)) ();
-  };
-  var $T12 = function () {
-    return ($T12 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.DepthStencilState)) ();
-  };
-  var $T13 = function () {
-    return ($T13 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.RasterizerState)) ();
-  };
-  var $T14 = function () {
-    return ($T14 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Fonts)) ();
-  };
-  var $T15 = function () {
-    return ($T15 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteFont)) ();
-  };
-  var $T16 = function () {
-    return ($T16 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T17 = function () {
-    return ($T17 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Button_ThisOnClick)) ();
-  };
-  var $T18 = function () {
-    return ($T18 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-
-  function Game1__ctor () {
-    this.menuState = $T00().Main;
-    $T01().prototype._ctor.call(this);
-    $T02().Globals$graphics$value = new ($T03())(this);
-    (this.get_Content()).set_RootDirectory("Content");
-    this.set_IsFixedTimeStep(true);
-    $T02().Init();
-  };
-
-  function Game1_$lSetButtons$gb__0 (b) {
-    this.menuState = $T00().TriangleFilling;
-  };
-
-  function Game1_$lSetButtons$gb__1 (b) {
-    this.menuState = $T00().None;
-    this.scene = new ($T06())();
-    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
-  };
-
-  function Game1_$lSetButtons$gb__2 (b) {
-    this.menuState = $T00().None;
-    this.scene = new ($T09())();
-    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
-  };
-
-  function Game1_$lSetButtons$gb__3 (b) {
-    this.menuState = $T00().None;
-    this.scene = new ($T0A())();
-    (this.scene).add_BackToMenu($T08().New(this, $thisType.prototype.BackToMainMenu));
-  };
-
-  function Game1_BackToMainMenu () {
-    this.scene = null;
-    this.menuState = $T00().Main;
-  };
-
-  function Game1_BackToTriangleMenu () {
-    this.scene = null;
-    this.menuState = $T00().TriangleFilling;
-  };
-
-  function Game1_CreateForm () {
-  };
-
-  function Game1_Draw (gameTime) {
-    this.get_GraphicsDevice().InternalClear($T0D().get_SlateGray());
-    (this.spriteBatch).Begin(
-      $T0F().Deferred, 
-      $T10().AlphaBlend, 
-      $T11().LinearClamp, 
-      $T12().None, 
-      $T13().CullNone
-    );
-    switch ((this.menuState).valueOf()) {
-      case 0: 
-        this.DrawMainMenu(this.spriteBatch);
-        break;
-
-      case 1: 
-        this.DrawTriangleFillingMenu(this.spriteBatch);
-        break;
-
-    }
-    if (this.scene !== null) {
-      (this.scene).Draw(this.spriteBatch);
-    }
-    (this.spriteBatch).End();
-    $T01().prototype.Draw.call(this, gameTime);
-  };
-
-  function Game1_DrawMainMenu (spriteBatch) {
-    (this.buttonTriangleFilling).Draw(spriteBatch);
-    (this.buttonClipping).Draw(spriteBatch);
-  };
-
-  function Game1_DrawTriangleFillingMenu (spriteBatch) {
-    (this.buttonHalfSpace).Draw(spriteBatch);
-    (this.buttonBarycentric).Draw(spriteBatch);
-  };
-
-  function Game1_Initialize () {
-    this.set_IsMouseVisible(true);
-    $T01().prototype.Initialize.call(this);
-  };
-
-  function Game1_LoadContent () {
-    this.spriteBatch = new ($T0E())(this.get_GraphicsDevice());
-    $T14().Fonts$font14$value = (this.get_Content()).Load$b1($T15())("Font14");
-    $T14().Fonts$smallFont$value = (this.get_Content()).Load$b1($T15())("SmallFont");
-    $T14().Fonts$arial14$value = (this.get_Content()).Load$b1($T15())("Arial14");
-    this.SetButtons();
-  };
-
-  function Game1_SetButtons () {
-    this.buttonTriangleFilling = new ($T05())("Triangle\n filling", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) - 200), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
-    this.buttonClipping = new ($T05())("Clipping", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) + 50), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
-    this.buttonHalfSpace = new ($T05())("Half-space", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) - 200), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
-    this.buttonBarycentric = new ($T05())("Barycentric", $T14().Fonts$font14$value, $S00().Construct(150, 50), $S00().Construct(+(((($T02().get_viewportWidth() | 0) / 2) | 0) + 50), +(((($T02().get_viewportHeight() | 0) / 2) | 0) - 25)), $T0D().get_Red().MemberwiseClone());
-    (this.buttonTriangleFilling).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__0));
-    (this.buttonHalfSpace).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__1));
-    (this.buttonBarycentric).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__2));
-    (this.buttonClipping).add_OnClick($T17().New(this, $thisType.prototype.$lSetButtons$gb__3));
-  };
-
-  function Game1_UnloadContent () {
-  };
-
-  function Game1_Update (gameTime) {
-    $T18().Update(gameTime);
-    if (this.scene !== null) {
-      (this.scene).Update(gameTime);
-    }
-    switch ((this.menuState).valueOf()) {
-      case 0: 
-        (this.buttonTriangleFilling).Update(gameTime);
-        (this.buttonClipping).Update(gameTime);
-        break;
-
-      case 1: 
-        (this.buttonHalfSpace).Update(gameTime);
-        (this.buttonBarycentric).Update(gameTime);
-        break;
-
-    }
-    $T01().prototype.Update.call(this, gameTime);
+  function Helper_CrossProduct (a, b) {
+    return ((+a.X * +b.Y) - (+a.Y * +b.X));
   };
 
   JSIL.MakeType({
-      BaseType: $asm02.TypeRef("Microsoft.Xna.Framework.Game"), 
-      Name: "HumanGraphicsPipelineXna.Game1", 
-      IsPublic: true, 
+      BaseType: $asm06.TypeRef("System.Object"), 
+      Name: "HumanGraphicsPipelineXna.Helper", 
+      IsPublic: false, 
       IsReferenceType: true, 
       MaximumConstructorArguments: 0, 
     }, function ($interfaceBuilder) {
@@ -3147,211 +3372,13 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
 
     $.Method({Static:false, Public:true }, ".ctor", 
       JSIL.MethodSignature.Void, 
-      Game1__ctor
+      Helper__ctor
     );
 
-    $.Method({Static:false, Public:false}, "$lSetButtons$gb__0", 
-      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
-      Game1_$lSetButtons$gb__0
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:false}, "$lSetButtons$gb__1", 
-      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
-      Game1_$lSetButtons$gb__1
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:false}, "$lSetButtons$gb__2", 
-      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
-      Game1_$lSetButtons$gb__2
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:false}, "$lSetButtons$gb__3", 
-      JSIL.MethodSignature.Action($asm00.TypeRef("HumanGraphicsPipelineXna.Button")), 
-      Game1_$lSetButtons$gb__3
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:false}, "BackToMainMenu", 
-      JSIL.MethodSignature.Void, 
-      Game1_BackToMainMenu
+    $.Method({Static:true , Public:true }, "CrossProduct", 
+      new JSIL.MethodSignature($.Single, [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), 
+      Helper_CrossProduct
     );
-
-    $.Method({Static:false, Public:false}, "BackToTriangleMenu", 
-      JSIL.MethodSignature.Void, 
-      Game1_BackToTriangleMenu
-    );
-
-    $.Method({Static:false, Public:false}, "CreateForm", 
-      JSIL.MethodSignature.Void, 
-      Game1_CreateForm
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "Draw", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      Game1_Draw
-    );
-
-    $.Method({Static:false, Public:false}, "DrawMainMenu", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Game1_DrawMainMenu
-    );
-
-    $.Method({Static:false, Public:false}, "DrawTriangleFillingMenu", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Game1_DrawTriangleFillingMenu
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "Initialize", 
-      JSIL.MethodSignature.Void, 
-      Game1_Initialize
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "LoadContent", 
-      JSIL.MethodSignature.Void, 
-      Game1_LoadContent
-    );
-
-    $.Method({Static:false, Public:true }, "SetButtons", 
-      JSIL.MethodSignature.Void, 
-      Game1_SetButtons
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "UnloadContent", 
-      JSIL.MethodSignature.Void, 
-      Game1_UnloadContent
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "Update", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      Game1_Update
-    );
-
-    $.Field({Static:false, Public:false}, "spriteBatch", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")); 
-    $.Field({Static:false, Public:false}, "buttonHalfSpace", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
-    $.Field({Static:false, Public:false}, "buttonBarycentric", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
-    $.Field({Static:false, Public:false}, "buttonTriangleFilling", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
-    $.Field({Static:false, Public:false}, "buttonClipping", $asm00.TypeRef("HumanGraphicsPipelineXna.Button")); 
-    $.Field({Static:false, Public:false}, "scene", $asm00.TypeRef("HumanGraphicsPipelineXna.Scene")); 
-    $.Field({Static:false, Public:false}, "menuState", $asm00.TypeRef("HumanGraphicsPipelineXna.Game1+MenuState")); 
-    $.ImplementInterfaces(
-    );
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* enum HumanGraphicsPipelineXna.Game1+MenuState */ 
-
-JSIL.MakeEnum(
-  "HumanGraphicsPipelineXna.Game1+MenuState", false, {
-    Main: 0, 
-    TriangleFilling: 1, 
-    Clipping: 2, 
-    None: 3
-  }, false
-);
-
-/* class HumanGraphicsPipelineXna.Square */ 
-
-(function Square$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.Texture2D)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SurfaceFormat)) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Rectangle)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D"), [
-        $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.GraphicsDevice"), $asm06.TypeRef("System.Int32"), 
-        $asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Boolean"), 
-        $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SurfaceFormat")
-      ]))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.MethodSignature(null, [$jsilcore.TypeRef("System.Array", ["!!0"])], ["T"]))) ();
-  };
-
-  function Square__ctor (pos, sizeIn, col) {
-    this.pixels = JSIL.Array.New($T01(), [$T01().get_Black()]);
-    this.pixels[0] = col;
-    (this.Square$position$value = pos);
-    this.size = sizeIn;
-    this.tex = $S00().Construct($T03().get_graphicsDevice(), 1, 1, true, $T04().Color);
-    $S01().CallVirtual("SetData$b1", [$asm01.Microsoft.Xna.Framework.Color], this.tex, this.pixels);
-  };
-
-  function Square_Draw (spriteBatch) {
-    spriteBatch.DrawRect(this.tex, new ($T06())(((this.Square$position$value.X) | 0), ((this.Square$position$value.Y) | 0), ((this.size.X) | 0), ((this.size.Y) | 0)), this.pixels[0]);
-  };
-
-  function Square_get_position () {
-    return this.Square$position$value;
-  };
-
-  function Square_set_position (value) {
-    this.Square$position$value = value;
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.Square", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 3, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      new JSIL.MethodSignature(null, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm01.TypeRef("Microsoft.Xna.Framework.Color")
-        ]), 
-      Square__ctor
-    );
-
-    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      Square_Draw
-    );
-
-    $.Method({Static:false, Public:true }, "get_position", 
-      JSIL.MethodSignature.Return($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
-      Square_get_position
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Method({Static:false, Public:false}, "set_position", 
-      JSIL.MethodSignature.Action($asm01.TypeRef("Microsoft.Xna.Framework.Vector2")), 
-      Square_set_position
-    )
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute"));
-
-    $.Field({Static:false, Public:false}, "tex", $asm04.TypeRef("Microsoft.Xna.Framework.Graphics.Texture2D")); 
-    $.Field({Static:false, Public:false}, "pixels", $jsilcore.TypeRef("System.Array", [$asm01.TypeRef("Microsoft.Xna.Framework.Color")])); 
-    $.Field({Static:false, Public:false}, "size", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "Square$position$value", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"))
-      .Attribute($asm06.TypeRef("System.Runtime.CompilerServices.CompilerGeneratedAttribute")); 
-    $.Property({Static:false, Public:true }, "position", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"));
 
     return function (newThisType) { $thisType = newThisType; }; 
   });
