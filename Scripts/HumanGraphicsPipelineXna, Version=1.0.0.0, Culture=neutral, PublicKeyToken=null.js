@@ -672,6 +672,12 @@ JSIL.MakeEnum(
   var $T14 = function () {
     return ($T14 = JSIL.Memoize($asm06.System.Math)) ();
   };
+  var $T15 = function () {
+    return ($T15 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Color))) ();
+  };
+  var $T16 = function () {
+    return ($T16 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
+  };
   var $S00 = function () {
     return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")])]), null))) ();
   };
@@ -689,6 +695,9 @@ JSIL.MakeEnum(
   };
   var $S05 = function () {
     return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
+  };
+  var $S06 = function () {
+    return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Color")]), null))) ();
   };
 
   function TriangleRasterisingScene__ctor () {
@@ -813,6 +822,34 @@ JSIL.MakeEnum(
     this.minimum = $S05().Construct((+this.minimum.X - (+this.minimum.X % +($T09().Globals$pixelSize$value))), (+this.minimum.Y - (+this.minimum.Y % +($T09().Globals$pixelSize$value))));
     this.maximum = $S05().Construct(((+this.maximum.X - (+this.maximum.X % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)), ((+this.maximum.Y - (+this.maximum.Y % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)));
     this.boundingBox = new ($T06())($S05().Construct(this.minimum.X, this.minimum.Y), $S05().Construct((+this.maximum.X - +this.minimum.X), (+this.maximum.Y - +this.minimum.Y)), $jsilxna.ColorFromPremultipliedInts(null, 255, 0, 0, 120));
+    var list = $S06().Construct();
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
+    list.Add($T16().get_Red());
+    list.Add($T16().get_Yellow());
+    list.Add($T16().get_Green());
+    list.Add($T16().get_Blue());
+    list.Add($T16().get_White());
+    list.Add($T16().get_Gray());
+    list.Add($T16().get_CornflowerBlue());
+    list.Add($T16().get_Plum());
+    list.Add($T16().get_Olive());
   };
 
   JSIL.MakeType({
@@ -2141,6 +2178,7 @@ JSIL.MakeEnum(
     var len = (Math.sqrt(((xD * xD) + (yD * yD))));
     var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
     var dot = (xD * xD2) + (yD * yD2);
+    var deg = +((dot / (len * len2)));
     var div = (yD2 * xD) - (xD2 * yD);
     var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
     var ub = +((((xD * yD3) - (yD * xD3)) / div));
@@ -2171,8 +2209,9 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_CorrectNormalisedTriangle (state) {
+    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
+    var pX = aX + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;
@@ -2268,15 +2307,17 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_LastPointPlaced (gameTime) {
-    var v = new JSIL.BoxedVariable(new ($T03())());
     this.CorrectNormalisedTriangle(this.triangleCount);
 
     for (var i = 0; i < (this.triangleCount | 0); i = ((i + 1) | 0)) {
       (this.isOutsideList).Add(((Math.abs(this.normalisedTrianglePoints[i].X)) >= 1) || ((Math.abs(this.normalisedTrianglePoints[i].Y)) >= 1));
       (this.intersectionsLists).Add($S06().Construct());
     }
+    i = 0;
+    var v = new JSIL.BoxedVariable(null);
 
-    for (i = 0; i < 8; i = ((i + 2) | 0)) {
+    while (i < 8) {
+      v.set($T03().get_Zero().MemberwiseClone());
 
       for (var j = 0; j < (((this.triangleCount | 0) - 1) | 0); j = ((j + 1) | 0)) {
         var b = this.CheckLineIntersection(
@@ -2296,6 +2337,7 @@ JSIL.MakeEnum(
         /* ref */ v
       );
       ((this.intersectionsLists).get_Item(((((this.intersectionsLists).get_Count() | 0) - 1) | 0))).Add(v.get().MemberwiseClone());
+      i = ((i + 2) | 0);
     }
 
     for (i = 0; i < (this.triangleCount | 0); i = ((i + 1) | 0)) {
@@ -3466,9 +3508,8 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
   };
 
   function TriangleClippingScene_CorrectNormalisedTriangle (state) {
-    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = aX + bX;
+    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;

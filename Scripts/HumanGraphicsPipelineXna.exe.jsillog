@@ -1,23 +1,23 @@
 // JSILc v0.7.16496
-// Build took 0005.39 second(s).
+// Build took 0005.19 second(s).
 // The following configuration was used when translating 'C:\Users\Ashley\Documents\GitHub\HumanGraphicsPipelineXna\HumanGraphicsPipelineXna\HumanGraphicsPipelineXna\bin\x86\Debug\HumanGraphicsPipelineXna.exe':
 {"ContributingPaths":["C:\\Users\\Ashley\\Documents\\GitHub\\JSIL\\bin\\defaults.jsilconfig"],"Path":"C:\\Users\\Ashley\\Documents\\GitHub\\JSIL\\bin","SolutionBuilder":{"Configuration":null,"Platform":null,"Target":null,"LogVerbosity":null,"ExtraOutputs":[]},"AutoLoadConfigFiles":null,"UseLocalProxies":null,"ReuseTypeInfoAcrossAssemblies":null,"OutputDirectory":"%currentdirectory%","FileOutputDirectory":null,"Profile":"XNA4","ProfileSettings":{"OverwriteExistingContent":true,"ContentOutputDirectory":"%outputdirectory%/Content"},"AnalyzerSettings":{},"CustomVariables":{},"ApplyDefaults":null,"IncludeDependencies":null,"UseSymbols":null,"UseThreads":null,"UseDefaultProxies":null,"GenerateSkeletonsForStubbedAssemblies":null,"GenerateContentManifest":null,"RunBugChecks":null,"TuneGarbageCollection":null,"FilenameEscapeRegex":null,"AssemblyCollectionName":null,"FrameworkVersion":4,"Assemblies":{"Ignored":["Microsoft\\.VisualC,","Accessibility,","SMDiagnostics,","System\\.EnterpriseServices,","System\\.Security,","System\\.Runtime\\.Serialization\\.Formatters\\.Soap,","System\\.Runtime\\.DurableInstancing,","System\\.Data\\.SqlXml,","JSIL\\.Meta,"],"Stubbed":["mscorlib,","^System,","^System\\.(.+),","^Microsoft\\.(.+),","FSharp.Core,"],"Proxies":["C:\\Users\\Ashley\\Documents\\GitHub\\JSIL\\bin\\JSIL.Proxies.XNA4.dll"],"Redirects":{}},"CodeGenerator":{"EliminateStructCopies":null,"SimplifyOperators":null,"SimplifyLoops":null,"EliminateTemporaries":null,"EliminateRedundantControlFlow":null,"CacheMethodSignatures":null,"CacheGenericMethodSignatures":null,"CacheTypeExpressions":null,"CacheBaseMethodHandles":null,"EliminatePointlessFinallyBlocks":null,"PreferAccessorMethods":null,"HintIntegerArithmetic":null,"EnableThreadedTransforms":null,"FreezeImmutableObjects":null,"EnableUnsafeCode":null,"HoistAllocations":null,"HintDoubleArithmetic":null,"AutoGenerateEventAccessorsInSkeletons":null,"AggressivelyUseElementProxies":null,"EmitAllParameterNames":null}}
 // The configuration was generated from the following configuration files:
 C:\Users\Ashley\Documents\GitHub\JSIL\bin\defaults.jsilconfig
 // The following outputs were produced:
 XNA.Colors.js
-Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
 Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
 Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
 HumanGraphicsPipelineXna, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null.js
+Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
+Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
 System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js
 Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
-Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553.js
-System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
+System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
 System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js
 System.Deployment, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.js
-System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
 System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
+System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
 System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
 mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
 System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089.js
