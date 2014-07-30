@@ -960,9 +960,8 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_CorrectNormalisedTriangle (state) {
-    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = aX + bX;
+    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;
@@ -2343,9 +2342,8 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
   };
 
   function TriangleClippingScene_CorrectNormalisedTriangle (state) {
-    var aX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X;
     var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = aX + bX;
+    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
     var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
     var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
     var pY = aY + bY;
