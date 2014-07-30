@@ -18663,7 +18663,7 @@ JSIL.MakeInterface(
 (function ManifestSignedXml$Members () {
   var $, $thisType;
   JSIL.MakeType({
-      BaseType: $asm11.TypeRef("System.Security.Cryptography.Xml.SignedXml"), 
+      BaseType: $asm0F.TypeRef("System.Security.Cryptography.Xml.SignedXml"), 
       Name: "System.Deployment.Internal.CodeSigning.ManifestSignedXml", 
       IsPublic: false, 
       IsReferenceType: true, 
