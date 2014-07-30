@@ -830,7 +830,7 @@ JSIL.MakeEnum(
     return ($T0F = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
   };
   var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Polygon)) ();
+    return ($T10 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.Line))) ();
   };
   var $T11 = function () {
     return ($T11 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Square)) ();
@@ -860,19 +860,16 @@ JSIL.MakeEnum(
     return ($T19 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.TriangleClippingSH_ClippingPoint))) ();
   };
   var $T1A = function () {
-    return ($T1A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Color))) ();
+    return ($T1A = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Color))) ();
   };
   var $T1B = function () {
-    return ($T1B = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
+    return ($T1B = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.MouseState)) ();
   };
   var $T1C = function () {
-    return ($T1C = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.MouseState)) ();
+    return ($T1C = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
   };
   var $T1D = function () {
-    return ($T1D = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
-  };
-  var $T1E = function () {
-    return ($T1E = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.ButtonState)) ();
+    return ($T1D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.ButtonState)) ();
   };
   var $S00 = function () {
     return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
@@ -896,19 +893,22 @@ JSIL.MakeEnum(
     return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
   };
   var $S07 = function () {
-    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Single")]), null))) ();
+    return ($S07 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Line")]), null))) ();
   };
   var $S08 = function () {
-    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingSH+ClippingPoint")]), null))) ();
+    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Single")]), null))) ();
   };
   var $S09 = function () {
-    return ($S09 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), null))) ();
+    return ($S09 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingSH+ClippingPoint")]), null))) ();
   };
   var $S0A = function () {
-    return ($S0A = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Color")]), null))) ();
+    return ($S0A = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), null))) ();
   };
   var $S0B = function () {
-    return ($S0B = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Point"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
+    return ($S0B = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Color")]), null))) ();
+  };
+  var $S0C = function () {
+    return ($S0C = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Point"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
   };
 
   function TriangleClippingSH__ctor () {
@@ -929,7 +929,6 @@ JSIL.MakeEnum(
     var len = (Math.sqrt(((xD * xD) + (yD * yD))));
     var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
     var dot = (xD * xD2) + (yD * yD2);
-    var deg = +((dot / (len * len2)));
     var div = (yD2 * xD) - (xD2 * yD);
     var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
     var ub = +((((xD * yD3) - (yD * xD3)) / div));
@@ -984,16 +983,17 @@ JSIL.MakeEnum(
     this.lineBottom = new ($T0D())(this.pointBottomLeft.MemberwiseClone(), this.pointBottomRight.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
     this.lineRight = new ($T0D())(this.pointTopRight.MemberwiseClone(), this.pointBottomRight.MemberwiseClone(), $T0E().get_Black().MemberwiseClone(), 1);
     this.l = ($S06().Construct()).__Initialize__([[$S01().Construct(-2.14748365E+09, this.pointTopLeft.Y)], [$S01().Construct(2.14748365E+09, this.pointTopRight.Y)], [$S01().Construct(this.pointBottomLeft.X, -2.14748365E+09)], [$S01().Construct(this.pointTopLeft.X, 2.14748365E+09)], [$S01().Construct(-2.14748365E+09, this.pointBottomLeft.Y)], [$S01().Construct(2.14748365E+09, this.pointBottomRight.Y)], [$S01().Construct(this.pointTopRight.X, -2.14748365E+09)], [$S01().Construct(this.pointBottomRight.X, 2.14748365E+09)]]);
+    this.linesOutput = $S07().Construct();
   };
 
   function TriangleClippingSH_Draw (spriteBatch) {
-    if (this.polyList !== null) {
+    $T00().prototype.Draw.call(this, spriteBatch);
+    if (this.linesOutput !== null) {
 
-      for (var i = 0; i < ((this.polyList).get_Count() | 0); i = ((i + 1) | 0)) {
-        ((this.polyList).get_Item(i)).Draw(spriteBatch);
+      for (var i = 0; i < ((this.linesOutput).get_Count() | 0); i = ((i + 1) | 0)) {
+        ((this.linesOutput).get_Item(i)).Draw(spriteBatch);
       }
     }
-    $T00().prototype.Draw.call(this, spriteBatch);
     (this.lineTop).Draw(spriteBatch);
     (this.lineLeft).Draw(spriteBatch);
     (this.lineBottom).Draw(spriteBatch);
@@ -1032,7 +1032,7 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_FindPointInPolygon (points, p) {
-    var v = $S07().Construct();
+    var v = $S08().Construct();
 
     for (var i = 1; i < (points.get_Count() | 0); i = ((i + 1) | 0)) {
       v.Add(this.orient2d(
@@ -1122,8 +1122,8 @@ JSIL.MakeEnum(
       (this.intersectionsLists).set_Item(i, this.EliminateDuplicates$b1($T02())((this.intersectionsLists).get_Item(i)));
       ((this.intersectionsLists).get_Item(i)).Remove($S00().Construct(-Infinity));
     }
-    this.insideTriPoints = $S08().Construct();
-    this.outsideTriPoints = $S08().Construct();
+    this.insideTriPoints = $S09().Construct();
+    this.outsideTriPoints = $S09().Construct();
     var tempIntersectionsTo = $S06().Construct();
     var tempIntersectionsFrom = $S06().Construct();
     this.squareList = $S03().Construct();
@@ -1134,7 +1134,7 @@ JSIL.MakeEnum(
         (this.squareList).Add(new ($T11())(((this.intersectionsLists).get_Item(i)).get_Item(j).MemberwiseClone(), $S01().Construct(4, 4), $T0E().get_Red().MemberwiseClone()));
       }
     }
-    var pointList = $S09().Construct();
+    var pointList = $S0A().Construct();
     i = 0;
     var check = new JSIL.BoxedVariable(null);
     var one = new JSIL.BoxedVariable(null);
@@ -1174,14 +1174,17 @@ JSIL.MakeEnum(
       }
     }
     pointList = this.EliminateDuplicates$b1($T14())(pointList);
-    var dCol = ($S0A().Construct()).__Initialize__([[$T1B().get_Red()], [$T1B().get_Yellow()], [$T1B().get_Green()], [$T1B().get_Blue()], [$T1B().get_White()], [$T1B().get_Gray()], [$T1B().get_CornflowerBlue()], [$T1B().get_Plum()], [$T1B().get_Olive()], [$T1B().get_Red()], [$T1B().get_Yellow()], [$T1B().get_Green()], [$T1B().get_Blue()], [$T1B().get_White()], [$T1B().get_Gray()], [$T1B().get_CornflowerBlue()], [$T1B().get_Plum()], [$T1B().get_Olive()], [$T1B().get_Red()], [$T1B().get_Yellow()], [$T1B().get_Green()], [$T1B().get_Blue()], [$T1B().get_White()], [$T1B().get_Gray()], [$T1B().get_CornflowerBlue()], [$T1B().get_Plum()], [$T1B().get_Olive()]]);
+    var dCol = ($S0B().Construct()).__Initialize__([[$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()], [$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()], [$T0E().get_Red()], [$T0E().get_Yellow()], [$T0E().get_Green()], [$T0E().get_Blue()], [$T0E().get_White()], [$T0E().get_Gray()], [$T0E().get_CornflowerBlue()], [$T0E().get_Plum()], [$T0E().get_Olive()]]);
     if ((pointList.get_Count() | 0) > 0) {
-      this.polygonOutput = new ($T10())(pointList, $T1B().get_Green());
 
       for (i = 0; i < (((pointList.get_Count() | 0) - 2) | 0); i = ((i + 1) | 0)) {
-        var d = ($S09().Construct()).__Initialize__([[pointList.get_Item(0)], [pointList.get_Item(((i + 1) | 0))], [pointList.get_Item(((i + 2) | 0))]]);
-        var p = new ($T10())(d, dCol.get_Item(i));
-        (this.polyList).Add(p);
+        var list = $S0A().Construct();
+        list.Add(pointList.get_Item(0).MemberwiseClone());
+        list.Add(pointList.get_Item(((i + 1) | 0)).MemberwiseClone());
+        list.Add(pointList.get_Item(((i + 2) | 0)).MemberwiseClone());
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 1) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
+        (this.linesOutput).Add(new ($T0D())(this.PointtoVec2(pointList.get_Item(((i + 2) | 0)).MemberwiseClone()).MemberwiseClone(), this.PointtoVec2(pointList.get_Item(0).MemberwiseClone()).MemberwiseClone(), dCol.get_Item(i).MemberwiseClone(), 2));
       }
     }
   };
@@ -1196,7 +1199,7 @@ JSIL.MakeEnum(
 
   function TriangleClippingSH_StateChanges (gameTime) {
     $T00().prototype.StateChanges.call(this, gameTime);
-    if (!((($T1D().Inputs$MouseState$value.get_LeftButton().valueOf() | 0) !== 0) || ($T1D().Inputs$MouseStatePrevious$value.get_LeftButton() !== $T1E().Pressed))) {
+    if (!((($T1C().Inputs$MouseState$value.get_LeftButton().valueOf() | 0) !== 0) || ($T1C().Inputs$MouseStatePrevious$value.get_LeftButton() !== $T1D().Pressed))) {
       if ((this.state | 0) <= (this.triangleCount | 0)) {
         this.CorrectNormalisedTriangle(this.state);
       }
@@ -1204,7 +1207,7 @@ JSIL.MakeEnum(
   };
 
   function TriangleClippingSH_Vec2toPoint (vecIn) {
-    return $S0B().Construct(((vecIn.X) | 0), ((vecIn.Y) | 0));
+    return $S0C().Construct(((vecIn.X) | 0), ((vecIn.Y) | 0));
   };
 
   JSIL.MakeType({
@@ -1320,6 +1323,7 @@ JSIL.MakeEnum(
     $.Field({Static:false, Public:false}, "outsideTriPoints", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingSH+ClippingPoint")])); 
     $.Field({Static:false, Public:false}, "isOutsideList", $asm06.TypeRef("System.Collections.Generic.List`1", [$.Boolean])); 
     $.Field({Static:false, Public:false}, "intersectionsLists", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])])); 
+    $.Field({Static:false, Public:false}, "linesOutput", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Line")])); 
     $.Field({Static:false, Public:false}, "polyList", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Polygon")])); 
     $.Field({Static:false, Public:false}, "squareList", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.Square")])); 
     return function (newThisType) { $thisType = newThisType; }; 
@@ -2144,790 +2148,6 @@ JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnClick", false, []);
 /* delegate HumanGraphicsPipelineXna.Button+ThisOnHold */ 
 
 JSIL.MakeDelegate("HumanGraphicsPipelineXna.Button+ThisOnHold", false, []);
-
-/* class HumanGraphicsPipelineXna.TriangleClippingScene */ 
-
-(function TriangleClippingScene$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Globals)) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Line)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Color)) ();
-  };
-  var $T04 = function () {
-    return ($T04 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
-  };
-  var $T05 = function () {
-    return ($T05 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleScene)) ();
-  };
-  var $T06 = function () {
-    return ($T06 = JSIL.Memoize($asm04.Microsoft.Xna.Framework.Graphics.SpriteBatch)) ();
-  };
-  var $T07 = function () {
-    return ($T07 = JSIL.Memoize($asm06.System.Double)) ();
-  };
-  var $T08 = function () {
-    return ($T08 = JSIL.Memoize($asm06.System.Math)) ();
-  };
-  var $T09 = function () {
-    return ($T09 = JSIL.Memoize($asm06.System.Boolean)) ();
-  };
-  var $T0A = function () {
-    return ($T0A = JSIL.Memoize($asm06.System.Type)) ();
-  };
-  var $T0B = function () {
-    return ($T0B = JSIL.Memoize($asm06.System.Int32)) ();
-  };
-  var $T0C = function () {
-    return ($T0C = JSIL.Memoize($asm06.System.Object)) ();
-  };
-  var $T0D = function () {
-    return ($T0D = JSIL.Memoize($asm06.System.Single)) ();
-  };
-  var $T0E = function () {
-    return ($T0E = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Square)) ();
-  };
-  var $T0F = function () {
-    return ($T0F = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm00.HumanGraphicsPipelineXna.TriangleClippingScene_ClippingPoint))) ();
-  };
-  var $T10 = function () {
-    return ($T10 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm0B.System.Drawing.Point))) ();
-  };
-  var $T11 = function () {
-    return ($T11 = JSIL.Memoize($asm0B.System.Drawing.Point)) ();
-  };
-  var $T12 = function () {
-    return ($T12 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Polygon)) ();
-  };
-  var $T13 = function () {
-    return ($T13 = JSIL.Memoize($asm0B.System.Drawing.Color)) ();
-  };
-  var $T14 = function () {
-    return ($T14 = JSIL.Memoize($asm09.System.Linq.Enumerable)) ();
-  };
-  var $T15 = function () {
-    return ($T15 = JSIL.Memoize($asm06.System.Collections.Generic.IEnumerable$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
-  };
-  var $T16 = function () {
-    return ($T16 = JSIL.Memoize($asm06.System.Console)) ();
-  };
-  var $T17 = function () {
-    return ($T17 = JSIL.Memoize($asm06.System.String)) ();
-  };
-  var $T18 = function () {
-    return ($T18 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm06.System.Single))) ();
-  };
-  var $T19 = function () {
-    return ($T19 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
-  };
-  var $T1A = function () {
-    return ($T1A = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleClippingScene_ClippingPoint)) ();
-  };
-  var $T1B = function () {
-    return ($T1B = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.MouseState)) ();
-  };
-  var $T1C = function () {
-    return ($T1C = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.Inputs)) ();
-  };
-  var $T1D = function () {
-    return ($T1D = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Input.ButtonState)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S01 = function () {
-    return ($S01 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
-  };
-  var $S02 = function () {
-    return ($S02 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S03 = function () {
-    return ($S03 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm0B.TypeRef("System.Drawing.Point")]), null))) ();
-  };
-  var $S04 = function () {
-    return ($S04 = JSIL.Memoize(new JSIL.ConstructorSignature($asm0B.TypeRef("System.Drawing.Point"), [$asm06.TypeRef("System.Int32"), $asm06.TypeRef("System.Int32")]))) ();
-  };
-  var $S05 = function () {
-    return ($S05 = JSIL.Memoize(new JSIL.MethodSignature("!!0", [$asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"])], ["TSource"]))) ();
-  };
-  var $S06 = function () {
-    return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Single")]), null))) ();
-  };
-  var $S07 = function () {
-    return ($S07 = JSIL.Memoize(new JSIL.MethodSignature($asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"]), [$asm06.TypeRef("System.Collections.Generic.IEnumerable`1", ["!!0"])], ["TSource"]))) ();
-  };
-  var $S08 = function () {
-    return ($S08 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")]), null))) ();
-  };
-
-  function TriangleClippingScene__ctor () {
-    this.lineTop = new ($T02())($thisType.pointTopLeft.MemberwiseClone(), $thisType.pointTopRight.MemberwiseClone(), $T03().get_Black().MemberwiseClone(), 1);
-    this.lineLeft = new ($T02())($thisType.pointTopLeft.MemberwiseClone(), $thisType.pointBottomLeft.MemberwiseClone(), $T03().get_Black().MemberwiseClone(), 1);
-    this.lineBottom = new ($T02())($thisType.pointBottomLeft.MemberwiseClone(), $thisType.pointBottomRight.MemberwiseClone(), $T03().get_Black().MemberwiseClone(), 1);
-    this.lineRight = new ($T02())($thisType.pointTopRight.MemberwiseClone(), $thisType.pointBottomRight.MemberwiseClone(), $T03().get_Black().MemberwiseClone(), 1);
-    this.l = ($S01().Construct()).__Initialize__([[$thisType.pointTopLeft], [$thisType.pointTopRight], [$thisType.pointBottomLeft], [$thisType.pointTopLeft], [$thisType.pointBottomRight], [$thisType.pointBottomLeft], [$thisType.pointTopRight], [$thisType.pointBottomRight]]);
-    this.isOutsideA = false;
-    this.isOutsideB = false;
-    this.isOutsideC = false;
-    this.outsideCount = 0;
-    $T05().prototype._ctor.call(this);
-  };
-
-  function TriangleClippingScene_ActionOnTrianglePlaced (spriteBatch) {
-  };
-
-  function TriangleClippingScene_CheckLineIntersection (p1, p2, q1, q2, /* ref */ intersectionPoint) {
-    intersectionPoint.set($S02().Construct(-Infinity));
-    var xD = +p2.X - +p1.X;
-    var xD2 = +q2.X - +q1.X;
-    var yD = +p2.Y - +p1.Y;
-    var yD2 = +q2.Y - +q1.Y;
-    var xD3 = +p1.X - +q1.X;
-    var yD3 = +p1.Y - +q1.Y;
-    var len = (Math.sqrt(((xD * xD) + (yD * yD))));
-    var len2 = (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
-    var dot = (xD * xD2) + (yD * yD2);
-    var deg = +((dot / (len * len2)));
-    var div = (yD2 * xD) - (xD2 * yD);
-    var ua = +((((xD2 * yD3) - (yD2 * xD3)) / div));
-    var ub = +((((xD * yD3) - (yD * xD3)) / div));
-    var pt = $S00().Construct(Math.fround(+p1.X + (ua * xD)), Math.fround(+p1.Y + (ua * yD)));
-    xD = +pt.X - +p1.X;
-    xD2 = +pt.X - +p2.X;
-    yD = +pt.Y - +p1.Y;
-    yD2 = +pt.Y - +p2.Y;
-    var segmentLength = (Math.sqrt(((xD * xD) + (yD * yD)))) + (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
-    xD = +pt.X - +q1.X;
-    xD2 = +pt.X - +q2.X;
-    yD = +pt.Y - +q1.Y;
-    yD2 = +pt.Y - +q2.Y;
-    var segmentLength2 = (Math.sqrt(((xD * xD) + (yD * yD)))) + (Math.sqrt(((xD2 * xD2) + (yD2 * yD2))));
-    if (!(((Math.abs((len - segmentLength))) <= 0.01) && ((Math.abs((len2 - segmentLength2))) <= 0.01))) {
-      var result = false;
-    } else if (!(!(((Math.round(pt.X)) === (Math.round(p1.X))) && 
-          ((Math.round(pt.Y)) === (Math.round(p1.Y)))) && (((Math.round(pt.X)) !== (Math.round(p2.X))) || 
-          ((Math.round(pt.Y)) !== (Math.round(p2.Y)))))) {
-      result = false;
-    } else if (!((+((+pt.X / 2)) === +((+pt.X / 2))) && (+((+pt.Y / 2)) === +((+pt.Y / 2))))) {
-      result = false;
-    } else {
-      intersectionPoint.set(pt.MemberwiseClone());
-      result = true;
-    }
-    return result;
-  };
-
-  function TriangleClippingScene_CheckListEquality$b1 (T, a, b) {
-    if ((a.get_Count() | 0) === (b.get_Count() | 0)) {
-
-      for (var i = 0; i < (a.get_Count() | 0); i = ((i + 1) | 0)) {
-        var t = JSIL.CloneParameter(T, a.get_Item(i));
-        if (!(t).Object_Equals(b.get_Item(i))) {
-          var result = false;
-          return result;
-        }
-      }
-      result = true;
-    } else {
-      result = false;
-    }
-    return result;
-  };
-
-  function TriangleClippingScene_CorrectNormalisedTriangle (state) {
-    var bX = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X / 2));
-    var pX = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].X + bX;
-    var aY = +this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y;
-    var bY = +((+this.normalisedTrianglePoints[(((state | 0) - 1) | 0)].Y / 2));
-    var pY = aY + bY;
-    this.normalisedTrianglePoints[(((state | 0) - 1) | 0)] = $S00().Construct(pX, pY);
-  };
-
-  function TriangleClippingScene_DerivedInit () {
-    $T05().prototype.DerivedInit.call(this);
-    this.trianglePoints = JSIL.Array.New($T00(), this.triangleCount);
-    this.normalisedTrianglePoints = JSIL.Array.New($T00(), this.triangleCount);
-    this.triangleSquares = JSIL.Array.New($T0E(), this.triangleCount);
-    this.triangleLines = JSIL.Array.New($T02(), this.triangleCount);
-    this.intersectionAB1 = false;
-    this.intersectionBC1 = false;
-    this.intersectionAC1 = false;
-    this.intersectionAB2 = false;
-    this.intersectionBC2 = false;
-    this.intersectionAC2 = false;
-    this.intersectionPointAB1 = $S02().Construct(-Infinity);
-    this.intersectionPointBC1 = $S02().Construct(-Infinity);
-    this.intersectionPointAC1 = $S02().Construct(-Infinity);
-    this.intersectionPointAB2 = $S02().Construct(-Infinity);
-    this.intersectionPointBC2 = $S02().Construct(-Infinity);
-    this.intersectionPointAC2 = $S02().Construct(-Infinity);
-    this.outsideCount = 0;
-    this.isOutsideA = false;
-    this.isOutsideB = false;
-    this.isOutsideC = false;
-    this.clippingA = null;
-    this.clippingB = null;
-    this.clippingC = null;
-    this.insideTriPoints = null;
-    this.outsideTriPoints = null;
-  };
-
-  function TriangleClippingScene_Draw (spriteBatch) {
-    $T05().prototype.Draw.call(this, spriteBatch);
-    (this.lineTop).Draw(spriteBatch);
-    (this.lineLeft).Draw(spriteBatch);
-    (this.lineBottom).Draw(spriteBatch);
-    (this.lineRight).Draw(spriteBatch);
-    if (this.squareIntersectionAB1 !== null) {
-      (this.squareIntersectionAB1).Draw(spriteBatch);
-    }
-    if (this.squareIntersectionBC1 !== null) {
-      (this.squareIntersectionBC1).Draw(spriteBatch);
-    }
-    if (this.squareIntersectionAC1 !== null) {
-      (this.squareIntersectionAC1).Draw(spriteBatch);
-    }
-    if (this.squareIntersectionAB2 !== null) {
-      (this.squareIntersectionAB2).Draw(spriteBatch);
-    }
-    if (this.squareIntersectionBC2 !== null) {
-      (this.squareIntersectionBC2).Draw(spriteBatch);
-    }
-    if (this.squareIntersectionAC2 !== null) {
-      (this.squareIntersectionAC2).Draw(spriteBatch);
-    }
-    if (this.outsideTriPoints !== null) {
-      if (((this.outsideTriPoints).get_Count() | 0) === 1) {
-        var index = 1;
-        if (!(((((this.insideTriPoints).get_Item(1).intersectionPointsTo).get_Count() | 0) === 0) || !$T00().op_Equality(
-              ((this.outsideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0), 
-              ((this.insideTriPoints).get_Item(1).intersectionPointsTo).get_Item(0)
-            ))) {
-          index = 0;
-        }
-        var ll = new ($T02())(((this.outsideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).MemberwiseClone(), (this.insideTriPoints).get_Item(index).triPoint.MemberwiseClone(), $T03().get_Red().MemberwiseClone(), 3);
-        ll.Draw(spriteBatch);
-      } else if (((this.outsideTriPoints).get_Count() | 0) === 2) {
-        if (!(!(((((this.outsideTriPoints).get_Item(0).intersectionPointsFrom).get_Count() | 0) === 0) && 
-              ((((this.outsideTriPoints).get_Item(1).intersectionPointsTo).get_Count() | 0) === 0)) && (((((this.outsideTriPoints).get_Item(1).intersectionPointsFrom).get_Count() | 0) !== 0) || 
-              ((((this.outsideTriPoints).get_Item(0).intersectionPointsTo).get_Count() | 0) !== 0)))) {
-          if (!((+((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).X === +((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).X) || (+((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).Y === +((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).Y))) {
-            var l = new ($T02())(((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).MemberwiseClone(), ((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $T03().get_Green().MemberwiseClone(), 3);
-            l.Draw(spriteBatch);
-          } else {
-            var d = ($S03().Construct()).__Initialize__([[$S04().Construct(((((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).X) | 0), ((((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).Y) | 0))], [$S04().Construct(((((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).X) | 0), ((((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).Y) | 0))], [$S04().Construct((((this.insideTriPoints).get_Item(0).triPoint.X) | 0), (((this.insideTriPoints).get_Item(0).triPoint.Y) | 0))]]);
-            var p = new ($T12())(d, $T13().get_Red());
-            p.Draw(spriteBatch);
-          }
-        } else {
-          index = 0;
-          if ((((this.outsideTriPoints).get_Item(0).intersectionPointsFrom).get_Count() | 0) < (((this.outsideTriPoints).get_Item(1).intersectionPointsFrom).get_Count() | 0)) {
-            index = 1;
-          }
-          var arg_446_0 = ((
-            (index === 0)
-               ? 1
-               : 0)
-           | 0);
-          l = new ($T02())(((this.outsideTriPoints).get_Item(index).intersectionPointsFrom).get_Item(0).MemberwiseClone(), (this.insideTriPoints).get_Item(0).triPoint.MemberwiseClone(), $T03().get_Red().MemberwiseClone(), 2);
-          if (!((+((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).X !== +((this.outsideTriPoints).get_Item(index).intersectionPointsFrom).get_Item(0).X) && (+((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).Y !== +((this.outsideTriPoints).get_Item(index).intersectionPointsFrom).get_Item(0).Y))) {
-            var v = ((this.insideTriPoints).get_Item(0).intersectionPointsTo).get_Item(0).MemberwiseClone();
-          } else {
-            v = ((this.insideTriPoints).get_Item(0).intersectionPointsFrom).get_Item(0).MemberwiseClone();
-          }
-          var l2 = new ($T02())(((this.outsideTriPoints).get_Item(index).intersectionPointsFrom).get_Item(0).MemberwiseClone(), v.MemberwiseClone(), $T03().get_Green().MemberwiseClone(), 2);
-          l.Draw(spriteBatch);
-          if (l2 !== null) {
-            l2.Draw(spriteBatch);
-          }
-        }
-      } else if (((this.outsideTriPoints).get_Count() | 0) === 3) {
-        var index2 = 0;
-        var index3 = 0;
-        if ((((this.outsideTriPoints).get_Item(0).intersectionPointsFrom).get_Count() | 0) === 0) {
-          index2 = 1;
-        }
-
-        for (var i = 0; i < 3; i = ((i + 1) | 0)) {
-          if (i !== index2) {
-            if ((((this.outsideTriPoints).get_Item(i).intersectionPointsFrom).get_Count() | 0) > 0) {
-              index3 = i;
-            }
-          }
-        }
-        if (!(((((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Count() | 0) !== 0) && ((((this.outsideTriPoints).get_Item(index3).intersectionPointsTo).get_Count() | 0) !== 0))) {
-          if (!((+((this.outsideTriPoints).get_Item(index2).intersectionPointsTo).get_Item(0).X !== +((this.outsideTriPoints).get_Item(index2).intersectionPointsTo).get_Item(0).Y) && (+((this.outsideTriPoints).get_Item(index3).intersectionPointsFrom).get_Item(0).Y !== +((this.outsideTriPoints).get_Item(index3).intersectionPointsFrom).get_Item(0).Y))) {
-            l = new ($T02())(((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index3).intersectionPointsFrom).MemberwiseClone(), $T03().get_Green().MemberwiseClone(), 2);
-          } else {
-            l = new ($T02())(((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Item(0).MemberwiseClone(), ((this.outsideTriPoints).get_Item(index3).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $T03().get_Green().MemberwiseClone(), 2);
-          }
-          l.Draw(spriteBatch);
-        }
-        if (!(((((this.outsideTriPoints).get_Item(index2).intersectionPointsTo).get_Count() | 0) <= 0) || ((((this.outsideTriPoints).get_Item(index3).intersectionPointsTo).get_Count() | 0) <= 0))) {
-          var l3 = new ($T02())(((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index2).intersectionPointsTo).MemberwiseClone(), $T03().get_Red().MemberwiseClone(), 2);
-          l2 = new ($T02())($S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index3).intersectionPointsTo).MemberwiseClone(), ((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $T03().get_Blue().MemberwiseClone(), 2);
-          var l4 = new ($T02())(((this.outsideTriPoints).get_Item(index3).intersectionPointsTo).get_Item(0).MemberwiseClone(), ((this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).get_Item(0).MemberwiseClone(), $T03().get_Yellow().MemberwiseClone(), 2);
-          l3.Draw(spriteBatch);
-          l2.Draw(spriteBatch);
-          l4.Draw(spriteBatch);
-        }
-
-        for (i = 0; i < 8; i = ((i + 2) | 0)) {
-          if (i === 0) {
-            var col = $T03().get_Pink().MemberwiseClone();
-          } else if (i === 2) {
-            col = $T03().get_White().MemberwiseClone();
-          } else if (i === 4) {
-            col = $T03().get_Salmon().MemberwiseClone();
-          } else {
-            col = $T03().get_RoyalBlue().MemberwiseClone();
-          }
-          if (this.FindPointInPolygon(
-              $T14().ToList$b1($T00())($T15().$Cast(this.trianglePoints)), 
-              (this.l).get_Item(i)
-            )) {
-            if (!((+$S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).X !== +(this.l).get_Item(i).X) && (+$S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).Y !== +(this.l).get_Item(i).Y))) {
-              v = $S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index2).intersectionPointsFrom).MemberwiseClone();
-            } else {
-              v = $S05().CallStatic($T14(), "Last$b1", [$asm01.Microsoft.Xna.Framework.Vector2], (this.outsideTriPoints).get_Item(index3).intersectionPointsFrom).MemberwiseClone();
-            }
-            var lX = new ($T02())((this.l).get_Item(i).MemberwiseClone(), v.MemberwiseClone(), col.MemberwiseClone(), 2);
-            lX.Draw(spriteBatch);
-          } else {
-            $T16().WriteLine(JSIL.ConcatString("False! + ", i));
-          }
-        }
-      }
-    }
-  };
-
-  function TriangleClippingScene_DrawOnAnimate (spriteBatch) {
-  };
-
-  function TriangleClippingScene_FindPointInPolygon (points, p) {
-    var v = $S06().Construct();
-
-    for (var i = 1; i < (points.get_Count() | 0); i = ((i + 1) | 0)) {
-      v.Add(this.orient2d(
-          points.get_Item(((i - 1) | 0)), 
-          points.get_Item(i), 
-          p
-        ));
-    }
-    v.Add(this.orient2d(
-        points.get_Item((((points.get_Count() | 0) - 1) | 0)), 
-        points.get_Item(0), 
-        p
-      ));
-    var negative = false;
-    if (+v.get_Item(0) < 0) {
-      negative = true;
-    }
-
-  $loop1: 
-    for (i = 0; i < (v.get_Count() | 0); ) {
-      if (!(!negative || (+v.get_Item(i) < 0))) {
-        var result = false;
-      } else {
-        if (negative || (+v.get_Item(i) >= 0)) {
-          i = ((i + 1) | 0);
-          continue $loop1;
-        }
-        result = false;
-      }
-      return result;
-    }
-    result = true;
-    return result;
-  };
-
-  function TriangleClippingScene_LastPointPlaced (gameTime) {
-    var v = new JSIL.BoxedVariable(new ($T00())());
-    var d = new JSIL.BoxedVariable(0);
-    var d2 = new JSIL.BoxedVariable(0);
-    this.intersectionsC = $S01().Construct();
-    this.intersectionsA = $S01().Construct();
-    this.intersectionsB = $S01().Construct();
-    this.CorrectNormalisedTriangle(3);
-    this.isOutsideA = ((Math.abs(this.normalisedTrianglePoints[0].X)) >= 1) || 
-    ((Math.abs(this.normalisedTrianglePoints[0].Y)) >= 1);
-    this.isOutsideB = ((Math.abs(this.normalisedTrianglePoints[1].X)) >= 1) || 
-    ((Math.abs(this.normalisedTrianglePoints[1].Y)) >= 1);
-    this.isOutsideC = ((Math.abs(this.normalisedTrianglePoints[2].X)) >= 1) || 
-    ((Math.abs(this.normalisedTrianglePoints[2].Y)) >= 1);
-    $T16().WriteLine(JSIL.ConcatString("A: ", this.isOutsideA));
-    $T16().WriteLine(JSIL.ConcatString("B: ", this.isOutsideB));
-    $T16().WriteLine(JSIL.ConcatString("C: ", this.isOutsideC, "\n"));
-    this.outsideCount = 0;
-
-    for (var i = 0; i < 8; i = ((i + 2) | 0)) {
-      var b = this.CheckLineIntersection(
-        this.trianglePoints[0].MemberwiseClone(), 
-        this.trianglePoints[1].MemberwiseClone(), 
-        (this.l).get_Item(i), 
-        (this.l).get_Item(((i + 1) | 0)), 
-        /* ref */ v
-      );
-      (this.intersectionsA).Add(v.get().MemberwiseClone());
-      b = this.CheckLineIntersection(
-        this.trianglePoints[1].MemberwiseClone(), 
-        this.trianglePoints[2].MemberwiseClone(), 
-        (this.l).get_Item(i), 
-        (this.l).get_Item(((i + 1) | 0)), 
-        /* ref */ v
-      );
-      (this.intersectionsB).Add(v.get().MemberwiseClone());
-      b = this.CheckLineIntersection(
-        this.trianglePoints[2].MemberwiseClone(), 
-        this.trianglePoints[0].MemberwiseClone(), 
-        (this.l).get_Item(i), 
-        (this.l).get_Item(((i + 1) | 0)), 
-        /* ref */ v
-      );
-      (this.intersectionsC).Add(v.get().MemberwiseClone());
-    }
-    this.intersectionsA = $T14().ToList$b1($T00())($S07().CallStatic($T14(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], this.intersectionsA));
-    (this.intersectionsA).Remove($S02().Construct(-Infinity));
-    this.intersectionsB = $T14().ToList$b1($T00())($S07().CallStatic($T14(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], this.intersectionsB));
-    (this.intersectionsB).Remove($S02().Construct(-Infinity));
-    this.intersectionsC = $T14().ToList$b1($T00())($S07().CallStatic($T14(), "Distinct$b1", [$asm01.Microsoft.Xna.Framework.Vector2], this.intersectionsC));
-    (this.intersectionsC).Remove($S02().Construct(-Infinity));
-    var v2 = new JSIL.BoxedVariable(null);
-    var v3 = new JSIL.BoxedVariable(null);
-    var t = new JSIL.BoxedVariable(null);
-    if (((this.intersectionsA).get_Count() | 0) > 1) {
-      v2.set((this.intersectionsA).get_Item(0).MemberwiseClone());
-      v3.set((this.intersectionsA).get_Item(1).MemberwiseClone());
-      t.set(this.trianglePoints[0].MemberwiseClone());
-      $T00().Distance(/* ref */ v2, /* ref */ v3, /* ref */ d);
-      $T00().Distance(/* ref */ v2, /* ref */ t, /* ref */ d2);
-      if (+d.get() < +d2.get()) {
-        var temp = (this.intersectionsA).get_Item(0).MemberwiseClone();
-        (this.intersectionsA).set_Item(0, (this.intersectionsA).get_Item(1).MemberwiseClone());
-        (this.intersectionsA).set_Item(1, temp.MemberwiseClone());
-      }
-    }
-    if (((this.intersectionsB).get_Count() | 0) > 1) {
-      v2.set((this.intersectionsB).get_Item(0).MemberwiseClone());
-      v3.set((this.intersectionsB).get_Item(1).MemberwiseClone());
-      t.set(this.trianglePoints[0].MemberwiseClone());
-      $T00().Distance(/* ref */ v2, /* ref */ v3, /* ref */ d);
-      $T00().Distance(/* ref */ v2, /* ref */ t, /* ref */ d2);
-      if (+d.get() < +d2.get()) {
-        temp = (this.intersectionsB).get_Item(0).MemberwiseClone();
-        (this.intersectionsB).set_Item(0, (this.intersectionsB).get_Item(1).MemberwiseClone());
-        (this.intersectionsB).set_Item(1, temp.MemberwiseClone());
-      }
-    }
-    if (((this.intersectionsC).get_Count() | 0) > 1) {
-      v2.set((this.intersectionsC).get_Item(0).MemberwiseClone());
-      v3.set((this.intersectionsC).get_Item(1).MemberwiseClone());
-      t.set(this.trianglePoints[0].MemberwiseClone());
-      $T00().Distance(/* ref */ v2, /* ref */ v3, /* ref */ d);
-      $T00().Distance(/* ref */ v2, /* ref */ t, /* ref */ d2);
-      if (+d.get() < +d2.get()) {
-        temp = (this.intersectionsC).get_Item(0).MemberwiseClone();
-        (this.intersectionsC).set_Item(0, (this.intersectionsC).get_Item(1).MemberwiseClone());
-        (this.intersectionsC).set_Item(1, temp.MemberwiseClone());
-      }
-    }
-    this.insideTriPoints = $S08().Construct();
-    this.outsideTriPoints = $S08().Construct();
-    var tempIntersectionsTo = $S01().Construct();
-    var tempIntersectionsFrom = $S01().Construct();
-    $T04().prototype.AddRange.call(tempIntersectionsFrom, this.intersectionsA);
-    $T04().prototype.AddRange.call(tempIntersectionsTo, this.intersectionsC);
-    this.clippingA = new ($T1A())(this.trianglePoints[0].MemberwiseClone(), this.normalisedTrianglePoints[0], tempIntersectionsTo, tempIntersectionsFrom);
-    this.clippingA.isOutside = this.isOutsideA;
-    if (this.isOutsideA) {
-      (this.outsideTriPoints).Add(this.clippingA);
-    } else {
-      (this.insideTriPoints).Add(this.clippingA);
-    }
-    tempIntersectionsTo = $S01().Construct();
-    tempIntersectionsFrom = $S01().Construct();
-    $T04().prototype.AddRange.call(tempIntersectionsFrom, this.intersectionsB);
-    $T04().prototype.AddRange.call(tempIntersectionsTo, this.intersectionsA);
-    this.clippingB = new ($T1A())(this.trianglePoints[1].MemberwiseClone(), this.normalisedTrianglePoints[1], tempIntersectionsTo, tempIntersectionsFrom);
-    this.clippingB.isOutside = this.isOutsideB;
-    if (this.isOutsideB) {
-      (this.outsideTriPoints).Add(this.clippingB);
-    } else {
-      (this.insideTriPoints).Add(this.clippingB);
-    }
-    tempIntersectionsTo = $S01().Construct();
-    tempIntersectionsFrom = $S01().Construct();
-    $T04().prototype.AddRange.call(tempIntersectionsTo, this.intersectionsB);
-    $T04().prototype.AddRange.call(tempIntersectionsFrom, this.intersectionsC);
-    this.clippingC = new ($T1A())(this.trianglePoints[2].MemberwiseClone(), this.normalisedTrianglePoints[2], tempIntersectionsTo, tempIntersectionsFrom);
-    this.clippingC.isOutside = this.isOutsideC;
-    if (this.isOutsideC) {
-      (this.outsideTriPoints).Add(this.clippingC);
-    } else {
-      (this.insideTriPoints).Add(this.clippingC);
-    }
-    this.squareIntersectionAB1 = new ($T0E())($S00().Construct((+this.intersectionPointAB1.X - 2), (+this.intersectionPointAB1.Y - 2)), $S00().Construct(4, 4), $T03().get_Red().MemberwiseClone());
-    this.squareIntersectionBC1 = new ($T0E())($S00().Construct((+this.intersectionPointBC1.X - 2), (+this.intersectionPointBC1.Y - 2)), $S00().Construct(4, 4), $T03().get_Green().MemberwiseClone());
-    this.squareIntersectionAC1 = new ($T0E())($S00().Construct((+this.intersectionPointAC1.X - 2), (+this.intersectionPointAC1.Y - 2)), $S00().Construct(4, 4), $T03().get_LightBlue().MemberwiseClone());
-    this.squareIntersectionAB2 = new ($T0E())($S00().Construct((+this.intersectionPointAB2.X - 2), (+this.intersectionPointAB2.Y - 2)), $S00().Construct(4, 4), $T03().get_Yellow().MemberwiseClone());
-    this.squareIntersectionBC2 = new ($T0E())($S00().Construct((+this.intersectionPointBC2.X - 2), (+this.intersectionPointBC2.Y - 2)), $S00().Construct(4, 4), $T03().get_Pink().MemberwiseClone());
-    this.squareIntersectionAC2 = new ($T0E())($S00().Construct((+this.intersectionPointAC2.X - 2), (+this.intersectionPointAC2.Y - 2)), $S00().Construct(4, 4), $T03().get_Brown().MemberwiseClone());
-  };
-
-  function TriangleClippingScene_orient2d (a, b, p) {
-    return (((+b.X - +a.X) * (+p.Y - +a.Y)) - ((+b.Y - +a.Y) * (+p.X - +a.X)));
-  };
-
-  function TriangleClippingScene_StateChanges (gameTime) {
-    $T05().prototype.StateChanges.call(this, gameTime);
-    if (!((($T1C().Inputs$MouseState$value.get_LeftButton().valueOf() | 0) !== 0) || ($T1C().Inputs$MouseStatePrevious$value.get_LeftButton() !== $T1D().Pressed))) {
-      if ((this.state | 0) <= 3) {
-        this.CorrectNormalisedTriangle(this.state);
-      }
-    }
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleScene"), 
-      Name: "HumanGraphicsPipelineXna.TriangleClippingScene", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 0, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      JSIL.MethodSignature.Void, 
-      TriangleClippingScene__ctor
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "ActionOnTrianglePlaced", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      TriangleClippingScene_ActionOnTrianglePlaced
-    );
-
-    $.Method({Static:false, Public:false}, "CheckLineIntersection", 
-      new JSIL.MethodSignature($.Boolean, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $jsilcore.TypeRef("JSIL.Reference", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])
-        ]), 
-      TriangleClippingScene_CheckLineIntersection
-    );
-
-    $.Method({Static:false, Public:false}, "CheckListEquality", 
-      new JSIL.MethodSignature($.Boolean, [$asm06.TypeRef("System.Collections.Generic.List`1", ["!!0"]), $asm06.TypeRef("System.Collections.Generic.List`1", ["!!0"])], ["T"]), 
-      TriangleClippingScene_CheckListEquality$b1
-    );
-
-    $.Method({Static:false, Public:false}, "CorrectNormalisedTriangle", 
-      JSIL.MethodSignature.Action($.Int32), 
-      TriangleClippingScene_CorrectNormalisedTriangle
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DerivedInit", 
-      JSIL.MethodSignature.Void, 
-      TriangleClippingScene_DerivedInit
-    );
-
-    $.Method({Static:false, Public:true , Virtual:true }, "Draw", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      TriangleClippingScene_Draw
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "DrawOnAnimate", 
-      JSIL.MethodSignature.Action($asm04.TypeRef("Microsoft.Xna.Framework.Graphics.SpriteBatch")), 
-      TriangleClippingScene_DrawOnAnimate
-    );
-
-    $.Method({Static:false, Public:true }, "FindPointInPolygon", 
-      new JSIL.MethodSignature($.Boolean, [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), 
-      TriangleClippingScene_FindPointInPolygon
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "LastPointPlaced", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      TriangleClippingScene_LastPointPlaced
-    );
-
-    $.Method({Static:false, Public:false}, "orient2d", 
-      new JSIL.MethodSignature($.Single, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")
-        ]), 
-      TriangleClippingScene_orient2d
-    );
-
-    $.Method({Static:false, Public:false, Virtual:true }, "StateChanges", 
-      JSIL.MethodSignature.Action($asm02.TypeRef("Microsoft.Xna.Framework.GameTime")), 
-      TriangleClippingScene_StateChanges
-    );
-
-    $.Field({Static:true , Public:false}, "pointTopLeft", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:true , Public:false}, "pointTopRight", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:true , Public:false}, "pointBottomLeft", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:true , Public:false}, "pointBottomRight", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointAB1", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointBC1", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointAC1", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointAB2", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointBC2", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "intersectionPointAC2", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:false}, "lineTop", $asm00.TypeRef("HumanGraphicsPipelineXna.Line")); 
-    $.Field({Static:false, Public:false}, "lineLeft", $asm00.TypeRef("HumanGraphicsPipelineXna.Line")); 
-    $.Field({Static:false, Public:false}, "lineBottom", $asm00.TypeRef("HumanGraphicsPipelineXna.Line")); 
-    $.Field({Static:false, Public:false}, "lineRight", $asm00.TypeRef("HumanGraphicsPipelineXna.Line")); 
-    $.Field({Static:false, Public:false}, "l", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:false}, "clippingA", $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")); 
-    $.Field({Static:false, Public:false}, "clippingB", $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")); 
-    $.Field({Static:false, Public:false}, "clippingC", $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")); 
-    $.Field({Static:false, Public:false}, "intersectionAB1", $.Boolean); 
-    $.Field({Static:false, Public:false}, "intersectionBC1", $.Boolean); 
-    $.Field({Static:false, Public:false}, "intersectionAC1", $.Boolean); 
-    $.Field({Static:false, Public:false}, "intersectionAB2", $.Boolean); 
-    $.Field({Static:false, Public:false}, "intersectionBC2", $.Boolean); 
-    $.Field({Static:false, Public:false}, "intersectionAC2", $.Boolean); 
-    $.Field({Static:false, Public:false}, "squareIntersectionAB1", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "squareIntersectionBC1", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "squareIntersectionAC1", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "squareIntersectionAB2", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "squareIntersectionBC2", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "squareIntersectionAC2", $asm00.TypeRef("HumanGraphicsPipelineXna.Square")); 
-    $.Field({Static:false, Public:false}, "isOutsideA", $.Boolean); 
-    $.Field({Static:false, Public:false}, "isOutsideB", $.Boolean); 
-    $.Field({Static:false, Public:false}, "isOutsideC", $.Boolean); 
-    $.Field({Static:false, Public:false}, "outsideCount", $.Int32); 
-    $.Field({Static:false, Public:false}, "insideTriPoints", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")])); 
-    $.Field({Static:false, Public:false}, "outsideTriPoints", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint")])); 
-    $.Field({Static:false, Public:false}, "intersectionsC", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:false}, "intersectionsA", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:false}, "intersectionsB", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:false}, "t", $asm00.TypeRef("HumanGraphicsPipelineXna.Polygon")); 
-    function TriangleClippingScene__cctor () {
-      $thisType.pointTopLeft = new $asm01.Microsoft.Xna.Framework.Vector2();
-      $thisType.pointTopRight = new $asm01.Microsoft.Xna.Framework.Vector2();
-      $thisType.pointBottomLeft = new $asm01.Microsoft.Xna.Framework.Vector2();
-      $thisType.pointBottomRight = new $asm01.Microsoft.Xna.Framework.Vector2();
-      $thisType.pointTopLeft = $S00().Construct(+((($T01().get_viewportWidth() | 0) / 6 | 0)), +((($T01().get_viewportHeight() | 0) / 6 | 0)));
-      $thisType.pointTopRight = $S00().Construct(+(($T01().get_viewportWidth() | 0) - ((($T01().get_viewportWidth() | 0) / 6) | 0)), +((($T01().get_viewportHeight() | 0) / 6 | 0)));
-      $thisType.pointBottomLeft = $S00().Construct(+((($T01().get_viewportWidth() | 0) / 6 | 0)), +(($T01().get_viewportHeight() | 0) - ((($T01().get_viewportHeight() | 0) / 6) | 0)));
-      $thisType.pointBottomRight = $S00().Construct(+(($T01().get_viewportWidth() | 0) - ((($T01().get_viewportWidth() | 0) / 6) | 0)), +(($T01().get_viewportHeight() | 0) - ((($T01().get_viewportHeight() | 0) / 6) | 0)));
-    };
-
-
-    $.Method({Static:true , Public:false}, ".cctor", 
-      JSIL.MethodSignature.Void, 
-      TriangleClippingScene__cctor
-    );
-
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
-
-/* enum HumanGraphicsPipelineXna.TriangleClippingScene+Side */ 
-
-JSIL.MakeEnum(
-  "HumanGraphicsPipelineXna.TriangleClippingScene+Side", false, {
-    Up: 0, 
-    Left: 1, 
-    Down: 2, 
-    Right: 3, 
-    TL: 4, 
-    TR: 5, 
-    BL: 6, 
-    BR: 7
-  }, false
-);
-
-/* class HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint */ 
-
-(function ClippingPoint$Members () {
-  var $, $thisType;
-  var $T00 = function () {
-    return ($T00 = JSIL.Memoize($asm01.Microsoft.Xna.Framework.Vector2)) ();
-  };
-  var $T01 = function () {
-    return ($T01 = JSIL.Memoize($asm06.System.Collections.Generic.List$b1.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
-  };
-  var $T02 = function () {
-    return ($T02 = JSIL.Memoize($asm00.HumanGraphicsPipelineXna.TriangleClippingScene_Side)) ();
-  };
-  var $T03 = function () {
-    return ($T03 = JSIL.Memoize($asm06.System.Boolean)) ();
-  };
-  var $S00 = function () {
-    return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), null))) ();
-  };
-
-  function ClippingPoint__ctor (triPointIn, normalisedPointIn, intersectionPointsToIn, intersectionPointsFromIn) {
-    this.intersectionPointsTo = $S00().Construct();
-    this.intersectionPointsFrom = $S00().Construct();
-    this.isOutside = false;
-    this.intersectionPointsTo = intersectionPointsToIn;
-    this.intersectionPointsFrom = intersectionPointsFromIn;
-    this.triPoint = triPointIn;
-    if (!((+normalisedPointIn.X >= -1) || (+normalisedPointIn.Y <= 1))) {
-      this.side = $T02().TL;
-    } else if (!((+normalisedPointIn.X <= 1) || (+normalisedPointIn.Y <= 1))) {
-      this.side = $T02().TR;
-    } else if (!((+normalisedPointIn.X >= -1) || (+normalisedPointIn.Y >= -1))) {
-      this.side = $T02().BL;
-    } else if (!((+normalisedPointIn.X <= 1) || (+normalisedPointIn.Y >= -1))) {
-      this.side = $T02().BR;
-    } else if (+normalisedPointIn.X < -1) {
-      this.side = $T02().Left;
-    } else if (+normalisedPointIn.X > 1) {
-      this.side = $T02().Right;
-    } else if (+normalisedPointIn.Y > 1) {
-      this.side = $T02().Up;
-    } else if (+normalisedPointIn.Y < -1) {
-      this.side = $T02().Down;
-    }
-  };
-
-  function ClippingPoint_setIsOutside (t) {
-    this.isOutside = t;
-  };
-
-  JSIL.MakeType({
-      BaseType: $asm06.TypeRef("System.Object"), 
-      Name: "HumanGraphicsPipelineXna.TriangleClippingScene+ClippingPoint", 
-      IsPublic: false, 
-      IsReferenceType: true, 
-      MaximumConstructorArguments: 4, 
-    }, function ($interfaceBuilder) {
-    $ = $interfaceBuilder;
-
-    $.Method({Static:false, Public:true }, ".ctor", 
-      new JSIL.MethodSignature(null, [
-          $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), $asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), 
-          $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")]), $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])
-        ]), 
-      ClippingPoint__ctor
-    );
-
-    $.Method({Static:false, Public:false}, "setIsOutside", 
-      JSIL.MethodSignature.Action($.Boolean), 
-      ClippingPoint_setIsOutside
-    );
-
-    $.Field({Static:false, Public:true }, "triPoint", $asm01.TypeRef("Microsoft.Xna.Framework.Vector2")); 
-    $.Field({Static:false, Public:true }, "intersectionPointsTo", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:true }, "intersectionPointsFrom", $asm06.TypeRef("System.Collections.Generic.List`1", [$asm01.TypeRef("Microsoft.Xna.Framework.Vector2")])); 
-    $.Field({Static:false, Public:true }, "isOutside", $.Boolean); 
-    $.Field({Static:false, Public:true }, "side", $asm00.TypeRef("HumanGraphicsPipelineXna.TriangleClippingScene+Side")); 
-    return function (newThisType) { $thisType = newThisType; }; 
-  });
-
-})();
 
 /* class HumanGraphicsPipelineXna.Fonts */ 
 

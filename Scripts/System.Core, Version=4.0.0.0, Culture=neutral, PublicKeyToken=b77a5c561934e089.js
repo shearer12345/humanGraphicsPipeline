@@ -52815,7 +52815,7 @@ JSIL.DeclareNamespace("System.Security.Cryptography.Xml");
 (function ManifestSignedXml$Members () {
   var $, $thisType;
   JSIL.MakeType({
-      BaseType: $asm11.TypeRef("System.Security.Cryptography.Xml.SignedXml"), 
+      BaseType: $asm10.TypeRef("System.Security.Cryptography.Xml.SignedXml"), 
       Name: "System.Security.Cryptography.Xml.ManifestSignedXml", 
       IsPublic: false, 
       IsReferenceType: true, 
@@ -52907,7 +52907,7 @@ JSIL.DeclareNamespace("System.Security.Cryptography.Xml");
     );
 
     $.ExternalMethod({Static:true , Public:false}, "VerifyStrongNameSignatureTransforms", 
-      new JSIL.MethodSignature($asm09.TypeRef("System.Security.Cryptography.SignatureVerificationResult"), [$asm11.TypeRef("System.Security.Cryptography.Xml.SignedInfo")])
+      new JSIL.MethodSignature($asm09.TypeRef("System.Security.Cryptography.SignatureVerificationResult"), [$asm10.TypeRef("System.Security.Cryptography.Xml.SignedInfo")])
     );
 
     $.Field({Static:false, Public:false}, "m_manifest", $asm09.TypeRef("System.Security.ManifestKinds")); 
