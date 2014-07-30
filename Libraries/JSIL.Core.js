@@ -2725,8 +2725,12 @@ JSIL.RenameGenericMethods = function (publicInterface, typeObject) {
           typeObject, genericSignature, resolveContext
         );
 
-        if (!signature && throwOnFail) {
-          JSIL.RuntimeError("Failed to resolve generic signature", genericSignature);
+        if (!signature) {
+          if (throwOnFail) {
+            JSIL.RuntimeError("Failed to resolve generic signature", genericSignature);
+          } else {
+            signature = genericSignature;
+          }
         }
       }
 
@@ -2746,7 +2750,7 @@ JSIL.RenameGenericMethods = function (publicInterface, typeObject) {
       }
 
       if ((genericSignature !== null) && (genericSignature.get_Hash() != signature.get_Hash())) {
-        var newName = signature.GetKey(descriptor.EscapedName);
+        var newName = signature.GetNamedKey(descriptor.EscapedName, true);
 
         var methodReference = JSIL.$FindMethodBodyInTypeChain(typeObject, descriptor.Static, oldName, false);
         if (!methodReference)
@@ -2952,7 +2956,7 @@ JSIL.FixupInterfaces = function (publicInterface, typeObject) {
       var signatureQualifiedName = null;
 
       if (signature) {
-        signatureQualifiedName = signature.GetKey(qualifiedName);
+        signatureQualifiedName = signature.GetNamedKey(qualifiedName, true);
       }
 
       if (signature 
@@ -2984,7 +2988,9 @@ JSIL.FixupInterfaces = function (publicInterface, typeObject) {
           } else {
             var implementation = matchingMethods[0];
 
-            var sourceQualifiedName = implementation._data.signature.GetKey(implementation._descriptor.EscapedName);
+            var sourceQualifiedName = implementation._data.signature.GetNamedKey(
+              implementation._descriptor.EscapedName, true
+            );
 
             if (trace)
               console.log(typeName + "::" + signatureQualifiedName + " (" + iface + ") = " + sourceQualifiedName);
@@ -3073,13 +3079,15 @@ JSIL.FixupInterfaces = function (publicInterface, typeObject) {
 
       if (!iface)
         JSIL.RuntimeError(
-          "Member '" + member._descriptor.EscapedName + 
-          "' overrides nonexistent interface of type '" + typeObject.__FullName__ + 
-          "' with index '" + override.interfaceNameOrReference + "'"
+          "Member '" + typeObject.__FullName__ + 
+          "::" + member._descriptor.EscapedName + 
+          "' overrides nonexistent interface member '" + 
+          override.interfaceNameOrReference + 
+          "::" + override.interfaceMemberName + "'"
         );
 
       var interfaceQualifiedName = JSIL.$GetSignaturePrefixForType(iface) + JSIL.EscapeName(override.interfaceMemberName);
-      var key = member._data.signature.GetKey(interfaceQualifiedName);
+      var key = member._data.signature.GetNamedKey(interfaceQualifiedName, true);
 
       var missingIndex = missingMembers.indexOf(key);
       if (missingIndex >= 0)
@@ -3644,7 +3652,7 @@ JSIL.$MakeMethodGroup = function (typeObject, isStatic, target, renamedMethods, 
   //  and then use that as the method group.
   var makeSingleMethodGroup = function (id, group, offset) {
     var singleMethod = group.list[0];
-    var key = singleMethod.GetKey(methodEscapedName);
+    var key = singleMethod.GetNamedKey(methodEscapedName, true);
     var unrenamedKey = key;
 
     if (typeof (renamedMethods[key]) === "string")
@@ -3907,17 +3915,35 @@ JSIL.$ApplyMemberHiding = function (typeObject, memberList, resolveContext) {
   //  properties or methods - we need to access the data members directly.
 
   var comparer = function (lhs, rhs) {
-    var lhsHash = lhs._data.signature.get_Hash();
-    var rhsHash = rhs._data.signature.get_Hash();
+    var lhsCount = lhs._data.signature.argumentTypes.length; 
+    var rhsCount = rhs._data.signature.argumentTypes.length; 
 
-    var result = JSIL.CompareValues(lhsHash, rhsHash);
+    // Group by argument count.
+    var result = JSIL.CompareValues(lhsCount, rhsCount);
 
+    // Sub-cluster by hash (the hash encodes argument types, etc.)
+    if (result === 0) {
+      var lhsHash = lhs._data.signature.get_Hash();
+      var rhsHash = rhs._data.signature.get_Hash();
+
+      result = JSIL.CompareValues(lhsHash, rhsHash);
+    }
+
+    // Non-placeholders override placeholders.
     if (result === 0)
       result = JSIL.CompareValues(
         lhs._data.isPlaceholder ? 1 : 0,
         rhs._data.isPlaceholder ? 1 : 0
       );
 
+    // Non-externals override externals.
+    if (result === 0)
+      result = JSIL.CompareValues(
+        lhs._data.isExternal ? 1 : 0,
+        rhs._data.isExternal ? 1 : 0
+      );
+
+    // A derived type's methods override inherited methods.
     if (result === 0)
       result = -JSIL.CompareValues(
         lhs._typeObject.__InheritanceDepth__, 
@@ -3939,7 +3965,34 @@ JSIL.$ApplyMemberHiding = function (typeObject, memberList, resolveContext) {
   var originalCount = memberList.length;
 
   var currentSignatureHash = null;
+  var currentArgumentCount = null;
   var currentGroupStart;
+
+  var groupUpdate = function (i, memberSignature) {
+    var argumentCount = memberSignature.argumentTypes.length;
+    var memberSignatureHash = memberSignature.get_Hash();
+
+    if (
+      (currentArgumentCount === null) ||
+      (currentSignatureHash === null) || 
+      (currentArgumentCount != argumentCount) ||
+      (
+        (currentSignatureHash != memberSignatureHash) &&
+        // *Every* method with zero arguments is a part of a group, no matter what.
+        // They will automatically sort into one group because they all start with '$void='
+        (currentArgumentCount !== 0)
+      )
+    ) {
+      // New group
+      currentArgumentCount = argumentCount;
+      currentSignatureHash = memberSignatureHash;
+      currentGroupStart = i;
+
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   var trace = false;
   var traceOut = function () {
@@ -3947,7 +4000,7 @@ JSIL.$ApplyMemberHiding = function (typeObject, memberList, resolveContext) {
       console.log.apply(console, arguments);
     else
       print.apply(null, arguments);
-  }
+  };
 
   var memberName = memberList[0]._descriptor.Name;
 
@@ -3956,20 +4009,35 @@ JSIL.$ApplyMemberHiding = function (typeObject, memberList, resolveContext) {
     var member = memberList[i];
     var memberSignature = member._data.signature;
 
-    var memberSignatureHash = memberSignature.get_Hash();
+    var isHidden = groupUpdate(i, memberSignature);
 
-    if ((currentSignatureHash === null) || (currentSignatureHash != memberSignatureHash)) {
-      // New group
-      currentSignatureHash = memberSignatureHash;
-      currentGroupStart = i;
-    } else {
+    if (isHidden) {
       var hidingMember = memberList[currentGroupStart];
 
       if (trace) {
+        var localMemberName =
+          member._typeObject.__FullName__ + 
+          "." + member._descriptor.Name;
+        var hidingMemberName = 
+          hidingMember._typeObject.__FullName__ + 
+          "." + hidingMember._descriptor.Name;
+
+        var memberSuffix = "", hidingMemberSuffix = "";
+        if (member._data.isPlaceholder)
+          memberSuffix = " (placeholder)";
+        else if (member._data.isExternal)
+          memberSuffix = " (external)";
+
+        if (hidingMember._data.isPlaceholder)
+          hidingMemberSuffix = " (placeholder)";
+        else if (hidingMember._data.isExternal)
+          hidingMemberSuffix = " (external)";
+
         traceOut(
-          "Purged " + member._typeObject.__FullName__ + "'s version of " + 
-            member._descriptor.Name + " because it is hidden by " + hidingMember._typeObject.__FullName__ + 
-            "." + hidingMember._descriptor.Name
+          memberName + ": Purged " + 
+          localMemberName + memberSuffix +
+          " because it is hidden by " + 
+          hidingMemberName + hidingMemberSuffix
         );
       }
 
@@ -4012,7 +4080,7 @@ JSIL.$CreateMethodMembranes = function (typeObject, publicInterface) {
     // FIXME: I'm not sure this is right for open generic methods.
     // I think it might be looking up the old open form of the method signature
     //  instead of the closed form.
-    var key = method._data.signature.GetKey(method._descriptor.EscapedName);
+    var key = method._data.signature.GetNamedKey(method._descriptor.EscapedName, true);
 
     var useMembrane = isStatic && 
       ($jsilcore.cctorKeys.indexOf(method._descriptor.Name) < 0) &&
@@ -4118,11 +4186,22 @@ JSIL.$BuildMethodGroups = function (typeObject, publicInterface, forceLazyMethod
     });
 
     var entries = [];
+    var numZeroArgEntries = 0;
 
     for (var i = 0, l = entriesToSort.length; i < l; i++) {
       var method = entriesToSort[i];
 
       entries.push(method.signature);
+
+      if (method.signature.argumentTypes.length === 0) {
+        numZeroArgEntries += 1;
+      }
+    }
+
+    if (numZeroArgEntries > 1) {
+      throw new Error(
+        "Method '" + methodName + "' has more than one zero-argument overload"
+      );
     }
 
     var target = isStatic ? publicInterface : publicInterface.prototype;
@@ -4162,6 +4241,10 @@ JSIL.$BuildMethodGroups = function (typeObject, publicInterface, forceLazyMethod
         return methodGroupTarget;
       };
     };
+
+    if (trace) {
+      console.log(typeObject.__FullName__ + "[" + methodEscapedName + "] = ", getter);
+    }
 
     if (active) {    
       var getter = makeMethodGroupGetter(
@@ -5188,8 +5271,6 @@ JSIL.MakeType = function (typeArgs, initializer) {
     // Without this, the generated constructor won't behave correctly for 0-argument construction
     typeObject.__IsStruct__ = !isReferenceType;
 
-    var typeBuilder = new JSIL.TypeBuilder(typeObject);
-
     var ctorFunction = null;
     if (genericArguments && genericArguments.length) {
       ctorFunction = function OpenType () {
@@ -5199,8 +5280,9 @@ JSIL.MakeType = function (typeArgs, initializer) {
       ctorFunction = JSIL.MakeTypeConstructor(typeObject, maxConstructorArguments);
     }
 
-    typeBuilder.setConstructor(ctorFunction);
-    staticClassObject = typeBuilder.getPublicInterface();
+    staticClassObject = ctorFunction;
+    JSIL.SetValueProperty(typeObject, "__PublicInterface__", staticClassObject);
+    JSIL.SetValueProperty(staticClassObject, "__Type__", typeObject);    
 
     typeObject.__MaxConstructorArguments__ = maxConstructorArguments;
 
@@ -5283,7 +5365,7 @@ JSIL.MakeType = function (typeArgs, initializer) {
 
     var inited = false;
 
-    typeBuilder.declareConstant("toString", true, function TypePublicInterface_ToString () {
+    JSIL.SetValueProperty(staticClassObject, "toString", function TypePublicInterface_ToString () {
       return "<" + fullName + " Public Interface>";
     });
 
@@ -5497,6 +5579,7 @@ JSIL.EnumValue.prototype.toString = function () {
 
   return this.stringified;
 };
+
 JSIL.EnumValue.prototype.valueOf = function () {
   return this.value;
 }
@@ -6167,8 +6250,8 @@ JSIL.InterfaceBuilder.prototype.PushMember = function (type, descriptor, data, m
       if (!m.data.signature)
         return false;
 
-      var sig1 = m.data.signature.GetKey(m.descriptor.EscapedName, includeReturnType);
-      var sig2 = data.signature.GetKey(descriptor.EscapedName, includeReturnType);
+      var sig1 = m.data.signature.GetNamedKey(m.descriptor.EscapedName, includeReturnType);
+      var sig2 = data.signature.GetNamedKey(descriptor.EscapedName, includeReturnType);
 
       return (sig1 == sig2);
     });
@@ -6197,6 +6280,36 @@ JSIL.InterfaceBuilder.prototype.PushMember = function (type, descriptor, data, m
   return members.length - 1;
 };
 
+JSIL.$PlaceExternalMember = function (
+  target, implementationSource, implementationPrefix,
+  memberName, namespace, getDisplayName
+) {
+  var newValue = null;
+  var existingValue = target[memberName];
+
+  if (implementationSource.hasOwnProperty(implementationPrefix + memberName)) {
+    newValue = implementationSource[implementationPrefix + memberName][1];
+  } else if (!target.hasOwnProperty(memberName)) {
+    if (!getDisplayName)
+      getDisplayName = function () { return memberName; };
+
+    newValue = JSIL.MakeExternalMemberStub(namespace, getDisplayName, existingValue);
+    newValue.__PlaceholderFor__ = memberName;
+  }
+
+  if (newValue === null)
+    return;
+
+  if (existingValue === newValue)
+    return;
+
+  if (existingValue) {
+    // console.log("replacing '" + memberName + "':", existingValue, "\r\n with:", newValue);
+  }
+
+  JSIL.SetValueProperty(target, memberName, newValue);
+};
+
 JSIL.InterfaceBuilder.prototype.ExternalMembers = function (isInstance /*, ...names */) {
   var impl = this.externals;
 
@@ -6208,19 +6321,10 @@ JSIL.InterfaceBuilder.prototype.ExternalMembers = function (isInstance /*, ...na
 
   for (var i = 1, l = arguments.length; i < l; i++) {
     var memberName = arguments[i];
-    var memberValue = target[memberName];
-    var newValue = undefined;
 
-    if (impl.hasOwnProperty(prefix + memberName)) {
-      newValue = impl[prefix + memberName][1];
-    } else if (!target.hasOwnProperty(memberName)) {
-      var getName = (function GetMemberName () { return this; }).bind(memberName);
-      newValue = JSIL.MakeExternalMemberStub(this.namespace, getName, memberValue);
-    }
-
-    if (newValue !== undefined) {
-      JSIL.SetValueProperty(target, memberName, newValue);
-    }
+    JSIL.$PlaceExternalMember(
+      target, impl, prefix, memberName, this.namespace, null
+    );
   }
 };
 
@@ -6455,27 +6559,24 @@ JSIL.InterfaceBuilder.prototype.Field = function (_descriptor, fieldName, fieldT
 JSIL.InterfaceBuilder.prototype.ExternalMethod = function (_descriptor, methodName, signature) {
   var descriptor = this.ParseDescriptor(_descriptor, methodName, signature);
 
-  var mangledName = signature.GetKey(descriptor.EscapedName);
+  var mangledName = signature.GetNamedKey(descriptor.EscapedName, true);
 
   var impl = this.externals;
 
   var prefix = descriptor.Static ? "" : "instance$";
 
   var memberValue = descriptor.Target[mangledName];
-  var newValue = undefined;
+  var newValue = null;
 
   var isPlaceholder;
 
   var fullName = this.namespace + "." + methodName;
 
-  if (impl.hasOwnProperty(prefix + mangledName)) {
-    newValue = impl[prefix + mangledName][1];
-
-    isPlaceholder = false;
-  } else if (!descriptor.Target.hasOwnProperty(mangledName)) {
+  {
     var externalMethods = this.typeObject.__ExternalMethods__;
     var externalMethodIndex = externalMethods.length;
 
+    // FIXME: Avoid doing this somehow?
     externalMethods.push(signature);
 
     var getName = function () {
@@ -6488,14 +6589,11 @@ JSIL.InterfaceBuilder.prototype.ExternalMethod = function (_descriptor, methodNa
 
       return lateBoundSignature.toString(methodName);
     };
-    newValue = JSIL.MakeExternalMemberStub(this.namespace, getName, memberValue);
-
-    isPlaceholder = true;
   }
 
-  if (newValue !== undefined) {
-    JSIL.SetValueProperty(descriptor.Target, mangledName, newValue);
-  }
+  JSIL.$PlaceExternalMember(
+    descriptor.Target, impl, prefix, mangledName, this.namespace, getName
+  );
 
   var isConstructor = (descriptor.EscapedName === "_ctor");
   var memberTypeName = isConstructor ? "ConstructorInfo" : "MethodInfo";
@@ -6558,7 +6656,7 @@ JSIL.InterfaceBuilder.prototype.RawMethod = function (isStatic, methodName, fn) 
 JSIL.InterfaceBuilder.prototype.Method = function (_descriptor, methodName, signature, fn) {
   var descriptor = this.ParseDescriptor(_descriptor, methodName, signature);
 
-  var mangledName = signature.GetKey(descriptor.EscapedName);
+  var mangledName = signature.GetNamedKey(descriptor.EscapedName, true);
 
   var memberBuilder = new JSIL.MemberBuilder(this.context);
 
@@ -6615,7 +6713,7 @@ JSIL.InterfaceBuilder.prototype.MakeEventAccessors = function (_descriptor, name
 JSIL.InterfaceBuilder.prototype.InheritBaseMethod = function (name, signature) {
   var descriptor = this.ParseDescriptor({Public: true, Static: false}, name, signature);
 
-  var mangledName = signature.GetKey(descriptor.EscapedName);
+  var mangledName = signature.GetNamedKey(descriptor.EscapedName, true);
 
   var fn = null;
 
@@ -6680,18 +6778,51 @@ JSIL.SignatureBase = function () {
   JSIL.RuntimeError("Abstract base class");
 };
 
-JSIL.SignatureBase.prototype.GetKey = function (name, includeReturnType) {
-  if ((name === this._lastKeyName) && (includeReturnType !== false))
-    return this._lastKey;
-
-  var result = (name + this.get_Hash(includeReturnType));
+JSIL.SignatureBase.prototype.GetNamedKey$CacheMiss = function (name, includeReturnType) {
+  var result = name + "" + this.get_Hash(includeReturnType);
 
   if (includeReturnType !== false) {
-    this._lastKeyName = name;
+    this._lastKeyName = null;
     this._lastKey = result;
   }
 
   return result;
+};
+
+JSIL.SignatureBase.prototype.GetNamedKey = function (name, includeReturnType) {
+  if (!name)
+    return this.GetUnnamedKey(includeReturnType);
+  else if ((name === this._lastKeyName) && (includeReturnType !== false))
+    return this._lastKey;
+
+  return this.GetNamedKey$CacheMiss(name, includeReturnType);
+};
+
+JSIL.SignatureBase.prototype.GetUnnamedKey$CacheMiss = function (includeReturnType) {
+  var result = this.get_Hash(includeReturnType);
+
+  if (includeReturnType !== false) {
+    this._lastKeyName = null;
+    this._lastKey = result;
+  }
+
+  return result;
+};
+
+JSIL.SignatureBase.prototype.GetUnnamedKey = function (includeReturnType) {
+  if ((!this._lastKeyName) && (includeReturnType !== false))
+    return this._lastKey;
+
+  return this.GetUnnamedKey$CacheMiss(includeReturnType);
+};
+
+JSIL.SignatureBase.prototype.GetKey = function (name, includeReturnType) {
+  if (arguments.length === 2)
+    return this.GetNamedKey(name, includeReturnType);
+  else if (arguments.length === 1)
+    return this.GetNamedKey(name, true);
+  else
+    return this.GetUnnamedKey(true);  
 };
 
 JSIL.SignatureBase.prototype.ResolveTypeReference = function (typeReference) {
@@ -6702,7 +6833,7 @@ JSIL.SignatureBase.prototype.LookupMethod = function (context, name) {
   if (!context)
     JSIL.RuntimeError("Attempting to invoke method named '" + name + "' on null/undefined object");
 
-  var key = this.GetKey(name);
+  var key = this.GetNamedKey(name, true);
 
   var method = context[key];
   if (typeof (method) !== "function") {
@@ -6749,12 +6880,23 @@ JSIL.MethodSignature = function (returnType, argumentTypes, genericArgumentNames
     this.genericArgumentValues = genericArgumentValues;
   }
 
-  this.useInlineCache = true;
+  this.recompileCount = 0;
+  this.useInlineCache = JSIL.MethodSignature.EnableInlineCaches;
   this.inlineCacheEntries = [];
-  this.inlineCacheTable = JSIL.CreateDictionaryObject(null);
+  this.isInterfaceSignature = false;
 };
 
 JSIL.MethodSignature.prototype = JSIL.CreatePrototypeObject(JSIL.SignatureBase.prototype);
+
+JSIL.MethodSignature.prototype.Clone = function (isInterfaceSignature) {
+  var result = new JSIL.MethodSignature(
+    this.returnType, this.argumentTypes, this.genericArgumentNames,
+    this.context, this.openSignature, this.genericArgumentValues
+  );
+
+  result.isInterfaceSignature = isInterfaceSignature;
+  return result;
+};
 
 JSIL.SetLazyValueProperty(JSIL.MethodSignature, "Void", function () {
   return new JSIL.MethodSignature(null, null, null);
@@ -6809,17 +6951,17 @@ JSIL.MethodSignature.Action = function (argumentType) {
 
 JSIL.SetLazyValueProperty(
   JSIL.MethodSignature.prototype, "Call", 
-  function () { return this.$MakeCallMethod("Call"); }, true, false
+  function () { return this.$MakeCallMethod("Call", null, null); }, true, false
 );
 
 JSIL.SetLazyValueProperty(
   JSIL.MethodSignature.prototype, "CallStatic", 
-  function () { return this.$MakeCallMethod("CallStatic"); }, true, false
+  function () { return this.$MakeCallMethod("CallStatic", null, null); }, true, false
 );
 
 JSIL.SetLazyValueProperty(
   JSIL.MethodSignature.prototype, "CallVirtual", 
-  function () { return this.$MakeCallMethod("CallVirtual"); }, true, false
+  function () { return this.$MakeCallMethod("CallVirtual", null, null); }, true, false
 );
 
 JSIL.MethodSignature.prototype.Resolve = function (name) {
@@ -6836,7 +6978,7 @@ JSIL.MethodSignature.prototype.Resolve = function (name) {
 
   return new JSIL.ResolvedMethodSignature(
     this,
-    this.GetKey(name),
+    this.GetNamedKey(name, true),
     resolvedReturnType, 
     argTypes
   );
@@ -6923,11 +7065,38 @@ JSIL.MethodSignature.$EmitInvocation = function (
   body.push(indentation + ");");
 };
 
-JSIL.MethodSignature.$CallMethodCache = JSIL.CreateDictionaryObject(null);
 
-JSIL.CheckGenericArgumentCount = false;
+// Used as a global cache for generated invocation method bodies.
+// Caching them reduces memory usage but probably ruins type info, so we're not
+// going to do it by default.
+if (false) {
+  JSIL.MethodSignature.$CallMethodCache = JSIL.CreateDictionaryObject(null);
+} else {
+  JSIL.MethodSignature.$CallMethodCache = null;
+}
 
-JSIL.MethodSignature.prototype.$MakeInlineCacheBody = function (callMethodName) {
+// Control whether generated ICs check argument & generic argument counts.
+// Shouldn't ever be necessary, but it's a useful debugging tool.
+JSIL.MethodSignature.CheckArgumentCount = false;
+JSIL.MethodSignature.CheckGenericArgumentCount = false;
+JSIL.MethodSignature.EnableInlineCaches = true;
+
+JSIL.MethodSignatureInlineCacheEntry = function (name, typeId, methodKey) {
+  this.name = name;
+  this.typeId = typeId;
+  this.methodKey = methodKey;
+};
+
+JSIL.MethodSignatureInlineCacheEntry.prototype.equals = function (name, typeId, methodKey) {
+  return (this.name === name) &&
+    (this.typeId === typeId) &&
+    (this.methodKey === methodKey);
+};
+
+
+JSIL.MethodSignature.prototype.$MakeInlineCacheBody = function (callMethodName, knownMethodKey, fallbackMethod) {
+  // Welcome to optimization hell! Enjoy your stay.
+
   var returnType = this.returnType;
   var argumentTypes = this.argumentTypes;
   var genericArgumentNames = this.genericArgumentNames;
@@ -6935,31 +7104,52 @@ JSIL.MethodSignature.prototype.$MakeInlineCacheBody = function (callMethodName) 
   var argumentNames;
   var methodLookupArg, thisReferenceArg;
   var suffix;
+  var isInterfaceCall = false;
+
+  // We're generating an optimized inline cache or invocation thunk that handles 
+  //  method dispatch for four different types of calls. They are all similar.
 
   switch (callMethodName) {
     case "CallStatic":
+      // Invoking a specific static method of a given type. There's no this-reference.
+      // methodSource is the public interface of the type, we can call off it directly.
       thisReferenceArg = methodLookupArg = "methodSource";
       argumentNames = ["methodSource", "name", "ga"];
       break;
+
     case "Call":
+      // Invoking a specific method against a specific object instance.
       thisReferenceArg = "thisReference";
       methodLookupArg = "methodSource";
       argumentNames = ["methodSource", "name", "ga", "thisReference"];
       break;
+
     case "CallVirtual":
+      // Invoking a specific virtual method of a specific object instance.
+      // The thisReference is the source of the method so we can call off it directly.
       suffix = "Virtual";
       thisReferenceArg = methodLookupArg = "thisReference";
       argumentNames = ["name", "ga", "thisReference"];
       break;
-    // HACK
+
     case "CallInterface":
-      this.useInlineCache = false;
+    case "CallVariantInterface":
+      // Interface calls that are non-variant don't need an IC. Their target is constant.
+      if (callMethodName === "CallInterface")
+        this.useInlineCache = false;
+
+      // Invoking an interface method against a this-reference.
+      // If the method is part of a variant generic interface, we need to do variant 
+      //  lookup. Otherwise, the name is constant and we can dispatch to it directly.
+      isInterfaceCall = true;
       thisReferenceArg = methodLookupArg = "thisReference";
       argumentNames = ["thisReference", "ga"];
       break;
+
     default:
       JSIL.RuntimeError("Invalid callMethodName");
   }
+
 
   for (var i = 0, l = argumentTypes.length; i < l; i++) {
     var argumentName = "arg" + i;
@@ -6975,87 +7165,224 @@ JSIL.MethodSignature.prototype.$MakeInlineCacheBody = function (callMethodName) 
     argumentCheckOperator = "<";
   }
 
-  var functionName = (callMethodName === "CallInterface" ? "InterfaceMethod" : "MethodSignature") +
-      "." + callMethodName +
+
+  // We attempt to generate unique-enough and friendly names for our generated closures.
+  // These names make it clear what the IC is for and how many times it has been recompiled.
+  // The recompile count is important; otherwise some debuggers overwrite older compiles
+  //  with new ones, making it confusing to debug.
+
+  this.recompileCount += 1;
+
+  var functionName = (isInterfaceCall ? "InterfaceMethod" : "MethodSignature") + 
+      "." + callMethodName;
+
+  if (knownMethodKey && (callMethodName === "CallInterface")) {
+    // Generate straightforward closure names for non-variant interface methods.
+    functionName += "_" + 
+      knownMethodKey;
+  } else {
+    functionName += 
       "$" + genericArgumentNames.length + 
-      "$" + argumentTypes.length;   
-
-  var body = [];
-  body.push("var argc = arguments.length | 0;");
-  body.push("if (argc " + argumentCheckOperator + " " + requiredArgumentCount + ") JSIL.RuntimeError('" + requiredArgumentCount + " argument(s) required, ' + argc + ' provided.');");
-
-  if (callMethodName === "CallInterface") {
-    body.push("var method = this.LookupMethod(" + methodLookupArg + ");");
-    body.push("");
+      "$" + argumentTypes.length;
   }
 
+  if (this.useInlineCache)
+    functionName += "$inlineCache" + this.recompileCount;  
+
+
+  var body = [];
+
+  // Check the # of provided arguments to detect an invalid invocation.
+  if (JSIL.MethodSignature.CheckArgumentCount) {
+    body.push("var argc = arguments.length | 0;");
+    body.push("if (argc " + argumentCheckOperator + " " + requiredArgumentCount + ")");
+    body.push("  JSIL.RuntimeError('" + requiredArgumentCount + " argument(s) required, ' + argc + ' provided.');");
+  }
+
+
+  // If the function accepts generic arguments, we need to do a check to ensure
+  //  that the appropriate # of arguments were passed.
   if (genericArgumentNames.length > 0) {
-    if (JSIL.CheckGenericArgumentCount) {
+    if (JSIL.MethodSignature.CheckGenericArgumentCount) {
       body.push("if (!ga || ga.length !== " + genericArgumentNames.length + ")");
       body.push("  JSIL.RuntimeError('Invalid number of generic arguments');");
     }
     body.push("JSIL.ResolveTypeArgumentArray(ga);");
     body.push("");
   } else {
-    if (JSIL.CheckGenericArgumentCount) {
+    // If it doesn't accept them, and we're in validation mode, insert a check.
+    // This wastes cycles normally so we don't always want to put it in there.
+    if (JSIL.MethodSignature.CheckGenericArgumentCount) {
       body.push("if (ga && ga.length > 0)");
       body.push("  JSIL.RuntimeError('Invalid number of generic arguments');");
       body.push("");
     }
   }
 
+
+  var nameIdentifier = "name";
   var thisReferenceExpression = null;
 
   if (methodLookupArg !== thisReferenceArg)
     thisReferenceExpression = thisReferenceArg;
 
-  var emitDefaultInvocation = function (indentation) {
-    var methodName = thisReferenceExpression
-      ? methodLookupArg + "[methodKey].call"
-      : methodLookupArg + "[methodKey]";
 
-    JSIL.MethodSignature.$EmitInvocation(
-      body, methodName, thisReferenceExpression, 
-      (!!returnType) ? "return " : "", 
-      argumentTypes, genericArgumentNames,
-      false, indentation
-    );
+  // This is the path used for simple invocations - no IC, etc.
+  var emitDefaultInvocation = function (indentation, methodKeyToken) {
+    // For every invocation type other than Call, the this-reference will
+    //  automatically bind thanks to JS call semantics.
+    var methodName = (callMethodName === "Call")
+      ? methodLookupArg + "[" + methodKeyToken + "].call"
+      : methodLookupArg + "[" + methodKeyToken + "]";
+
+    if (fallbackMethod) {
+      body.push(indentation + "  var methodReference = " + methodName + ";");
+      body.push(indentation + "  if (!methodReference) {");
+      body.push(indentation + "    methodReference = fallbackMethod(this.typeObject, this, thisReference)");
+      body.push(indentation + "  }");
+      body.push("");
+
+      JSIL.MethodSignature.$EmitInvocation(
+        body, "methodReference.call", "thisReference", 
+        (!!returnType) ? "return " : "", 
+        argumentTypes, genericArgumentNames,
+        false, indentation + "  "
+      );
+    } else {
+      JSIL.MethodSignature.$EmitInvocation(
+        body, methodName, thisReferenceExpression, 
+        (!!returnType) ? "return " : "", 
+        argumentTypes, genericArgumentNames,
+        false, indentation
+      );
+    }
   };
 
+
+  // The 'method key' used to find the method in the method source depends on
+  //  the call scenario.
+  var getMethodKeyLookup = function () {
+    if (isInterfaceCall) {
+      if (callMethodName === "CallVariantInterface") {
+        return "this.LookupVariantMethodKey(thisReference)";
+      } else if (knownMethodKey) {
+        return "\"" + knownMethodKey + "\"";
+      } else {
+        return "this.methodKey";
+      }
+    } else {
+      return "this.GetNamedKey(name, true)";
+    }
+  };
+
+
+  // When an IC is enabled, if a cache miss occurs we update the IC before finally
+  //  doing a typical invocation.
   var emitCacheMissInvocation = function (indentation) {
-    body.push(indentation + "var methodKey = this.GetKey(name);");
-    body.push(indentation + "this.$InlineCacheMiss('" + callMethodName + "', name, methodKey);");
-    emitDefaultInvocation(indentation);
+    // Interface ICs are keyed off the type ID of the this-reference.
+    // Non-interface ICs are keyed off method name.
+    var typeIdExpression = 
+      isInterfaceCall
+        ? "typeId"
+        : "null";
+
+    // Interface ICs live on the InterfaceMethod's signature.
+    var cacheMissMethod = 
+      isInterfaceCall
+        ? "this.signature.$InlineCacheMiss(this, '"
+        : "this.$InlineCacheMiss(this, '";
+
+    // Look up the actual method key, update the IC...
+    body.push(indentation + "var methodKey = " + getMethodKeyLookup() + ";");
+    body.push(
+      indentation + cacheMissMethod +  
+      callMethodName + "', " +
+      nameIdentifier + ", " + 
+      typeIdExpression + ", methodKey);"
+    );
+
+    // Then finally invoke.
+    emitDefaultInvocation(indentation, "methodKey");
   };
 
-  if (callMethodName === "CallInterface") {
-    JSIL.MethodSignature.$EmitInvocation(
-      body, "method.call", thisReferenceArg, 
-      (!!returnType) ? "return " : "", 
-      argumentTypes, genericArgumentNames,
-      true, "  "
-    );
-  } else if (this.useInlineCache) {
-    if (this.inlineCacheEntries.length > 0) {
-      body.push("var methodIndex = this.inlineCacheTable[name] | 0;")
+  if (this.useInlineCache) {
+    // Crazy inline cache nonsense time!
+
+    if (fallbackMethod)
+      JSIL.RuntimeError("Inline caching does not support fallback methods");
+
+    // Look up the type ID of the this-reference for interface calls. We'll be using it a lot.
+    if (isInterfaceCall) {
+      nameIdentifier = "null";
+      body.push("var typeId = thisReference.__ThisTypeId__;");
     }
 
+    // Generate the lookup switch for the IC, along with IC management code.
     for (var i = 0, l = this.inlineCacheEntries.length; i < l; i++) {
-      var currentName = this.inlineCacheEntries[i][0];
-      var currentKey = this.inlineCacheEntries[i][1];
+      var entry = this.inlineCacheEntries[i];
 
-      if (i === 0)
-        body.push("switch (methodIndex) {");
-
-      this.inlineCacheTable[currentName] = (i + 1) | 0;
-
+      // Check to see if the cache entry matches. Note that the condition depends
+      //  on whether this is an interface method IC.
       // FIXME: Can the key end up with a single quote in it, or a backslash?
-      body.push("  case " + (i + 1) + ":");
+      var conditionExpression = 
+        isInterfaceCall
+          ? "\"" + entry.typeId + "\""
+          : "\"" + entry.name + "\"";
 
-      var methodName = thisReferenceExpression
-        ? methodLookupArg + "['" + currentKey + "'].call"
-        : methodLookupArg + "['" + currentKey + "']";
+      // So, you might be asking yourself... why a switch block keyed on the name?
+      // It's a good question. The first IC implementation built a name -> index
+      //  dictionary, and looked up the name in the dictionary to choose the method
+      //  to call. This was a performance improvement.
+      // The key observation, however, is that the value of these ICs is actually for
+      //  inlining. If the call target is known, inlining can occur more easily,
+      //  and once a method is inlining lots of cool new optimizations become possible.
+      // In an ideal world, *both* this IC *and* the call target will be inlined,
+      //  so we want to design the IC to make this possible and make it *fast*.
+      // The old table lookup is not particularly optimizer-friendly. Even if it inlined
+      //  the IC, it wouldn't have any easy way to know that the table lookup
+      //  was constant.
+      // Replacing the table lookup with a switch (or if statements, even) keyed on
+      //  the name/typeId means that once inlined, the IC looks like this:
+      //
+      //  function ic (name /* = 'knownName' */, ...) {
+      //    if (name === 'knownName' /* true */) {
+      //      ...
+      //    } else if (name === 'otherKnownName' /* false */) {
+      //    ...
+      //
+      // Thanks to the inline, the JIT now has all the information it needs to
+      //  *completely* optimize out the IC. It can kill all the false branch
+      //  conditions and it's only left with the true branch - which calls a specific
+      //  known method directly on the provided this-reference.
+      // In most scenarios the method name being passed into the IC is a constant,
+      //  so it's fairly likely that inlining can happen and that it will optimize this way.
+      // Finally, in testing switch statements were not found to be any slower than
+      //  if statements, so we generate an if statement. The generated code is denser
+      //  and clearer, which is nice, and it makes it less work for the JIT to figure
+      //  out that it can use a jump table or whatever it likes in the case where
+      //  we aren't optimized out entirely.
 
+      if (i === 0) {
+        body.push(
+          "switch (" +
+          (isInterfaceCall
+            ? "typeId"
+            : "name") +
+          ") {"
+        );
+      }
+
+      body.push(
+        "  case " + conditionExpression + ": "
+      );
+
+      // For every invocation type other than Call, the this-reference will
+      //  automatically bind thanks to JS call semantics.
+      var methodName = (callMethodName === "Call")
+        ? methodLookupArg + "['" + entry.methodKey + "'].call"
+        : methodLookupArg + "['" + entry.methodKey + "']";
+
+      // This inline cache entry matches, so build an appropriate invocation.
       JSIL.MethodSignature.$EmitInvocation(
         body, methodName, thisReferenceExpression, 
         (!!returnType) ? "return " : "", 
@@ -7063,79 +7390,116 @@ JSIL.MethodSignature.prototype.$MakeInlineCacheBody = function (callMethodName) 
         false, "    "
       );
 
-      if (!returnType)
-        body.push("    break;");
-
+      body.push("  break;");
       body.push("  ");
     }
+
 
     if (this.inlineCacheEntries.length >= 1) {
       body.push("  default: ");
       emitCacheMissInvocation("    ");
-      body.push("  ");
       body.push("}");
+      body.push("");
     } else {
       emitCacheMissInvocation("");
     }
 
   } else {
-    body.push("var methodKey = this.GetKey(name);");
-    emitDefaultInvocation("");
+    emitDefaultInvocation("", getMethodKeyLookup());
   }
 
   var joinedBody = body.join("\r\n");
+  var closure = null;
+  if (fallbackMethod)
+    closure = { fallbackMethod: fallbackMethod };
 
   return JSIL.CreateNamedFunction(
     functionName,
     argumentNames,
-    joinedBody
+    joinedBody,
+    closure
   );
 };
 
-JSIL.MethodSignature.prototype.$MakeCallMethod = function (callMethodName) {
-  // TODO: Investigate caching these closures keyed off (callMethodType, (returnType ? 1 : 0), genericArgumentNames.length, argumentTypes.length)
-  // Caching them might impair performance because the arguments to each closure would no longer be monomorphic,
-  //  but it might pay for itself given the reduced memory usage.
-
+JSIL.MethodSignature.prototype.$MakeCallMethod = function (callMethodName, knownMethodKey, fallbackMethod) {
   // FIXME: Is this correct? I think having all instances of a given unique signature
   //  share the same IC is probably correct.
-  var cacheKey = callMethodName + "$" + this.GetKey();
-  var cachedResult = JSIL.MethodSignature.$CallMethodCache[cacheKey];
-  if (cachedResult)
-    return cachedResult;
+  var cacheKey = callMethodName + "$" + this.GetUnnamedKey(true);
 
-  var result = this.$MakeInlineCacheBody(callMethodName);
-  JSIL.MethodSignature.$CallMethodCache[cacheKey] = result;
+  if (JSIL.MethodSignature.$CallMethodCache) {
+    var cachedResult = JSIL.MethodSignature.$CallMethodCache[cacheKey];
+    if (cachedResult)
+      return cachedResult;
+  }
+
+  // Doing an IC with a fallback method in play is totally not worth the trouble.
+  // Fallback methods are an infrequently used hack anyway.
+  if (fallbackMethod)
+    this.useInlineCache = false;
+
+  var result = this.$MakeInlineCacheBody(callMethodName, knownMethodKey, fallbackMethod);
+
+  if (JSIL.MethodSignature.$CallMethodCache) {
+    JSIL.MethodSignature.$CallMethodCache[cacheKey] = result;
+  }
+
   return result;
 };
 
-JSIL.MethodSignature.prototype.$InlineCacheMiss = function (callMethodName, name, methodKey) {
+JSIL.MethodSignature.prototype.$InlineCacheMiss = function (target, callMethodName, name, typeId, methodKey) {
   if (!this.useInlineCache)
     return;
 
-  var inlineCacheCapacity = 4;
+  // FIXME: This might be too small.
+  var inlineCacheCapacity = 3;
+  var numEntries = this.inlineCacheEntries.length | 0;
 
-  if (this.inlineCacheEntries.length >= inlineCacheCapacity) {
-    this.inlineCacheTable = null;
+  if (numEntries >= inlineCacheCapacity) {
+    // Once the IC gets too large we convert it back to a simple invocation method.
+    // This is important since these ICs are only a big optimization if the JIT is
+    //  able to inline them into the caller (so the conditionals become free).
+    // Making an IC too big will prevent inlining and at that point it's not gonna
+    //  be particularly fast or worthwhile.
     this.inlineCacheEntries = null;
     this.useInlineCache = false;
 
-    this.$RecompileInlineCache(callMethodName);
-  } else if (typeof (this.inlineCacheTable[name]) !== "number") {
-    this.inlineCacheEntries.push([name, methodKey]);
-
-    this.$RecompileInlineCache(callMethodName);
+    this.$RecompileInlineCache(target, callMethodName);
   } else {
-    // Running a function that hasn't recompiled yet.
+    for (var i = 0; i < numEntries; i++) {
+      var entry = this.inlineCacheEntries[i];
+
+      // Our caller is an expired inline cache function.
+      if (entry.equals(name, typeId, methodKey)) {
+        // Some bugs cause this to happen over and over so perf sucks.
+        // JSIL.RuntimeError("Inline cache miss w/ pending recompile.");
+        return;
+      }
+    }
+
+    // If we had a cache miss and the target doesn't have an entry, add it and recompile.
+    var newEntry = new JSIL.MethodSignatureInlineCacheEntry(name, typeId, methodKey);
+    this.inlineCacheEntries.push(newEntry);
+    this.$RecompileInlineCache(target, callMethodName);
   }
 };
 
-JSIL.MethodSignature.prototype.$RecompileInlineCache = function (callMethodName) {
-  var cacheKey = callMethodName + "$" + this.GetKey();
-  var newFunction = this.$MakeInlineCacheBody(callMethodName);
+JSIL.MethodSignature.prototype.$RecompileInlineCache = function (target, callMethodName) {
+  var cacheKey = callMethodName + "$" + this.GetUnnamedKey(true);  
+  var newFunction = this.$MakeInlineCacheBody(callMethodName, target.methodKey || null);
 
-  JSIL.MethodSignature.$CallMethodCache[cacheKey] = newFunction;
-  JSIL.SetValueProperty(this, callMethodName, newFunction); 
+  if (JSIL.MethodSignature.$CallMethodCache) {
+    JSIL.MethodSignature.$CallMethodCache[cacheKey] = newFunction;
+  }
+
+  // HACK
+  var propertyName = this.isInterfaceSignature
+    ? "Call"
+    : callMethodName;
+
+  // Once we've recompiled the inline cache, overwrite the old one on the target.
+  // Note that this is not 'this' because for interface methods, the IC is managed
+  //  by their signature but lives on the interface method object instead.
+  JSIL.SetValueProperty(target, propertyName, newFunction); 
 };
 
 JSIL.MethodSignature.prototype.get_GenericSuffix = function () {
@@ -7254,7 +7618,7 @@ JSIL.ConstructorSignature.prototype.$MakeBoundConstructor = function (argumentNa
 
   if (typeObject.__IsStruct__ && argumentNames.length === 0) {
   } else {
-    ctorKey = this.GetKey("_ctor");
+    ctorKey = this.GetNamedKey("_ctor", true);
     if (!proto[ctorKey]) {
       if (!proto["_ctor"])
         JSIL.RuntimeError("No method named '_ctor' found");
@@ -7408,12 +7772,23 @@ JSIL.InterfaceMethod = function (typeObject, methodName, signature, parameterInf
   this.typeObject = typeObject;
   this.variantGenericArguments = JSIL.$FindVariantGenericArguments(typeObject);
   this.methodName = methodName;
-  this.methodKey = null;
-  this.signature = signature;
+
+  if (signature) {
+    // Important so ICs don't get mixed up.
+    this.signature = signature.Clone(true);
+  } else {
+    // FIXME: Why the hell does this happen?
+    this.signature = null;
+  }
+
   this.parameterInfo = parameterInfo;
   this.qualifiedName = JSIL.$GetSignaturePrefixForType(typeObject) + this.methodName;
   this.variantInvocationCandidateCache = JSIL.CreateDictionaryObject(null);
   this.fallbackMethod = JSIL.$PickFallbackMethodForInterfaceMethod(typeObject, methodName, signature);
+
+  JSIL.SetLazyValueProperty(this, "methodKey", function () {
+    return this.signature.GetNamedKey(this.qualifiedName, true);
+  });
 };
 
 JSIL.SetLazyValueProperty(JSIL.InterfaceMethod.prototype, "Call", function () { return this.$MakeCallMethod(); }, true);
@@ -7439,67 +7814,80 @@ JSIL.InterfaceMethod.prototype.GetVariantInvocationCandidates = function (thisRe
   return result;
 };
 
-JSIL.InterfaceMethod.prototype.LookupMethod = function (thisReference) {
-  if (!thisReference)
-    JSIL.RuntimeError("Attempting to invoke interface method named '" + this.methodName + "' on null/undefined object");
+JSIL.InterfaceMethod.prototype.MethodLookupFailed = function (thisReference) {
+  var variantInvocationCandidates = this.GetVariantInvocationCandidates(thisReference);
 
-  var result = null;
-  var variantInvocationCandidates = null;
+  var errorString = "Method '" + this.signature.toString(this.methodName) + "' of interface '" + 
+    this.typeObject.__FullName__ + "' is not implemented by object " + 
+    thisReference + "\n";
 
-  if (!this.methodKey) {
-    this.methodKey = this.signature.GetKey(this.qualifiedName);
-  }
+  if (variantInvocationCandidates) {
+    errorString += "(Looked for key(s): '";
+    errorString += this.methodKey + "'";
 
-  if (this.variantGenericArguments.length) {
-    variantInvocationCandidates = this.GetVariantInvocationCandidates(thisReference);
-
-    if (variantInvocationCandidates)
     for (var i = 0, l = variantInvocationCandidates.length; i < l; i++) {
       var candidate = variantInvocationCandidates[i];
-
-      result = thisReference[candidate];
-      if (result)
-        break;
+      errorString += ", \n'" + candidate + "'";
     }
 
-    if (!result)
-      result = thisReference[this.methodKey];
+    errorString += ")";
   } else {
-    result = thisReference[this.methodKey];
+    errorString += "(Looked for key '" + this.methodKey + "')";
   }
 
-  if (!result && this.fallbackMethod) {
-    result = this.fallbackMethod(this.typeObject, this.signature, thisReference);
+  JSIL.RuntimeError(errorString);
+};
+
+JSIL.InterfaceMethod.prototype.LookupMethod = function (thisReference, name) {
+  var methodKey;
+  if (this.variantGenericArguments.length > 0) {
+    methodKey = this.LookupVariantMethodKey(thisReference);
+  } else {
+    methodKey = this.methodKey;
   }
 
-  if (!result) {
-    var errorString = "Method '" + this.signature.toString(this.methodName) + "' of interface '" + 
-      this.typeObject.__FullName__ + "' is not implemented by object " + 
-      thisReference + "\n";
-
-    if (variantInvocationCandidates) {
-      errorString += "(Looked for key(s): '";
-      errorString += this.methodKey + "'";
-
-      for (var i = 0, l = variantInvocationCandidates.length; i < l; i++) {
-        var candidate = variantInvocationCandidates[i];
-        errorString += ", \n'" +candidate + "'";
-      }
-
-      errorString += ")";
-    } else {
-      errorString += "(Looked for key '" + this.methodKey + "')";
-    }
-
-    JSIL.RuntimeError(errorString);
-  }
+  var result = thisReference[methodKey];
+  if (!result)
+    this.MethodLookupFailed(thisReference);
 
   return result;
 };
 
+JSIL.InterfaceMethod.prototype.LookupVariantMethodKey = function (thisReference) {
+  var variantInvocationCandidates = this.GetVariantInvocationCandidates(thisReference);
+
+  if (variantInvocationCandidates) {
+    for (var i = 0, l = variantInvocationCandidates.length; i < l; i++) {
+      var candidate = variantInvocationCandidates[i];
+
+      var variantResult = thisReference[candidate];
+      if (variantResult)
+        return candidate;
+    }
+  }
+
+  return this.methodKey;
+};
+
 JSIL.InterfaceMethod.prototype.$MakeCallMethod = function () {
   if (this.typeObject.__IsClosed__ && this.signature.IsClosed) {
-    return this.signature.$MakeCallMethod("CallInterface");
+    var callType = 
+      (this.variantGenericArguments.length > 0)
+        ? "CallVariantInterface"
+        : "CallInterface";
+
+    var fallbackMethod = this.fallbackMethod;
+    Object.defineProperty(
+      this, "fallbackMethod",
+      { 
+        value: fallbackMethod,
+        writable: false,
+        writeable: false,
+        configurable: false
+      }
+    );
+
+    return this.signature.$MakeCallMethod(callType, this.methodKey, fallbackMethod);
   } else {
     return function () {
       JSIL.RuntimeError("Cannot invoke method '" + this.methodName + "' of open generic interface '" + this.typeObject.__FullName__ + "'");
@@ -8560,7 +8948,7 @@ JSIL.ObjectEquals = function (lhs, rhs) {
       break;
 
     case "object":
-      var key = JSIL.GetEqualsSignature().GetKey("Object_Equals");
+      var key = JSIL.GetEqualsSignature().GetNamedKey("Object_Equals", true);
       var fn = lhs[key];
 
       if (fn)
@@ -8627,7 +9015,9 @@ JSIL.CloneParameter = function (parameterType, value) {
 
   if (
     parameterType.__IsStruct__ && 
-    (parameterType.__IsNullable__ !== true)
+    (parameterType.__IsNullable__ !== true) &&
+    // We have to check this because of some tricky semantic corner cases :/
+    (value !== null)
   ) {
     return value.MemberwiseClone();
   } else
@@ -9236,7 +9626,7 @@ JSIL.$GenerateVariantInvocationCandidates = function (interfaceObject, signature
       record.interface, signature.openSignature, record.interface.__PublicInterface__
     );
 
-    var candidate = variantSignature.GetKey(qualifiedMethodName);
+    var candidate = variantSignature.GetNamedKey(qualifiedMethodName, true);
 
     if (trace)
       System.Console.WriteLine("Candidate (distance {0}): {1}", record.distance, candidate);
@@ -9365,7 +9755,7 @@ JSIL.$GetMethodImplementation = function (method, target) {
   if (isInterface)
     key = method._descriptor.EscapedName;
   else if (method._data.signature)
-    key = method._data.signature.GetKey(method._descriptor.EscapedName);
+    key = method._data.signature.GetNamedKey(method._descriptor.EscapedName, true);
   else
     key = method._data.mangledName || method._descriptor.EscapedName;
 

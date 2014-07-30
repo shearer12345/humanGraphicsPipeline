@@ -11,6 +11,7 @@ JSIL.DeclareNamespace("System.IO");
 JSIL.DeclareNamespace("System.Text.RegularExpressions");
 JSIL.DeclareNamespace("System.Diagnostics");
 JSIL.DeclareNamespace("System.Collections.Generic");
+JSIL.DeclareNamespace("System.Collections.ObjectModel");
 
 // HACK: Unfortunately necessary :-(
 String.prototype.Object_Equals = function (rhs) {
@@ -350,12 +351,21 @@ $jsilcore.$RemoveDelegate = function (lhs, rhs) {
     return null;
 
   var newList = Array.prototype.slice.call($jsilcore.$GetInvocationList(lhs));
+  var rightList = $jsilcore.$GetInvocationList(rhs);
 
-  for (var i = 0; i < newList.length; i++) {
-    var item = newList[i];
-    if ($jsilcore.$AreDelegatesEqual(item, rhs)) {
-      newList.splice(i, 1);
-      break;
+  if (newList.length >= rightList.length) {
+    for (var i = newList.length - rightList.length; i >= 0; i--) {
+      var equal = true;
+      for (var j = 0; j < rightList.length; j++) {
+        if (!$jsilcore.$AreDelegatesEqual(newList[i + j], rightList[j])) {
+          equal = false;
+          break;
+        }
+      }
+      if (equal) {
+        newList.splice(i, rightList.length);
+        break;
+      }
     }
   }
 
@@ -472,14 +482,16 @@ JSIL.MulticastDelegate.New = function (delegates) {
 };
 
 JSIL.MakeDelegate("System.Action", true, []);
-JSIL.MakeDelegate("System.Action`1", true, ["T"]);
-JSIL.MakeDelegate("System.Action`2", true, ["T1", "T2"]);
-JSIL.MakeDelegate("System.Action`3", true, ["T1", "T2", "T3"]);
+JSIL.MakeDelegate("System.Action`1", true, ["in T"]);
+JSIL.MakeDelegate("System.Action`2", true, ["in T1", "in T2"]);
+JSIL.MakeDelegate("System.Action`3", true, ["in T1", "in T2", "in T3"]);
 
-JSIL.MakeDelegate("System.Func`1", true, ["TResult"]);
-JSIL.MakeDelegate("System.Func`2", true, ["T", "TResult"]);
-JSIL.MakeDelegate("System.Func`3", true, ["T1", "T2", "TResult"]);
-JSIL.MakeDelegate("System.Func`4", true, ["T1", "T2", "T3", "TResult"]);
+JSIL.MakeDelegate("System.Func`1", true, ["out TResult"]);
+JSIL.MakeDelegate("System.Func`2", true, ["in T", "out TResult"]);
+JSIL.MakeDelegate("System.Func`3", true, ["in T1", "in T2", "out TResult"]);
+JSIL.MakeDelegate("System.Func`4", true, ["in T1", "in T2", "in T3", "out TResult"]);
+
+JSIL.MakeDelegate("System.Predicate`1", true, ["in T"]);
 
 JSIL.ImplementExternals(
   "System.Exception", function ($) {
@@ -928,24 +940,6 @@ $jsilcore.$ListExternals = function ($, T, type) {
       break;
   }
 
-  var indexOfImpl = function List_IndexOf (value) {
-    for (var i = 0, l = this._size; i < l; i++) {
-      if (JSIL.ObjectEquals(this._items[i], value))
-        return i;
-    }
-
-    return -1;
-  };
-
-  var findIndexImpl = function List_FindIndex (predicate) {
-    for (var i = 0, l = this._size; i < l; i++) {
-      if (predicate(this._items[i]))
-        return i;
-    }
-
-    return -1;
-  };
-
   $.Method({Static:false, Public:true }, ".ctor", 
     JSIL.MethodSignature.Void,
     function () {
@@ -971,10 +965,63 @@ $jsilcore.$ListExternals = function ($, T, type) {
     }
   );
 
+  var indexOfImpl = function List_IndexOf (value) {
+    for (var i = 0, l = this._size; i < l; i++) {
+      if (JSIL.ObjectEquals(this._items[i], value))
+        return i;
+    }
+
+    return -1;
+  };
+
+  var findIndexImpl = function List_FindIndex (predicate) {
+    for (var i = 0, l = this._size; i < l; i++) {
+      if (predicate(this._items[i]))
+        return i;
+    }
+
+    return -1;
+  };
+
   var addImpl = function (item) {
     this.InsertItem(this._size, item);
     return this._size;
   };
+
+  var rangeCheckImpl = function (index, size) {
+    return (index >= 0) && (size > index);
+  }
+
+  var getItemImpl = function (index) {
+    if (rangeCheckImpl(index, this._size))
+      return this._items[index];
+    else
+      throw new System.ArgumentOutOfRangeException("index");
+  };
+
+  var removeImpl = function (item) {
+    var index = this._items.indexOf(item);
+    if (index === -1)
+      return false;
+
+    this.RemoveAt(index);
+    return true;
+  };
+
+  var getEnumeratorType = function (self) {
+    if (self.$enumeratorType)
+      return self.$enumeratorType;
+
+    var T = getT(self);
+    return self.$enumeratorType = System.Collections.Generic.List$b1_Enumerator.Of(T);
+  };
+
+  var getEnumeratorImpl = function () {
+    var enumeratorType = getEnumeratorType(this);
+
+    return new enumeratorType(this);
+  };
+
 
   switch (type) {
     case "ArrayList":
@@ -1110,28 +1157,52 @@ $jsilcore.$ListExternals = function ($, T, type) {
     }
   );
 
-  var rangeCheckImpl = function (index, size) {
-    return (index >= 0) && (size > index);
-  }
-
-  var getItemImpl = function (index) {
-    if (rangeCheckImpl(index, this._size))
-      return this._items[index];
-    else
-      throw new System.ArgumentOutOfRangeException("index");
-  };
-
   $.Method({Static:false, Public:true }, "get_Item", 
     new JSIL.MethodSignature(T, [mscorlib.TypeRef("System.Int32")], []), 
     getItemImpl
   );
 
-  if (type != "ArrayList")
+  if (type != "ArrayList") {
+    $.Method(
+      {Static: false, Public: false }, null,
+      new JSIL.MethodSignature($.Int32, [$.Object], []),
+      addImpl
+    ).Overrides("System.Collections.IList", "Add");
+
     $.Method({Static:false, Public:true }, null, 
       new JSIL.MethodSignature($.Object, [mscorlib.TypeRef("System.Int32")], []), 
       getItemImpl
     )
       .Overrides("System.Collections.IList", "get_Item");
+
+    $.Method({Static: false, Public: true }, null,
+      new JSIL.MethodSignature(null, [mscorlib.TypeRef("System.Int32"), $.Object], []), 
+      function (index, value) {
+        if (rangeCheckImpl(index, this._size))
+          this.SetItem(index, this.T.$Cast(value));
+        else
+          throw new System.ArgumentOutOfRangeException("index");
+      }
+    )      
+      .Overrides("System.Collections.IList", "set_Item");
+
+    $.Method({Static: false, Public: false}, null,
+      new JSIL.MethodSignature(null, [$.Int32, $.Object], []),
+      function (index, item) {
+          this.InsertItem(index, item);
+        }
+    ).Overrides("System.Collections.IList", "Insert");
+
+    $.Method({Static:false,Public:false}, null,
+      new JSIL.MethodSignature($.Int32, [$.Object], []),
+      indexOfImpl
+    ).Overrides("System.Collections.IList", "IndexOf");
+
+    $.Method({Static: false, Public: false}, null,
+      new JSIL.MethodSignature(null, [$.Object], []),
+      removeImpl
+    ).Overrides("System.Collections.IList", "Remove");
+  }
 
   $.Method({Static: false, Public: true }, "set_Item",
     new JSIL.MethodSignature(null, [mscorlib.TypeRef("System.Int32"), T], []), 
@@ -1142,31 +1213,6 @@ $jsilcore.$ListExternals = function ($, T, type) {
         throw new System.ArgumentOutOfRangeException("index");
     }
   );
-
-  if (type != "ArrayList")
-    $.Method({Static: false, Public: true }, "set_Item",
-      new JSIL.MethodSignature(null, [mscorlib.TypeRef("System.Int32"), $.Object], []), 
-      function (index, value) {
-        if (rangeCheckImpl(index, this._size))
-          this.SetItem(index, this.T.$Cast(value));
-        else
-          throw new System.ArgumentOutOfRangeException("index");
-      }
-    );
-
-  var getEnumeratorType = function (self) {
-    if (self.$enumeratorType)
-      return self.$enumeratorType;
-
-    var T = getT(self);
-    return self.$enumeratorType = System.Collections.Generic.List$b1_Enumerator.Of(T);
-  };
-
-  var getEnumeratorImpl = function () {
-    var enumeratorType = getEnumeratorType(this);
-
-    return new enumeratorType(this);
-  };
 
   switch (type) {
     case "List":
@@ -1215,15 +1261,6 @@ $jsilcore.$ListExternals = function ($, T, type) {
     new JSIL.MethodSignature(mscorlib.TypeRef("System.Int32"), [T], []),
     indexOfImpl
   );
-
-  var removeImpl = function (item) {
-    var index = this._items.indexOf(item);
-    if (index === -1)
-      return false;
-
-    this.RemoveAt(index);
-    return true;
-  };
 
   switch (type) {
     case "ArrayList":
@@ -3575,6 +3612,30 @@ JSIL.MakeStruct("System.ValueType", "System.EventArgs", true, [], function ($) {
   $.Field({Static:true , Public:true }, "Empty", $jsilcore.TypeRef("System.EventArgs"), function ($) {
     return new System.EventArgs();
   });
+});
+
+JSIL.ImplementExternals("System.EventArgs", function ($) {
+	$.Method({Static: false, Public: true}, ".ctor",
+	new JSIL.MethodSignature(null, [], []),
+	function() {
+    }
+  );
+});
+
+JSIL.ImplementExternals("System.ComponentModel.PropertyChangedEventArgs", function ($) {
+  $.Method({Static: false, Public: true}, ".ctor",
+	new JSIL.MethodSignature(null, [$jsilcore.TypeRef("System.String")], []),
+	function(propertyName) {
+		this.propertyName = propertyName;
+    }
+  );
+
+  $.Method({Static: false, Public: true, Virtual:true}, "get_PropertyName",
+	new JSIL.MethodSignature($.String, [], []),
+	function() {
+		return this.propertyName;
+    }
+  );
 });
 
 JSIL.ImplementExternals("System.Diagnostics.Debug", function ($) {

@@ -358,7 +358,7 @@ JSIL.MakeClass("System.Object", "JSIL.MemoryRange", true, [], function ($) {
   );
 });
 
-JSIL.MakeStruct("System.ValueType", "JSIL.Pointer", true, [], function ($) {
+JSIL.MakeStruct("System.ValueType", "JSIL.Pointer", true, ["T"], function ($) {
   var shiftTable = [];
   for (var i = 0; i < 256; i++) {
     shiftTable[i] = (Math.log(i) / Math.LN2) | 0;
@@ -471,7 +471,7 @@ JSIL.MakeStruct("System.ValueType", "JSIL.Pointer", true, [], function ($) {
         this.offsetInElements = this.offsetInBytes >> this.shift;
       } else {
         // FIXME: Not generating strongly typed pointers
-        return new JSIL.Pointer(
+        return new JSIL.VoidPointer(
           this.memoryRange, this.view, (this.offsetInBytes + offsetInBytes) | 0
         );
       }
@@ -485,7 +485,7 @@ JSIL.MakeStruct("System.ValueType", "JSIL.Pointer", true, [], function ($) {
         this.offsetInBytes = (this.offsetInBytes + (offsetInElements << this.shift)) | 0;
       } else {
         // FIXME: Not generating strongly typed pointers
-        return new JSIL.Pointer(
+        return new JSIL.VoidPointer(
           this.memoryRange, this.view, (this.offsetInBytes + (offsetInElements << this.shift)) | 0
         );
       }
@@ -545,6 +545,9 @@ JSIL.MakeStruct("System.ValueType", "JSIL.Pointer", true, [], function ($) {
       return "<ptr " + this.view + " + " + this.offsetInBytes + ">";
     }
   );
+});
+
+JSIL.MakeStruct("JSIL.Pointer", "JSIL.VoidPointer", true, [], function ($) {
 });
 
 JSIL.MakeStruct("JSIL.Pointer", "JSIL.WordPointer", true, [], function ($) {
@@ -732,7 +735,7 @@ JSIL.MakeStruct("JSIL.Pointer", "JSIL.StructPointer", true, [], function ($) {
       if (modifyInPlace === true) {
         this.offsetInBytes = (this.offsetInBytes + offsetInBytes) | 0;
       } else {
-        return new JSIL.Pointer(this.memoryRange, this.view, (this.offsetInBytes + offsetInBytes) | 0);
+        return new JSIL.VoidPointer(this.memoryRange, this.view, (this.offsetInBytes + offsetInBytes) | 0);
       }
     }
   );
@@ -1076,7 +1079,7 @@ JSIL.StackAlloc = function (sizeInBytes, elementType) {
   if (!view)
     JSIL.RuntimeError("Unable to stack-allocate arrays of type '" + elementType.__FullName__ + "'");
 
-  return new JSIL.Pointer(memoryRange, view, 0);
+  return new JSIL.VoidPointer(memoryRange, view, 0);
 };
 
 $jsilcore.PointerLiteralMemoryRange = null;
@@ -1278,7 +1281,18 @@ JSIL.$EmitMemcpyIntrinsic = function (body, destToken, sourceToken, destOffsetTo
     // Unroll small copies when size is known
     if ((typeof (sizeOrSizeToken) === "number") && (sizeOrSizeToken <= unrollThreshold)) {
       for (var i = 0; i < sizeOrSizeToken; i++) {
-        body.push("  " + destToken + "[(" + destOffsetToken + " + " + i + ") | 0] = " + sourceToken + "[(" + sourceOffsetToken + " + " + i + ") | 0];");
+        var localDest, localSource;
+        if (typeof (destOffsetToken) === "number")
+          localDest = (destOffsetToken + i) | 0;
+        else
+          localDest = "(" + destOffsetToken + " + " + i + ") | 0";
+
+        if (typeof (sourceOffsetToken) === "number")
+          localSource = (sourceOffsetToken + i) | 0;
+        else
+          localSource = "(" + sourceOffsetToken + " + " + i + ") | 0";
+        
+        body.push("  " + destToken + "[" + localDest + "] = " + sourceToken + "[" + localSource + "];");
       }
       body.push("");
     } else {
@@ -1414,10 +1428,11 @@ JSIL.$MakeUnmarshallableFieldAccessor = function (fieldName) {
 };
 
 JSIL.$MakeFieldMarshaller = function (typeObject, field, viewBytes, nativeView, makeSetter) {
+  var fieldOffset = field.offsetBytes | 0;
+  var fieldSize = field.sizeBytes | 0;
+
   if (nativeView) {
     var clampedByteView = viewBytes.subarray(0, nativeView.BYTES_PER_ELEMENT);
-    var fieldOffset = field.offsetBytes | 0;
-    var fieldSize = field.sizeBytes | 0;
 
     var adapterSource = [
       "var bytes = this.$bytes;",
@@ -1426,7 +1441,10 @@ JSIL.$MakeFieldMarshaller = function (typeObject, field, viewBytes, nativeView, 
 
     if (makeSetter) {
       adapterSource.push("nativeView[0] = value;");
-      adapterSource.push("bytes.set(clampedByteView, offset);");
+      JSIL.$EmitMemcpyIntrinsic(
+        adapterSource, "bytes", "clampedByteView", "offset", 0, nativeView.BYTES_PER_ELEMENT
+      );
+      // adapterSource.push("bytes.set(clampedByteView, offset);");
 
       return JSIL.CreateNamedFunction(
         typeObject.__FullName__ + ".Proxy.set_" + field.name, ["value"],
@@ -1464,13 +1482,28 @@ JSIL.$MakeFieldMarshaller = function (typeObject, field, viewBytes, nativeView, 
       );
     } else {
       var unmarshalConstructor = JSIL.$GetStructUnmarshalConstructor(field.type);
+      var unmarshaller = JSIL.$GetStructUnmarshaller(field.type);
+      var cachedInstanceKey = "this.cached$" + field.name;
 
-      adapterSource.push("return new unmarshalConstructor(this.$bytes, offset);");
+      // FIXME: Is this going to work consistently?
+      var template = JSIL.CreateInstanceOfType(field.type, null);
+
+
+      adapterSource.push("var cachedInstance = " + cachedInstanceKey + ";");
+      adapterSource.push("if (cachedInstance !== null) {");
+      adapterSource.push("  unmarshaller(cachedInstance, this.$bytes, offset);");
+      adapterSource.push("  return cachedInstance;");
+      adapterSource.push("}");
+      adapterSource.push("");
+      adapterSource.push("return " + cachedInstanceKey + " = new unmarshalConstructor(this.$bytes, offset);");
 
       return JSIL.CreateNamedFunction(
         typeObject.__FullName__ + ".Proxy.get_" + field.name, [],
         adapterSource.join("\n"),
-        { unmarshalConstructor: unmarshalConstructor }
+        { 
+          unmarshaller: unmarshaller, 
+          unmarshalConstructor: unmarshalConstructor 
+        }
       );
     }
     
@@ -1489,6 +1522,11 @@ JSIL.$MakeElementProxyConstructor = function (typeObject) {
   var marshallingScratchBuffer = JSIL.GetMarshallingScratchBuffer(nativeSize);
   var viewBytes = marshallingScratchBuffer.getView($jsilcore.System.Byte, false);
 
+  var constructorBody = [];
+  constructorBody.push("this.$bytes = bytes;");
+  constructorBody.push("this.$offset = offsetInBytes | 0;");
+  constructorBody.push("");
+
   for (var i = 0, l = fields.length; i < l; i++) {
     var field = fields[i];
     var offset = field.offsetBytes;
@@ -1502,6 +1540,7 @@ JSIL.$MakeElementProxyConstructor = function (typeObject) {
       var nativeView = marshallingScratchBuffer.getView(field.type, false);
       getter = JSIL.$MakeFieldMarshaller(typeObject, field, viewBytes, nativeView, false);
       setter = JSIL.$MakeFieldMarshaller(typeObject, field, viewBytes, nativeView, true);
+      constructorBody.push("this.cached$" + field.name + " = null;");
     }
 
     // FIXME: The use of get/set functions here will really degrade performance in some JS engines
@@ -1516,10 +1555,10 @@ JSIL.$MakeElementProxyConstructor = function (typeObject) {
     );
   }      
 
-  var constructor = function ElementProxy (bytes, offsetInBytes) {
-    this.$bytes = bytes;
-    this.$offset = offsetInBytes | 0;
-  };
+  var constructor = JSIL.CreateNamedFunction(
+    typeObject.__FullName__ + ".Proxy._ctor", ["bytes", "offsetInBytes"],
+    constructorBody.join("\n"), null
+  );
 
   elementProxyPrototype.retarget = function (array, offsetInElements) {
     this.$bytes = array.bytes;

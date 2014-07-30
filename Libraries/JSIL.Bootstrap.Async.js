@@ -228,6 +228,7 @@ JSIL.ImplementExternals("System.Threading.Tasks.Task", function ($) {
   var createTaskCommon = function (self) {
     self.status = System.Threading.Tasks.TaskStatus.Created;
     self.action = null;
+    self.exception = null;
 
     self.ContinueExecution = function () {
       // TODO: init continuationActions with null on ctor
@@ -271,7 +272,6 @@ JSIL.ImplementExternals("System.Threading.Tasks.Task", function ($) {
     function _ctor(action) {
       createTaskCommon(this);
       this.action = action;
-
     }
   );
 
@@ -392,6 +392,11 @@ JSIL.ImplementExternals("System.Threading.Tasks.Task`1", function ($) {
   $.Method({ Static: false, Public: true }, "get_Result",
     (new JSIL.MethodSignature(new JSIL.GenericParameter("TResult", "System.Threading.Tasks.Task`1"), [], [])),
     function get_Result() {
+      var taskException = this.get_Exception();
+      if (taskException !== null)
+      {
+        throw taskException;
+      }
       return this.result;
     }
   );
@@ -515,6 +520,11 @@ JSIL.ImplementExternals("System.Runtime.CompilerServices.TaskAwaiter", function 
       if (!this._task.get_IsCompleted()) {
         throw new JSIL.ConstructorSignature($jsilcore.TypeRef("System.Exception"), [$jsilcore.TypeRef("System.String")]).Construct("TaskNotCompleted");
       }
+      var taskException = this._task.get_Exception();
+      if (taskException !== null)
+      {
+        throw taskException.get_InnerException();
+      }
     }
   );
 
@@ -543,10 +553,15 @@ JSIL.ImplementExternals("System.Runtime.CompilerServices.TaskAwaiter`1", functio
   );
 
   $.Method({ Static: false, Public: true }, "GetResult",
-    new JSIL.MethodSignature(null, [], []),
+    new JSIL.MethodSignature(new JSIL.GenericParameter("TResult", "System.Runtime.CompilerServices.TaskAwaiter`1"), [], []),
     function GetResult() {
       if (!this._task.get_IsCompleted()) {
         throw new JSIL.ConstructorSignature($jsilcore.TypeRef("System.Exception"), [$jsilcore.TypeRef("System.String")]).Construct("TaskNotCompleted");
+      }
+      var taskException = this._task.get_Exception();
+      if (taskException !== null)
+      {
+        throw taskException.get_InnerException();
       }
       return this._task.get_Result();
     }
