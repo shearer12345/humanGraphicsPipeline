@@ -672,7 +672,7 @@ JSIL.MakeEnum(
     return ($T13 = JSIL.Memoize($asm02.Microsoft.Xna.Framework.GameTime)) ();
   };
   var $T14 = function () {
-    return ($T14 = JSIL.Memoize(System.Array.Of($asm01.Microsoft.Xna.Framework.Vector2))) ();
+    return ($T14 = JSIL.Memoize($asm06.System.Math)) ();
   };
   var $S00 = function () {
     return ($S00 = JSIL.Memoize(new JSIL.ConstructorSignature($asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Collections.Generic.List`1", [$asm06.TypeRef("System.Boolean")])]), null))) ();
@@ -691,9 +691,6 @@ JSIL.MakeEnum(
   };
   var $S05 = function () {
     return ($S05 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single"), $asm06.TypeRef("System.Single")]))) ();
-  };
-  var $S06 = function () {
-    return ($S06 = JSIL.Memoize(new JSIL.ConstructorSignature($asm01.TypeRef("Microsoft.Xna.Framework.Vector2"), [$asm06.TypeRef("System.Single")]))) ();
   };
 
   function TriangleRasterisingScene__ctor () {
@@ -813,13 +810,8 @@ JSIL.MakeEnum(
   };
 
   function TriangleRasterisingScene_LastPointPlaced (gameTime) {
-    this.minimum = $S06().Construct(2.14748365E+09);
-    this.maximum = $S06().Construct(-2.14748365E+09);
-
-    for (var i = 0; i < (this.trianglePoints.length | 0); i = ((i + 1) | 0)) {
-      this.minimum = $T0C().Min(this.minimum.MemberwiseClone(), this.trianglePoints[i].MemberwiseClone()).MemberwiseClone();
-      this.maximum = $T0C().Max(this.maximum.MemberwiseClone(), this.trianglePoints[i].MemberwiseClone()).MemberwiseClone();
-    }
+    this.minimum = $S05().Construct(+($T14().Min(((this.trianglePoints[0].X) | 0), $T14().Min(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Min(((this.trianglePoints[0].Y) | 0), $T14().Min(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
+    this.maximum = $S05().Construct(+($T14().Max(((this.trianglePoints[0].X) | 0), $T14().Max(((this.trianglePoints[1].X) | 0), ((this.trianglePoints[2].X) | 0)))), +($T14().Max(((this.trianglePoints[0].Y) | 0), $T14().Max(((this.trianglePoints[1].Y) | 0), ((this.trianglePoints[2].Y) | 0)))));
     this.minimum = $S05().Construct((+this.minimum.X - (+this.minimum.X % +($T09().Globals$pixelSize$value))), (+this.minimum.Y - (+this.minimum.Y % +($T09().Globals$pixelSize$value))));
     this.maximum = $S05().Construct(((+this.maximum.X - (+this.maximum.X % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)), ((+this.maximum.Y - (+this.maximum.Y % +($T09().Globals$pixelSize$value))) + +($T09().Globals$pixelSize$value)));
     this.boundingBox = new ($T06())($S05().Construct(this.minimum.X, this.minimum.Y), $S05().Construct((+this.maximum.X - +this.minimum.X), (+this.maximum.Y - +this.minimum.Y)), $jsilxna.ColorFromPremultipliedInts(null, 255, 0, 0, 120));
