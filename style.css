@@ -33,6 +33,7 @@ t2{
 div.fullcont {
 	width:100%;
 	margin:0px;
+	padding-bottom:20px;
 	background-color: #cccccc;
 	border-radius: 25px;
 }
